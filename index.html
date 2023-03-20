@@ -9,13 +9,16 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
         rel="stylesheet" />
     <title>Join</title>
+    <link rel="icon" type="image/icon" href="assets/img/logo_join_white.svg" />
 
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/forgotPassword.js"></script>
+    
     <link rel="stylesheet" href="assets/css/login-signup.css">
     <link rel="stylesheet" href="assets/css/miniPopups.css">
+    <link rel="stylesheet" href="assets/css/models.css">
 
-    <link rel="icon" type="image/icon" href="assets/img/logo_join_white.svg"/>
+
 </head>
 
 <body onload="animatedLogo()">
@@ -29,9 +32,9 @@
             <img class="login_logo_blue_img" src="assets/img/logo_join_blue.svg">
         </div>
         <div class="login_not_user row-center">
-            <a class="not_user">Not a Join user</a>
+            <a class="not_user font400">Not a Join user</a>
             <button class="login_signup row-center-center" id="sign_up_button" onclick="showSignup()">
-                <a class="login_signup_text">Sign up</a>
+                <a class="login_signup_text font400">Sign up</a>
             </button>
         </div>
         <div class="login_container column-center">
@@ -42,13 +45,13 @@
             <div class="user_container column-flex-start">
                 <div class="user_mail column-flex-start">
                     <div class="inputs login_input_mail row-center">
-                        <input class="input_mail" type="text" placeholder="Email">
+                        <input class="input_mail font400" type="text" placeholder="Email">
                         <img class="login_input_img" src="assets/img/mail.svg" alt="">
                     </div>
                 </div>
                 <div class="user_password column-flex-start">
                     <div class="inputs login_input_password row-center">
-                        <input required type="password" minlength="6" class="input_password" placeholder="Password">
+                        <input required type="password" minlength="6" class="input_password font400" placeholder="Password">
                         <img class="login_input_img" src="assets/img/locker.svg" alt="">
                     </div>
                 </div>
@@ -56,16 +59,16 @@
             <div class="login_remember row-center-flexstart">
                 <div class="login_remember_me row-center-center">
                     <input type="checkbox" class="login_checkbox">
-                    <a class="login_rememberMe">Remember me</a>
+                    <a class="login_rememberMe font400">Remember me</a>
                 </div>
-                <a class="login_forgot_password" onclick="showForgotPassword()">Forgot my password</a>
+                <a class="login_forgot_password font400" onclick="showForgotPassword()">Forgot my password</a>
             </div>
             <div class="login_buttons row-center-flexstart">
-                <button class="login_button_cont row-center-center">
-                    <a class="login_button">Log in</a>
+                <button class="login_button_cont row-center-center" onclick="logInUser()">
+                    <a class="login_button font400">Log in</a>
                 </button>
-                <button class="guest_login_button_cont row-center-center">
-                    <a class="guest_login_button">Guest log in</a>
+                <button class="guest_login_button_cont row-center-center" onclick="logInGuest()">
+                    <a class="guest_login_button font400">Guest log in</a>
                 </button>
             </div>
         </div>
@@ -88,7 +91,7 @@
                 <div class="user_container column-flex-start">
                     <div class="signup_user column-flex-start">
                         <div class="inputs signup_input_user row-center">
-                            <input class="input_user" type="text" placeholder="Name">
+                            <input class="input_user font400" type="text" placeholder="Name">
                             <img class="login_input_img" src="assets/img/user.png" alt="">
                         </div>
                     </div>
@@ -108,7 +111,7 @@
                 </div>
                 <div class="login_buttons row-center-flexstart">
                     <button class="signup_button_cont row-center-center" onclick="confirmNewUser()">
-                        <a class="sign_button">Sign up</a>
+                        <a class="sign_button font400">Sign up</a>
                     </button>
                 </div>
             </div>
@@ -123,7 +126,7 @@
                 <div class="login_blue_line"></div>
             </div>
 
-            <a class="forgot_text_parraf">Don't worry! We will send you an email with the instructions
+            <a class="forgot_text_parraf font400">Don't worry! We will send you an email with the instructions
                 to reset your password.</a>
             <div class="user_mail column-flex-start">
                 <div class="inputs login_input_mail row-center">
@@ -152,11 +155,11 @@
                 <a class="login_text">Reset your password</a>
                 <div class="login_blue_line"></div>
             </div>
-    
-            <a class="reset_text_parraf">Change your account password here</a>
+
+            <a class="reset_text_parraf font400">Change your account password here</a>
             <div class="forgot_passwords column-flex-start">
                 <div class="inputs login_input_mail row-center">
-                    <input class="input_mail" type="password" minlength="6"  placeholder="New password">
+                    <input class="input_mail" type="password" minlength="6" placeholder="New password">
                 </div>
                 <div class="inputs login_input_mail row-center">
                     <input class="input_mail" type="password" minlength="6" placeholder="Confirm password">
@@ -168,7 +171,7 @@
                 </button>
             </div>
         </div>
-    <!-- reset Password pop-up-->
+        <!-- reset Password pop-up-->
         <div class="pop_up_style confirm_password row-center-center" id="popUpResetPassword">
             <a class="font_pop_up">You reset your password</a>
         </div>

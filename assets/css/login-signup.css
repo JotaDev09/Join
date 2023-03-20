@@ -6,63 +6,6 @@ body {
     font-style: normal;
 }
 
-/* models*/
-
-.column-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.column-flex-start {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.row-center {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.row-center-flexstart {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.row-center-center {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.column-center-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.d-none {
-    display: none !important;
-}
-
-.inputs {
-    box-sizing: border-box;
-    justify-content: space-between;
-    padding: 13px 21px;
-    gap: 10px;
-    width: 422px;
-    background: #FFFFFF;
-    border-bottom: 1px solid #d1d1d1;
-    outline: none;
-    cursor: pointer;
-}
-
 /* init */
 
 .logo_init {
@@ -100,9 +43,7 @@ body {
 }
 
 .not_user {
-    font-weight: 400;
     font-size: 23px;
-    line-height: 120%;
     color: #000000;
 }
 
@@ -124,12 +65,9 @@ body {
 }
 
 .login_signup_text {
-    font-weight: 400;
     font-size: 23px;
-    line-height: 120%;
     color: #FFFFFF;
 }
-
 
 /* log in */
 .login {
@@ -190,9 +128,7 @@ body {
 
 .input_mail {
     border: none;
-    font-weight: 400;
     font-size: 19px;
-    line-height: 120%;
     color: #D1D1D1;
     outline: none;
     cursor: pointer;
@@ -215,9 +151,7 @@ body {
 
 .input_password {
     border: none;
-    font-weight: 400;
     font-size: 19px;
-    line-height: 120%;
     color: #D1D1D1;
     outline: none;
     cursor: pointer;
@@ -247,18 +181,14 @@ body {
 .login_rememberMe {
     width: 132px;
     height: 23px;
-    font-weight: 400;
     font-size: 18px;
-    line-height: 120%;
     color: #000000;
 }
 
 .login_forgot_password {
     width: 181px;
     height: 23px;
-    font-weight: 400;
     font-size: 18px;
-    line-height: 120%;
     color: #005DFF;
     cursor: pointer;
 }
@@ -290,9 +220,7 @@ body {
 
 .login_button {
     font-style: normal;
-    font-weight: 400;
     font-size: 22px;
-    line-height: 120%;
     color: #FFFFFF;
     width: 65px;
     height: 28px;
@@ -319,9 +247,7 @@ body {
 }
 
 .guest_login_button {
-    font-weight: 400;
     font-size: 22px;
-    line-height: 120%;
     width: 127px;
     height: 28px;
 }
@@ -367,9 +293,7 @@ body {
 }
 
 .input_user {
-    font-weight: 400;
     font-size: 19px;
-    line-height: 120%;
     color: #D1D1D1;
     border: none;
     outline: none;
@@ -394,9 +318,7 @@ body {
 }
 
 .sign_button {
-    font-weight: 400;
     font-size: 18px;
-    line-height: 120%;
     color: #FFFFFF;
 }
 
@@ -432,9 +354,7 @@ body {
     padding-bottom: 35px;
     width: 422px;
     height: 56px;
-    font-weight: 400;
     font-size: 23px;
-    line-height: 120%;
     text-align: center;
     color: #000000;
 }
@@ -477,9 +397,7 @@ body {
     padding-bottom: 35px;
     width: 589px;
     height: 28px;
-    font-weight: 400;
     font-size: 23px;
-    line-height: 120%;
     text-align: center;
     color: #000000;
 }

@@ -53,9 +53,26 @@ function showForgotPassword() {
     document.getElementById('container_forgot_password').classList.remove('d-none')
 }
 
+/**
+ * confirm a new user in sign-up
+ */
 function confirmNewUser() {
     document.getElementById('login_site').classList.remove('d-none')
     document.getElementById('sign_up_site').classList.add('d-none')
     document.getElementById('sign_up_container').classList.add('d-none')
     document.getElementById('container_sign_up').classList.add('d-none')
+}
+
+/**
+ * login as user
+ */
+function logInUser() {
+    window.location.href = "summary.html";
+}
+
+/**
+ * login as guest
+ */
+function logInGuest() {
+    window.location.href = "summary.html";
 }

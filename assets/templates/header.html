@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="assets/css/header.css">
+
+<header>
+    <div class="header_container row-spacebet-center">
+        <div class="header_logo">
+            <img class="header_logo_white" src="assets/img/logo_join_white.svg">
+        </div>
+        <div class="header_title_user row-center">
+            <a class="header_kanban font400">Kanban Project Management Tool</a>
+            <img class="header_help" src="assets/img/help.svg">
+            <div class="header_circle" onclick="userLogOut()">
+                <span class="header_user_circle center-center">
+                    <img class="header_user_foto" src="assets/img/user_foto.svg">
+            </div>
+        </div>
+    </div>
+    <div class="header_popup_logout column-flex-start d-none" id="popUpLogOut">
+        <span class="header_popup row-center-center" onclick="logOut()">
+            <a class="header_logout_text font400">Log out</a>
+        </span>
+    </div>
+</header>

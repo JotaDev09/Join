@@ -1,0 +1,71 @@
+body {
+    margin: 0;
+}
+
+.header_container {
+    padding: 20px 39px;
+    gap: 34px;
+    position: absolute;
+    width: -webkit-fill-available;
+    height: 97.3px;
+    left: 0px;
+    top: 0px;
+    background: #4589FF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.header_logo {
+    width: 47px;
+    height: 57.3px;
+}
+
+.header_logo_white {
+    width: 47px;
+    height: 57.3px;
+    top: 20px;
+    left: 39px;
+}
+
+.header_title_user {
+    padding: 0;
+    gap: 26px;
+    width: 433px;
+    height: 49px;
+}
+
+.header_kanban {
+    width: 301px;
+    height: 23px;
+    font-size: 19px;
+    color: #FFFFFF;
+}
+
+.header_help {
+    width: 31px;
+    height: 31px;
+    cursor: pointer;
+}
+
+.header_user {
+    width: 49px;
+    height: 49px;
+}
+
+.header_circle {
+   cursor: pointer;
+}
+
+.header_user_circle {
+    display: flex;
+    border-radius: 559px;
+    width: 53px;
+    border: 2px solid white;
+    height: 53px;
+}
+
+.header_user_foto {
+    width: 49px;
+    height: 49px;
+    border-radius: 559px;
+}
