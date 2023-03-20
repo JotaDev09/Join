@@ -1,15 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+        rel="stylesheet" />
     <title>Join</title>
 
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="assets/js/login-signup.js"></script>
+    <script src="assets/js/forgotPassword.js"></script>
+    <link rel="stylesheet" href="assets/css/login-signup.css">
+    <link rel="stylesheet" href="assets/css/miniPopups.css">
+
+    <link rel="icon" type="image/icon" href="assets/img/logo_join_white.svg"/>
 </head>
-<body>
+
+<body onload="animatedLogo()">
+    <!-- init logo-->
+    <div class="logo_init" id="logo_init">
+        <img id="logo_init2" src="assets/img/logo_init.svg">
+    </div>
+    <!-- init log-in-->
+    <div class="login column-center d-none" id="login_site">
+        <div class="login_logo_join_blue">
+            <img class="login_logo_blue_img" src="assets/img/logo_join_blue.svg">
+        </div>
+        <div class="login_not_user row-center">
+            <a class="not_user">Not a Join user</a>
+            <button class="login_signup row-center-center" id="sign_up_button" onclick="showSignup()">
+                <a class="login_signup_text">Sign up</a>
+            </button>
+        </div>
+        <div class="login_container column-center">
+            <div class="login_title column-center">
+                <a class="login_text">Log in</a>
+                <div class="login_blue_line"></div>
+            </div>
+            <div class="user_container column-flex-start">
+                <div class="user_mail column-flex-start">
+                    <div class="inputs login_input_mail row-center">
+                        <input class="input_mail" type="text" placeholder="Email">
+                        <img class="login_input_img" src="assets/img/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="user_password column-flex-start">
+                    <div class="inputs login_input_password row-center">
+                        <input required type="password" minlength="6" class="input_password" placeholder="Password">
+                        <img class="login_input_img" src="assets/img/locker.svg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="login_remember row-center-flexstart">
+                <div class="login_remember_me row-center-center">
+                    <input type="checkbox" class="login_checkbox">
+                    <a class="login_rememberMe">Remember me</a>
+                </div>
+                <a class="login_forgot_password" onclick="showForgotPassword()">Forgot my password</a>
+            </div>
+            <div class="login_buttons row-center-flexstart">
+                <button class="login_button_cont row-center-center">
+                    <a class="login_button">Log in</a>
+                </button>
+                <button class="guest_login_button_cont row-center-center">
+                    <a class="guest_login_button">Guest log in</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- init sign-up-->
+    <div class="sign_up_cont column-center d-none" id="sign_up_site">
+        <div class="login_logo_join_blue">
+            <img src="assets/img/logo_join_white.svg">
+        </div>
+        <!-- Sign up window-->
+        <div class="login_container column-center d-none" id="sign_up_container">
+            <div class="blue_arrow" onclick="showLoginSite()">
+                <img src="assets/img/blue_arrow.svg" class="blue_arrow_img">
+            </div>
+            <div class="signUp_container d-none column-center" id="container_sign_up">
+                <div class="login_title column-center">
+                    <a class="login_text">Sign up</a>
+                    <div class="login_blue_line"></div>
+                </div>
+                <div class="user_container column-flex-start">
+                    <div class="signup_user column-flex-start">
+                        <div class="inputs signup_input_user row-center">
+                            <input class="input_user" type="text" placeholder="Name">
+                            <img class="login_input_img" src="assets/img/user.png" alt="">
+                        </div>
+                    </div>
+                    <div class="user_mail column-flex-start">
+                        <div class="inputs login_input_mail row-center">
+                            <input class="input_mail" type="text" placeholder="Email">
+                            <img class="login_input_img" src="assets/img/mail.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="user_password column-flex-start">
+                        <div class=" inputs login_input_password row-center">
+                            <input required type="password" id="" minlength="6" class="input_password"
+                                placeholder="Password">
+                            <img class="login_input_img" src="assets/img/locker.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="login_buttons row-center-flexstart">
+                    <button class="signup_button_cont row-center-center" onclick="confirmNewUser()">
+                        <a class="sign_button">Sign up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- forgot Password window-->
+        <div class="forgot_passw_container column-center d-none" id="container_forgot_password">
+            <div class="blue_arrow" onclick="showLoginSite()">
+                <img src="assets/img/blue_arrow.svg" class="blue_arrow_img">
+            </div>
+            <div class="forgot_title column-center">
+                <a class="login_text">I forgot my password</a>
+                <div class="login_blue_line"></div>
+            </div>
+
+            <a class="forgot_text_parraf">Don't worry! We will send you an email with the instructions
+                to reset your password.</a>
+            <div class="user_mail column-flex-start">
+                <div class="inputs login_input_mail row-center">
+                    <input class="input_mail" type="text" placeholder="Email">
+                    <img class="login_input_img" src="assets/img/mail.svg" alt="">
+                </div>
+            </div>
+            <div class="padding_top35 login_buttons row-center-flexstart ">
+                <button class="forgot_button_cont row-center-center" onclick="sendMailPassword()">
+                    <a class="sign_button">Send me the email</a>
+                </button>
+            </div>
+        </div>
+        <!-- forgot Password pop-up-->
+        <div class="window_popUp column-center d-none" id="windowPopUps"></div>
+        <div class="pop_up_style send_mail row-center-center" id="popUpForgotPassword">
+            <img src="assets/img/SendCheck.svg">
+            <a class="font_pop_up">An E-Mail has been sent to you</a>
+        </div>
+        <!-- reset Password window-->
+        <div class="reset_passw_container column-center d-none" id="container_reset_password">
+            <div class="blue_arrow" onclick="showForgotThePassword()">
+                <img src="assets/img/blue_arrow.svg" class="blue_arrow_img">
+            </div>
+            <div class="forgot_title column-center">
+                <a class="login_text">Reset your password</a>
+                <div class="login_blue_line"></div>
+            </div>
     
+            <a class="reset_text_parraf">Change your account password here</a>
+            <div class="forgot_passwords column-flex-start">
+                <div class="inputs login_input_mail row-center">
+                    <input class="input_mail" type="password" minlength="6"  placeholder="New password">
+                </div>
+                <div class="inputs login_input_mail row-center">
+                    <input class="input_mail" type="password" minlength="6" placeholder="Confirm password">
+                </div>
+            </div>
+            <div class="padding_top35 login_buttons row-center-flexstart ">
+                <button class="reset_button_cont row-center-center" onclick="changePassword()">
+                    <a class="sign_button">Continue</a>
+                </button>
+            </div>
+        </div>
+    <!-- reset Password pop-up-->
+        <div class="pop_up_style confirm_password row-center-center" id="popUpResetPassword">
+            <a class="font_pop_up">You reset your password</a>
+        </div>
+    </div>
 </body>
+
 </html>
