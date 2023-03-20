@@ -63,12 +63,12 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 0px 30px 30px 30px;
-   
+
 }
 
 .summary_top_left:hover a {
-     color: #4589FF;
-     font-size: 28px;
+    color: #4589FF;
+    font-size: 28px;
 }
 
 .summary_top_left:hover .urgent_number {
@@ -148,6 +148,14 @@
     cursor: pointer;
 }
 
+.summary_top_right:hover {
+    width: 271px;
+    height: 207px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 0px 30px 30px 30px;
+}
+
 .summary_right_cont {
     gap: 7px;
     width: 128px;
@@ -161,11 +169,16 @@
 }
 
 .summary_cont_tasktodo {
-    width: 128px;
+    width: 140px;
     height: 28px;
     font-size: 23px;
     text-align: center;
     color: #4589FF;
+}
+
+.summary_top_right:hover .summary_cont_tasktodo {
+    font-size: 28px;
+    color: #005DFF;
 }
 
 .summary_task_img {
@@ -182,6 +195,11 @@
     color: #000000;
 }
 
+.summary_top_right:hover .summary_task_number {
+    font-size: 58px;
+    color: #005DFF;
+}
+
 .summary_board_bottom {
     gap: 35px;
     width: 921px;
@@ -195,6 +213,14 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     cursor: pointer;
+}
+
+.summary_bottom_cont:hover {
+    width: 271px;
+    height: 207px;
+    background: #005DFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 0px 30px 30px 30px;
 }
 
 .summary_cont_tasks {
@@ -222,10 +248,20 @@
     color: #000000;
 }
 
+.summary_bottom_cont:hover .summary_progress_number {
+    font-size: 58px;
+    color: #FFFFFF;
+}
+
 .summary_tasks_text {
     width: 102px;
     height: 56px;
     font-size: 23px;
     text-align: center;
     color: #4589FF;
+}
+
+.summary_bottom_cont:hover .summary_tasks_text {
+    font-size: 28px;
+    color: #FFFFFF;
 }
