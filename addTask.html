@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +13,81 @@
 
     <link rel="stylesheet" href="assets/css/miniPopups.css">
     <link rel="stylesheet" href="assets/css/models.css">
+    <link rel="stylesheet" href="assets/css/addTask.css">
 
     <script src="assets/js/header.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/addTask.js"></script>
+
     <div w3-include-html="assets/templates/header.html"></div>
 </head>
 
 <body onload="init()">
     <div w3-include-html="assets/templates/menu.html"></div>
-    
+    <div class="add_task_container">
+        <div class="add_task_cont column-flex-start">
+            <div class="add_task_title column-flex-start">
+                <div class="add_task_title_cont row-center">
+                    <input class="add_task_input font400" placeholder="Enter a title" required></input>
+                </div>
+            </div>
+            <div class="add_task_contacts_cont column-flex-start" onclick="">
+                <div class="add_task_contacts column-flex-start">
+                    <div class="contacts_img_cont row-center">
+                        <a class="add_task_subtitle font400">Select contacts to assign</a>
+                        <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+                    </div>
+                </div>
+            </div>
+            <div class="add_task_dueDate_cont column-flex-start">
+                <a class="add_task_titles font400">Due date</a>
+                <div class="add_task_Duedate_input row-center">
+                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="text" id="inputCalendarAddTask"
+                        required>
+                    <img src="assets/img/calendarAddTask.svg" class="dueDate_img" id="imgCalendarAddTask">
+                </div>
+            </div>
+            <div class="add_task_category_cont column-flex-start">
+                <a class="add_task_titles font400">Category</a>
+                <div class="add_task_select_cat column-flex-start">
+                    <div class="add_task_selectCat row-center">
+                        <a class="add_task_subtitle font400">Select task category</a>
+                        <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+                    </div>
+                </div>
+            </div>
+            <div class="add_task_prio_cont row-center-center">
+                <div class="add_task_prio_buttons row-center-center urgent_hover">
+                    <a class="prio_buttons_text font400">Urgent</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioAlta.svg">
+                </div>
+                <div class="add_task_prio_buttons row-center-center urgent_medium">
+                    <a class="prio_buttons_text font400">Medium</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioMedia.svg">
+                </div>
+                <div class="add_task_prio_buttons row-center-center urgent_low">
+                    <a class="prio_buttons_text font400">Low</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioBaja.svg">
+                </div>
+            </div>
+            <div class="add_task_description_cont column-flex-start">
+                <a class="add_task_titles font400">Description</a>
+                <textarea class="add_task_descript_input row-flexstart font400" required
+                    placeholder="Enter a Description"></textarea>
+            </div>
+            <div class="add_task_subtasks_cont column-flex-start">
+                <a class="add_task_titles font400">Subtasks</a>
+                <div class="subtasks_cont_input_img row-center">
+                    <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask">
+                    <img src="assets/img/plusBlue.svg" class="plus_blue_img">
+                </div>
+                <div class="subtasks_cont_check row-center-center">
+                    <input type="checkbox" class="subtasks_checkbox">
+                    <a class="subtask_text font400">Subtask 1</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -3,9 +3,10 @@
 /**
  * necessary functions in init
  */
-function init() {
+async function init() {
     includeHTML();
-    setURL('http://juan-desantos.developerakademie.net/smallest_backend_ever')
+    await downloadFromServer()
+   // await loadUsers();
 }
 
 
@@ -38,4 +39,21 @@ function includeHTML() {
             return;
         }
     }
+}
+
+function openSummary() {
+    window.location.href = "summary.html";
+    
+}
+
+function openBoard() {
+    window.location.href = "board.html";
+}
+
+function openAddTask() {
+    window.location.href = "addTask.html";
+}
+
+function openContacts() {
+    window.location.href = "contacts.html";
 }

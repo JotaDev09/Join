@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+        rel="stylesheet" />
+    <title>Join</title>
+    <link rel="icon" type="image/icon" href="assets/img/logo_join_white.svg" />
+
+    <script src="assets/js/login-signup.js"></script>
+    <script src="assets/js/forgotPassword.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/mini_backend.js"></script>
+    <script>
+        setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
+    </script>
+
+    <link rel="stylesheet" href="assets/css/login-signup.css">
+    <link rel="stylesheet" href="assets/css/miniPopups.css">
+    <link rel="stylesheet" href="assets/css/models.css">
+
+
+</head>
+
+<body onload="init()">
+
+    <div class="sign_up_cont column-center" id="sign_up_site">
+        <div class="login_logo_join_blue">
+            <img src="assets/img/logo_join_white.svg">
+        </div>
+        <!-- Sign up window-->
+        <div class="login_container column-center" id="sign_up_container">
+            <div class="blue_arrow" onclick="showLogInSite()">
+                <img src="assets/img/blue_arrow.svg" class="blue_arrow_img">
+            </div>
+            <form class="signUp_container column-center" id="container_sign_up" onsubmit="addUser()">
+                <div class="login_title column-center">
+                    <a class="login_text">Sign up</a>
+                    <div class="login_blue_line"></div>
+                </div>
+                <div class="user_container column-flex-start">
+                    <div class="signup_user column-flex-start">
+                        <div class="inputs signup_input_user row-center">
+                            <input class="input_user font400" type="text" placeholder="Name" required id="newUserName">
+                            <img class="login_input_img" src="assets/img/user.png" alt="">
+                        </div>
+                    </div>
+                    <div class="user_mail column-flex-start">
+                        <div class="inputs login_input_mail row-center">
+                            <input class="input_mail" type="text" placeholder="Email" required id="newUserEmail">
+                            <img class="login_input_img" src="assets/img/mail.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="user_password column-flex-start">
+                        <div class=" inputs login_input_password row-center">
+                            <input required type="password" id="newUserPassword" minlength="6" class="input_password"
+                                placeholder="Password" required>
+                            <img class="login_input_img" src="assets/img/locker.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="login_buttons row-center-flexstart">
+                    <button class="signup_button_cont row-center-center">
+                        <a class="sign_button font400">Sign up</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

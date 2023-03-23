@@ -1,0 +1,267 @@
+body {
+    margin: 0;
+}
+
+.addTask_background {
+    background: #D2E3FF;
+    border-radius: 8px;
+}
+
+/*Add Task container*/
+.add_task_container {
+    width: -webkit-fill-available;
+    padding-left: 232px;
+}
+
+.add_task_cont {
+    gap: 25px;
+    position: absolute;
+    width: 561px;
+    height: 1056px;
+    left: 320px;
+    top: 176px;
+}
+
+.add_task_title {
+    gap: 8px;
+    width: 422px;
+    height: 74px;
+}
+
+.add_task_title_cont {
+    padding: 13px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 74px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.add_task_input {
+    font-size: 40px;
+    color: #D1D1D1;
+    border: none;
+    outline: none;
+}
+
+.add_task_contacts_cont {
+    gap: 8px;
+    width: 422px;
+    height: 51px;
+}
+
+.add_task_contacts {
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+}
+
+.contacts_img_cont {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.add_task_subtitle {
+    width: 216px;
+    height: 23px;
+    font-size: 19px;
+    color: #000000;
+}
+
+.add_task_contacts_arrow {
+    width: 16px;
+    height: 8px;
+    left: 392px;
+    top: 22px;
+}
+
+.add_task_dueDate_cont {
+    gap: 8px;
+    width: 422px;
+    height: 102px;
+}
+
+.add_task_titles {
+    font-weight: 700 !important;
+    font-size: 19px;
+    color: #42526E;
+}
+
+.add_task_Duedate_input {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.Duedate_input {
+    width: 422px;
+    height: 23px;
+    font-size: 19px;
+    color: #D1D1D1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.dueDate_img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.add_task_category_cont {
+    gap: 8px;
+    width: 422px;
+    height: 102px;
+}
+
+.add_task_select_cat {
+    width: 422px;
+    height: 51px;
+}
+
+.add_task_selectCat {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.add_task_prio_cont {
+    gap: 10px;
+    width: 450px;
+    height: 51px;
+}
+
+.add_task_prio_buttons {
+    gap: 10px;
+    width: 136px;
+    height: 51px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.prio_buttons_text {
+    width: 74px;
+    height: 23px;
+    font-size: 19px;
+    color: #000000;
+}
+
+.prio_buttons_img {
+    width: 20px;
+    height: 14.51px;
+}
+
+.urgent_hover:hover {
+    border-bottom: 2px solid #FF3D00;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+}
+
+.urgent_medium:hover {
+    border-bottom: 2px solid #FFA800;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+}
+
+.urgent_low:hover {
+    border-bottom: 2px solid #7AE229;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+}
+
+.add_task_description_cont {
+    gap: 8px;
+    width: 422px;
+    height: 154px;
+}
+
+.add_task_descript_input {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 103px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 0px 10px 10px 10px;
+    outline: none;
+}
+
+.add_task_descript_input::placeholder {
+    font-size: 19px;
+    color: #D1D1D1;
+}
+
+.add_task_subtasks_cont {
+    gap: 14px;
+    width: 422px;
+    height: 109px;
+    border: none;
+}
+
+.subtasks_cont_input_img {
+    width: 422px;
+    height: 52px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.add_task_subtasks_input {
+    padding-left: 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: none;
+    outline: none;
+}
+
+.add_task_subtasks_input::placeholder {
+    font-size: 19px;
+    color: #D1D1D1;
+}
+
+.plus_blue_img {
+    width: 24px;
+    height: 24px;
+    left: 381px;
+    top: 14px
+}
+
+.subtasks_cont_check {
+    gap: 20px;
+    width: 118px;
+    height: 19px;
+}
+
+.subtasks_checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.subtask_text {
+    font-size: 16px;
+    color: #000000;
+}
