@@ -7,6 +7,10 @@ body {
     border-radius: 8px;
 }
 
+.menu_large {
+    height: auto !important;
+}
+
 /*Add Task container*/
 .add_task_container {
     width: -webkit-fill-available;
@@ -31,7 +35,7 @@ body {
 .add_task_title_cont {
     padding: 13px 21px;
     gap: 10px;
-    width: 422px;
+    width: 381px;
     height: 74px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
@@ -60,7 +64,7 @@ body {
     padding: 18px 21px;
     gap: 10px;
     isolation: isolate;
-    width: 422px;
+    width: 381px;
     height: 51px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
@@ -95,10 +99,10 @@ body {
 }
 
 .add_task_Duedate_input {
-    padding: 18px 21px;
+    padding: 0px 21px;
     gap: 10px;
     isolation: isolate;
-    width: 422px;
+    width: 381px;
     height: 51px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
@@ -135,7 +139,7 @@ body {
     padding: 18px 21px;
     gap: 10px;
     isolation: isolate;
-    width: 422px;
+    width: 381px;
     height: 51px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
@@ -145,7 +149,7 @@ body {
 
 .add_task_prio_cont {
     gap: 10px;
-    width: 450px;
+    width: 422px;
     height: 51px;
 }
 
@@ -196,11 +200,12 @@ body {
 }
 
 .add_task_descript_input {
-    padding: 18px 21px;
+    padding-left: 21px;
+    padding-top: 18px;
     gap: 10px;
     isolation: isolate;
-    width: 422px;
-    height: 103px;
+    width: 398px;
+    height: 85px;
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 0px 10px 10px 10px;
@@ -264,4 +269,49 @@ body {
 .subtask_text {
     font-size: 16px;
     color: #000000;
+}
+
+.add_task_buttons_bottom {
+    gap: 25px;
+    width: 341px;
+    height: 61px;
+    position: absolute;
+    right: 30px;
+    top: 908px;
+}
+
+.add_task_buttons_clear {
+    padding: 18px 10px;
+    gap: 10px;
+    width: 136px;
+    height: 61px;
+    background: #FFFFFF;
+    border: 1px solid #647188;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add_task_clear_text {
+    width: 56px;
+    height: 28px;
+    font-size: 23px;
+    color: #647188;
+}
+
+.add_task_buttons_create {
+    padding: 18px 10px;
+    gap: 10px;
+    width: 180px;
+    height: 61px;
+    background: #4589FF;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.add_task_create_text {
+    width: 126px;
+    height: 28px;
+    font-size: 23px;
+    color: #FFFFFF;
 }

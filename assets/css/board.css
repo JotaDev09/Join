@@ -2,13 +2,13 @@ body {
     margin: 0;
 }
 
+.board_container {
+    padding-left: 232px;
+}
+
 .board_background {
     background: #D2E3FF;
     border-radius: 8px;
-}
-
-.board_container {
-    padding-left: 232px;
 }
 
 .board_head {

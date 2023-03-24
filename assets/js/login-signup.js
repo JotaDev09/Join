@@ -50,10 +50,6 @@ function showLogin() {
  */
 function showSignup() {
     window.location.href = "signup.html";
-   /* document.getElementById('login_site').classList.add('d-none')
-    document.getElementById('sign_up_site').classList.remove('d-none')
-    document.getElementById('sign_up_container').classList.remove('d-none')
-    document.getElementById('container_sign_up').classList.remove('d-none')*/
 }
 
 /**
@@ -61,10 +57,6 @@ function showSignup() {
  */
 function showLogInSite() {
     window.location.href = "index.html";
-   /* document.getElementById('login_site').classList.remove('d-none')
-    document.getElementById('sign_up_site').classList.add('d-none')
-    document.getElementById('sign_up_container').classList.add('d-none')
-    document.getElementById('container_sign_up').classList.add('d-none')*/
 }
 
 /**
@@ -72,7 +64,6 @@ function showLogInSite() {
  */
 function showForgotPassword() {
     document.getElementById('login_site').classList.add('d-none')
-    document.getElementById('sign_up_container').classList.add('d-none')
     document.getElementById('sign_up_site').classList.remove('d-none')
     document.getElementById('container_forgot_password').classList.remove('d-none')
 }

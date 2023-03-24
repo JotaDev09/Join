@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+}
+
+/* View Task */
+
+.view_task_container {
+    z-index: 8;
+    background: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.view_task_task {
+    padding: 50px;
+    gap: 25px;
+    isolation: isolate;
+    position: relative;
+    width: 523px;
+    height: 768px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+
+.view_task_popUp_close {
+    position: absolute;
+    width: 21.65px;
+    height: 21.65px;
+    left: 574.31px;
+    top: 34px;
+    cursor: pointer;
+}
+
+.view_task_category {
+    padding: 4px 36.5px;
+    gap: 10px;
+    width: 129px;
+    height: 36px;
+    background-color: red;
+    border-radius: 8px;
+}
+
+.view_task_category_text {
+    height: 28px;
+    font-size: 23px;
+    color: #FFFFFF;
+}
+
+.view_task_category_title {
+    gap: 1px;
+    width: 523px;
+    height: auto;
+}
+
+.view_task_category_a {
+    width: 523px;
+    height: auto;
+    font-weight: 700 !important;
+    font-size: 61px;
+    color: #000000;
+}
+
+.view_task_description {
+    width: 518px;
+    height: auto;
+    font-size: 21px;
+    color: #000000;
+}
+
+.view_task_due_date {
+    gap: 25px;
+    width: 246px;
+    height: 25px;
+}
+
+.view_task_subtitle {
+    width: fit-content;
+    height: 25px;
+    font-weight: 700 !important;
+    font-size: 20px;
+    color: #000000;
+}
+
+.view_task_date {
+    width: 122px;
+    height: 25px;
+    font-size: 21px;
+    color: #000000;
+}
+
+.view_task_priority {
+    gap: 25px;
+    width: 232px;
+    height: 31px;
+}
+
+.view_task_prio_cont {
+    padding: 4px 18px;
+    gap: 10px;
+    width: 125px;
+    height: 31px;
+    background: #FFD2D2;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+}
+
+.view_task_prio {
+    width: 74px;
+    height: 23px;
+    font-size: 19px;
+    color: #000000;
+}
+
+.view_task_prio_img {
+    width: 17px;
+    height: 12px;
+}
+
+.view_task_contacts_cont {
+    width: 400px;
+    height: fit-content;
+}
+
+.view_task_contact {
+    gap: 25px;
+    width: 390px;
+    height: 45px;
+}
+
+.view_task_contact_circle {
+    gap: 10px;
+    width: 45px;
+    height: 45px;
+    background: #9327FF;
+    border: 2px solid #FFFFFF;
+    border-radius: 58px;
+}
+
+.view_task_contact_initials {
+    width: 22px;
+    height: 19px;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.view_task_contact_name {
+    width: 300px;
+    height: 25px;
+    font-size: 21px;
+    color: #000000;
+}
+
+.view_task_edit {
+    gap: 6px;
+    position: absolute;
+    width: 57px;
+    height: 57px;
+    left: 525px;
+    top: 737px;
+    background: #4589FF;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}

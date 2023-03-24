@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/editTask.css">
+    <link rel="stylesheet" href="assets/css/models.css">
+    <link rel="stylesheet" href="assets/css/addTask.css">
+
+</head>
+
+<body>
+    <div class="edit_task_container center-center" id="ViewTaskContainer">
+        <div class="edit_task_task column-flex-start">
+            <img class="edit_task_popUp_close" src="assets/img/closePopCreate.svg">
+            <div class="edit_task_title row-center">
+                <a class="edit_task_title_text font400">Title example</a>
+            </div>
+            <div class="edit_task_description column-center-flexstart">
+                <a class="edit_task_subtitle font400">Description</a>
+                <textarea class="edit_task_description_area font400 row-flexstart">This is an example of a text in the text area</textarea>
+            </div>
+            <div class="edit_task_due_date column-center-flexstart">
+                <a class="edit_task_subtitle font400">Due date</a>
+                <div class="edit_task_Duedate_input row-spacebet-center">
+                    <input class="edite_input font400" placeholder="dd/mm/yyyy" type="text" id="inputCalendarAddTask"
+                        required>
+                    <img src="assets/img/calendarAddTask.svg" class="edit_dueDate_img" id="imgCalendarAddTask">
+                </div>
+            </div>
+            <div class="edit_task_prio_cont row-center-center">
+                <div class="add_task_prio_buttons row-center-center urgent_hover">
+                    <a class="prio_buttons_text font400">Urgent</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioAlta.svg">
+                </div>
+                <div class="add_task_prio_buttons row-center-center urgent_medium">
+                    <a class="prio_buttons_text font400">Medium</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioMedia.svg">
+                </div>
+                <div class="add_task_prio_buttons row-center-center urgent_low">
+                    <a class="prio_buttons_text font400">Low</a>
+                    <img class="prio_buttons_img" src="assets/img/PrioBaja.svg">
+                </div>
+            </div>
+            <div class="edit_task_contacts_cont column-center-flexstart">
+                <a class="edit_task_subtitle font400">Assigned to</a>
+                <div class="edit_task_contacts column-flex-start">
+                    <div class="edit_task_contacts_select row-spacebet-center">
+                        <a class="edit_task_contacts_assign font400">Select contacts to assign</a>
+                        <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+                    </div>
+                    <div class="edit_task_contacts_initials row-flexstart">
+                        <div class="edit_task_contact_circle column-center-center">
+                            <a class="edit_task_contact_initials font400">NE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="edit_task_button_ok row-center-center">
+                <a class="edit_task_OK font400">Ok</a>
+                <img src="assets/img/checkCreateT.svg">
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

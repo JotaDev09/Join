@@ -19,11 +19,13 @@
 
     <script src="assets/js/header.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/board.js"></script>
     <div w3-include-html="assets/templates/header.html"></div>
 </head>
 
 <body onload="init()">
     <div w3-include-html="assets/templates/menu.html"></div>
+    <div w3-include-html="assets/templates/addTaskPopUp.html"></div>
 
     <div class="board_container">
         <div class="board_head row-center">
@@ -37,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="addTask_button row-center-center">
+                <div class="addTask_button row-center-center" onclick="createTaskPU()">
                     <a class="add_task_text font400">Add task</a>
                     <img src="assets/img/plusAddTask.svg" class="plus_addTask">
                 </div>

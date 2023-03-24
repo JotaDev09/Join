@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+}
+
+/* edit Task */
+
+.edit_task_container {
+    z-index: 8;
+    background: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.edit_task_task {
+    padding: 50px;
+    gap: 45px;
+    isolation: isolate;
+    position: relative;
+    width: 523px;
+    height: 768px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+
+.edit_task_popUp_close {
+    position: absolute;
+    width: 21.65px;
+    height: 21.65px;
+    left: 574.31px;
+    top: 34px;
+    cursor: pointer;
+}
+
+.edit_task_title {
+    margin-left: 50px;
+    box-sizing: border-box;
+    padding: 13px 21px;
+    gap: 10px;
+    width: 405px;
+    height: 74px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.edit_task_title_text {
+    width: 430px;
+    height: 48px;
+    font-weight: 700 !important;
+    font-size: 40px;
+    color: #000000;
+}
+
+.edit_task_description {
+    margin-left: 50px;
+    gap: 5px;
+    width: 3732px;
+    height: 133px;
+}
+
+.edit_task_subtitle {
+    width: 160px;
+    height: 25px;
+    font-weight: 700 !important;
+    font-size: 21px;
+    color: #42526E;
+}
+
+.edit_task_description_area {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 360px;
+    height: 103px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 0px 10px 10px 10px;
+    font-size: 19px;
+}
+
+.edit_task_due_date {
+    margin-left: 50px;
+    gap: 5px;
+    width: 373px;
+    height: 81px;
+}
+
+.edit_task_Duedate_input {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 373px;
+    height: 51px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.edite_input {
+    width: 101px;
+    height: 23px;
+    font-size: 19px;
+    color: #000000;
+    border: none;
+}
+
+.edit_dueDate_img {
+    cursor: pointer;
+}
+
+.edit_task_prio_cont {
+    margin-left: 50px;
+    gap: 5px;
+    width: 415px;
+}
+
+.edit_task_contacts_cont {
+    margin-left: 50px;
+    gap: 5px;
+    width: 372px;
+}
+
+.edit_task_contacts {
+    width: 410px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.edit_task_contacts_select {
+    padding-left: 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 372px;
+    height: 51px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+.edit_task_contacts_initials {
+    padding: 14px;
+    gap: 8px;
+    width: 422px;
+    height: 73px;
+}
+
+.edit_task_contact_circle {
+    gap: 10px;
+    width: 45px;
+    height: 45px;
+    background: #9327FF;
+    border: 1px solid #FFFFFF;
+    border-radius: 58px;
+}
+
+.edit_task_contact_initials {
+    width: 28px;
+    height: 25px;
+    font-size: 21px;
+    color: #FFFFFF;
+}
+
+.edit_task_button_ok {
+    padding: 18px 10px;
+    gap: 10px;
+    position: absolute;
+    width: 84px;
+    height: 61px;
+    left: 508px;
+    bottom: 44px;
+    background: #4589FF;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit_task_OK {
+    width: 30px;
+    height: 28px;
+    font-size: 23px;
+    color: #FFFFFF;
+}

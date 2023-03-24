@@ -93,3 +93,16 @@
     outline: none;
     cursor: pointer;
 }
+
+.background_menu {
+    background: #D2E3FF;
+    border-radius: 8px;
+}
+
+.background_white_transp {
+    z-index: 8;
+    background: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
