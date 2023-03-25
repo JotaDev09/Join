@@ -136,6 +136,8 @@ body {
 
 .login_input_img {
     cursor: pointer;
+    position: absolute;
+    right: 138px;
 }
 
 .user_password {
@@ -155,6 +157,22 @@ body {
     color: #D1D1D1;
     outline: none;
     cursor: pointer;
+}
+
+.password_try_again {
+    width: 126px;
+    height: 23px;
+    font-weight: 400;
+    font-size: 19px;
+    color: #D1D1D1;
+    position: absolute;
+}
+
+.wrong_password {
+    width: 119px;
+    height: 12px;
+    font-size: 13px;
+    color: #FF8190;
 }
 
 .login_remember {

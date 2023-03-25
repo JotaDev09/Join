@@ -1,0 +1,35 @@
+async function initSummary() {
+    includeHTML();
+    await loadUsers();
+    greetUser()
+}
+
+/**
+ * greet user according day time and name
+ */
+function greetUser() {
+    greetAccordingToDayTime();
+    greetUserName();
+}
+
+//greeting according with the time
+function greetAccordingToDayTime() {
+    var currentTime = new Date().getHours();
+    if (currentTime < 12) {
+        document.getElementById("greetText").innerHTML = "Good morning, ";
+    } else if (currentTime < 18) {
+        document.getElementById("greetText").innerHTML = "Good afternoon, ";
+    } else {
+        document.getElementById("greetText").innerHTML = "Good evening, ";
+    }
+}
+
+function greetUserName() {
+    let user = JSON.parse(localStorage.getItem("users"));
+    if (user) {
+        document.getElementById("summaryUser").innerHTML =
+            user['name'];
+    } else {
+        document.getElementById("summaryUser").innerHTML = "Guest";
+    }
+}

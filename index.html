@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload="animatedLogo(), init()">
+<body onload="init()">
     <!-- init logo-->
     <div class="logo_init" id="logo_init">
         <img id="logo_init2" src="assets/img/logo_init.svg">
@@ -42,7 +42,7 @@
                 <a class="login_signup_text font400">Sign up</a>
             </button>
         </div>
-        <div class="login_container column-center">
+        <form onsubmit="logInUser(); return false" class="login_container column-center">
             <div class="login_title column-center">
                 <a class="login_text">Log in</a>
                 <div class="login_blue_line"></div>
@@ -50,16 +50,19 @@
             <div class="user_container column-flex-start">
                 <div class="user_mail column-flex-start">
                     <div class="inputs login_input_mail row-center">
-                        <input class="input_mail font400" type="text" placeholder="Email">
+                        <input class="input_mail font400" type="text" placeholder="Email" required id="newUserEmail" onclick="writeEmail()">
                         <img class="login_input_img" src="assets/img/mail.svg" alt="">
                     </div>
+                    <a class="wrong_password font400 d-none" id="wrongEmail">User not found</a>
                 </div>
                 <div class="user_password column-flex-start">
                     <div class="inputs login_input_password row-center">
                         <input required type="password" minlength="6" class="input_password font400"
-                            placeholder="Password">
-                        <img class="login_input_img" src="assets/img/locker.svg" alt="">
+                            placeholder="Password" required id="newUserPassword">
+                            <a class="password_try_again font400 d-none" id="tryAgain" onclick="writePassword()">Ups! Try again</a>
+                        <img class="login_input_img" src="assets/img/locker.svg" id="password_icon" onclick="showPassword()">
                     </div>
+                    <a class="wrong_password font400 d-none" id="wrongPassword">Wrong Password</a>
                 </div>
             </div>
             <div class="login_remember row-center-flexstart">
@@ -70,14 +73,14 @@
                 <a class="login_forgot_password font400" onclick="showForgotPassword()">Forgot my password</a>
             </div>
             <div class="login_buttons row-center-flexstart">
-                <button class="login_button_cont row-center-center" onclick="logInUser()">
+                <button class="login_button_cont row-center-center">
                     <a class="login_button font400">Log in</a>
                 </button>
                 <button class="guest_login_button_cont row-center-center" onclick="logInGuest()">
                     <a class="guest_login_button font400">Guest log in</a>
                 </button>
             </div>
-        </div>
+        </form>
     </div>
     <!-- init sign-up-->
     <div class="sign_up_cont column-center d-none" id="sign_up_site">

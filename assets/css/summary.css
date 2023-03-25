@@ -17,12 +17,12 @@
     top: 257px;
     gap: 22px;
     position: absolute;
-    width: 745px;
+    width: 800px;
     height: 77px;
 }
 
 .summary_morning {
-    width: 338px;
+    width: 385px;
     height: 58px;
     font-size: 48px;
     color: #2A3647;

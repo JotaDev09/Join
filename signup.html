@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload="init()">
+<body onload="initSignUp()">
 
     <div class="sign_up_cont column-center" id="sign_up_site">
         <div class="login_logo_join_blue">
@@ -37,7 +37,7 @@
             <div class="blue_arrow" onclick="showLogInSite()">
                 <img src="assets/img/blue_arrow.svg" class="blue_arrow_img">
             </div>
-            <form class="signUp_container column-center" id="container_sign_up" onsubmit="addUser()">
+            <form class="signUp_container column-center" id="container_sign_up" onsubmit="addUser(); return false;">
                 <div class="login_title column-center">
                     <a class="login_text">Sign up</a>
                     <div class="login_blue_line"></div>
