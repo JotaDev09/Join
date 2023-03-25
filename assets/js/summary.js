@@ -25,11 +25,11 @@ function greetAccordingToDayTime() {
 }
 
 function greetUserName() {
-    let user = JSON.parse(localStorage.getItem("users"));
-    if (user) {
+    let users = JSON.parse(localStorage.getItem("actualUser"));
+    if (users) {
         document.getElementById("summaryUser").innerHTML =
-            user['name'];
-    } else {
-        document.getElementById("summaryUser").innerHTML = "Guest";
+        users[0]['name'];
+   // } else {
+    //    document.getElementById("summaryUser").innerHTML = "Guest";
     }
 }

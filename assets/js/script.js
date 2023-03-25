@@ -59,23 +59,31 @@ async function logInUser() {
     users = JSON.parse(backend.getItem('users')) || [];
     let email = document.getElementById('newUserEmail');
     let password = document.getElementById('newUserPassword');
-    let user = users.find(u => u.email == email.value && u.password == password.value);
+    let actualUser = users.find(u => u.email == email.value && u.password == password.value);
     let existingEmail = users.find((u) => u.email == email);
     let existingpassword = users.find((u) => u.password == password);
+    mailOrPasswordWrong(actualUser, existingEmail, existingpassword);   
+}
 
-    if (user) {
+/**
+ * check if the email and the password are correct
+ */
+async function mailOrPasswordWrong(actualUser, existingEmail, existingpassword) {
+    if (actualUser) {
+        localStorage.setItem("actualUser", JSON.stringify(actualUser));
+        await backend.setItem("users", JSON.stringify(users));
         window.location.href = "summary.html";
     } else if (!existingEmail) {
         wrongEmail();
-    }
+    };
 
-    if (user) {
+    if (actualUser) {
+        localStorage.setItem("user", JSON.stringify(actualUser));
+        await backend.setItem("users", JSON.stringify(users));
         window.location.href = "summary.html";
     } else if (!existingpassword) {
         wrongPassword();
-    }
-
-    
+    };
 }
 
 /**
