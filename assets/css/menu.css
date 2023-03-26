@@ -76,6 +76,7 @@ body {
     gap: 20px;
     width: 160px;
     height: 46px;
+    cursor: pointer;
 }
 
 .menu_legal_icon {

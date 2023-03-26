@@ -15,94 +15,57 @@
     <link rel="stylesheet" href="assets/css/miniPopups.css">
     <link rel="stylesheet" href="assets/css/models.css">
     <link rel="stylesheet" href="assets/css/summary.css">
+    <link rel="stylesheet" href="assets/css/addTask.css">
 
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/forgotPassword.js"></script>
     <script src="assets/js/summary.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/addTask.js"></script>
 </head>
 
-<body onload="initSummary()">
-    <div class="container_summary column-center">
-        <div class="summary_head row-center ">
-            <a class="summary_morning font400">Good morning,</a>
-            <a class="summary_user font400">&nbspUser</a>
+<body>
+    <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
+        <div class="add_task_select_cat column-flex-start">
+            <div class="add_task_selectCat row-center" onclick="exapndCategory()" id="selecCategory">
+                <a class="add_task_subtitle font400">Select task category</a>
+                <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+            </div>
+            <div class="category_hidden_cont column-flex-start" id="categoryList">
+                
+            </div>
         </div>
     </div>
-    <div class="summary_board column-center-center">
-        <div class="summary_board_top row-center-flexstart">
-            <div class="summary_top_left row-center-center">
-                <div class="summary_left_urgent column-center-center">
-                    <div class="summary_urgent_up row-center-center">
-                        <img src="assets/img/blueClock.svg" class="urgent_clock_img">
-                        <a class="urgent_number font400">1</a>
-                    </div>
-                    <a class="summary_urgent_text font400">Tasks Urgent</a>
-                </div>
-                <a class="summary_whiteLine"></a>
-                <div class="summary_left_date column-flex-start">
-                    <a class="summary_date font400" id="summaryDate">
-                        <script>
-                            const monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"
-                            ];
-                            var date = new Date();
-                            document.write(monthNames[date.getMonth()] + " " + date.getDate() + "," + " " + date.getFullYear());
-                        </script>
-                    </a>
-                    <a class="summary_upcoming font400">Upcoming Deadline</a>
-                </div>
-            </div>
 
-            <div class="summary_top_right row-center-center">
-                <div class="summary_right_cont column-center-center">
-                    <div class="summary_cont_task row-center">
-                        <img src="assets/img/Board.svg" class="summary_task_img">
-                        <a class="summary_task_number">1</a>
-                    </div>
-                    <a class="summary_cont_tasktodo">Tasks To-do</a>
+
+    <div class="add_task_contacts_Cont column-flex-start" id="assignedContactcont">
+        <div class="add_task_contacts column-flex-start" id="assignedContactcont">
+            <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
+                <a class="add_task_subtitle font400">Select contacts to assign</a>
+                <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+            </div>
+            <div class="contacts_hidden_cont column-flex-start" id="contactsList">
+                <div class="contacts_choose_cont row-center">
+                    <a class="add_task_subtitle font400">Name contact</a>
+                    <input type="checkbox" class="add_task_check_cont">
+                </div>
+                <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
+                    <a class="add_task_subtitle font400">Invite new contact</a>
+                    <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
                 </div>
             </div>
         </div>
-        <div class="summary_board_bottom row-flexstart">
-            <div class="summary_bottom_cont row-center-center">
-                <div class="summary_cont_tasks column-center-center">
-                    <div class="summary_tasks_progress row-center">
-                        <img src="assets/img/taskBoard.svg" class="summary_progess_img">
-                        <a class="summary_progress_number font400">1</a>
-                    </div>
-                    <a class="summary_tasks_text font400">Task in Board</a>
-                </div>
-            </div>
-            <div class="summary_bottom_cont row-center-center">
-                <div class="summary_cont_tasks column-center-center">
-                    <div class="summary_tasks_progress row-center">
-                        <img src="assets/img/taskProgress.svg" class="summary_progess_img">
-                        <a class="summary_progress_number font400">1</a>
-                    </div>
-                    <a class="summary_tasks_text font400">Task in Progress</a>
-                </div>
-            </div>
-            <div class="summary_bottom_cont row-center-center">
-                <div class="summary_cont_tasks column-center-center">
-                    <div class="summary_tasks_progress row-center">
-                        <img src="assets/img/taskFeedback.svg" class="summary_progess_img">
-                        <a class="summary_progress_number font400">1</a>
-                    </div>
-                    <a class="summary_tasks_text font400">Awaiting Feedback</a>
-                </div>
-            </div>
-            <div class="summary_bottom_cont row-center-center">
-                <div class="summary_cont_tasks column-center-center">
-                    <div class="summary_tasks_progress row-center">
-                        <img src="assets/img/taskDone.svg" class="summary_progess_img">
-                        <a class="summary_progress_number font400">1</a>
-                    </div>
-                    <a class="summary_tasks_text font400">Tasks Done</a>
-                </div>
-            </div>
+    </div>
+    <div class="new_contact_cont row-center d-none" id="newContactCont">
+        <div>
+            <input class="new_contact_input row-center font400" id="addTaskNewContact"
+                placeholder="Contact email"></input>
         </div>
-
+        <div class="new_contact_input_icons row-center-center">
+            <img src="assets/img/cancelBlue.svg">
+            <img src="assets/img/grauLineSmall.svg">
+            <img src="assets/img/blueCheck.svg">
+        </div>
     </div>
 
 </body>

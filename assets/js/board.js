@@ -1,6 +1,9 @@
 
 
-
+async function initBoard() {
+    includeHTML();
+    await loadUsers();
+}
 /**
  * open the pop-up create Task
  */

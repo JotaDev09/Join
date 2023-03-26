@@ -48,6 +48,7 @@ body {
     outline: none;
 }
 
+/*Add Task assign contacts*/
 .add_task_contacts_cont {
     gap: 8px;
     width: 422px;
@@ -72,6 +73,77 @@ body {
     cursor: pointer;
 }
 
+.contacts_choose_cont {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 381px;
+    height: 31px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.contacts_choose_cont:hover {
+    background: #D2E3FF;
+}
+
+.new_contact_cont {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 381px;
+    height: 26px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #D1D1D1;
+    justify-content: space-between;
+}
+
+.new_contact_input {
+    padding: 18px 21px;
+    gap: 10px;
+    isolation: isolate;
+    width: 381px;
+    height: 26px;
+    justify-content: space-between;
+    cursor: pointer;
+    border: none;
+    width: 122px;
+    font-size: 19px;
+    color: #D1D1D1;
+    outline: none;
+}
+
+.new_contact_input_icons {
+    gap: 9px;
+    width: 66px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.add_task_check_cont {
+    width: 11px;
+    height: 11px;
+    border: #4589FF;
+    border-radius: 2px solid #4589FF;
+    margin-right: 8px;
+}
+
+.add_task_new_contact {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.add_task_check {
+    position: absolute;
+    left: 27.27%;
+    right: 27.27%;
+    top: 27.27%;
+    bottom: 27.27%;
+    background: #4589FF;
+    border-radius: 2px;
+}
+
 .add_task_subtitle {
     width: 216px;
     height: 23px;
@@ -86,6 +158,7 @@ body {
     top: 22px;
 }
 
+/*Add Task assign due date*/
 .add_task_dueDate_cont {
     gap: 8px;
     width: 422px;
@@ -124,6 +197,13 @@ body {
     cursor: pointer;
 }
 
+/*Add Task assign category*/
+
+.add_task_category_Cont {
+    width: 422px;
+    height: 51px;
+}
+
 .add_task_category_cont {
     gap: 8px;
     width: 422px;
@@ -147,6 +227,11 @@ body {
     cursor: pointer;
 }
 
+.category_hidden_cont {
+   
+}
+
+/*Add Task assign priority*/
 .add_task_prio_cont {
     gap: 10px;
     width: 422px;
@@ -193,6 +278,7 @@ body {
     border-radius: 10px;
 }
 
+/*Add Task write description*/
 .add_task_description_cont {
     gap: 8px;
     width: 422px;
@@ -231,6 +317,7 @@ body {
     border-bottom: 1px solid #D1D1D1;
 }
 
+/*Add Task assign subtask*/
 .add_task_subtasks_input {
     padding-left: 21px;
     gap: 10px;
@@ -271,6 +358,7 @@ body {
     color: #000000;
 }
 
+/*Add Task buttons bottom*/
 .add_task_buttons_bottom {
     gap: 25px;
     width: 341px;

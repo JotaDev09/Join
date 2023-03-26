@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/models.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/menu.css">
+    <link rel="stylesheet" href="assets/css/legal_help.css">
+
+    <script src="assets/js/script.js"></script>
+    <div w3-include-html="assets/templates/header.html"></div>
+</head>
+
+<body onload="includeHTML();">
+    <div w3-include-html="assets/templates/menu.html"></div>
+    <div class="legal_container column-flex-start">
+        <img src="assets/img/blue_arrow.svg" class="legal_help_blue_arrow" onclick="openSummary()">
+        <div class="legal_title_cont row-center-center">
+            <a class="legal_title font400">Legal Notice</a>
+        </div>
+        <div class="legal_info_cont column-flex-start">
+            <div class="legal_info_subcont column-flex-start">
+                <a class="legal_info_subtitle font400">Subtitle</a>
+                <a class="legal_info_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam distinctio asperiores id hic at
+                    laborum, necessitatibus autem praesentium reprehenderit consequuntur error totam temporibus eum. Non
+                    vitae obcaecati impedit exercitationem fuga!
+                </a>
+            </div>
+            <div class="legal_info_subcont column-flex-start">
+                <a class="legal_info_subtitle font400">Subtitle</a>
+                <a class="legal_info_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam distinctio asperiores id hic at
+                    laborum, necessitatibus autem praesentium reprehenderit consequuntur error totam temporibus eum. Non
+                    vitae obcaecati impedit exercitationem fuga!
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

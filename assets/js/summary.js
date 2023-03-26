@@ -28,7 +28,7 @@ function greetUserName() {
     let users = JSON.parse(localStorage.getItem("actualUser"));
     if (users) {
         document.getElementById("summaryUser").innerHTML =
-        users[0]['name'];
+        users['name'];
    // } else {
     //    document.getElementById("summaryUser").innerHTML = "Guest";
     }

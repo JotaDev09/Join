@@ -37,12 +37,32 @@
                         <input class="add_task_input font400" placeholder="Enter a title" required></input>
                     </div>
                 </div>
-                <div class="add_task_contacts_cont column-flex-start" onclick="">
+                <div class="add_task_contacts_cont column-flex-start"  id="assignedContactcont">
                     <div class="add_task_contacts column-flex-start">
-                        <div class="contacts_img_cont row-center">
+                        <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
                             <a class="add_task_subtitle font400">Select contacts to assign</a>
                             <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                         </div>
+                        <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
+                            <div class="contacts_choose_cont row-center">
+                                <a class="add_task_subtitle font400">Name contact</a>
+                                <input type="checkbox" class="add_task_check_cont">
+                            </div>
+                            <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
+                                <a class="add_task_subtitle font400">Invite new contact</a>
+                                <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="new_contact_cont row-center d-none" id="newContactCont">
+                    <div>
+                    <input class="new_contact_input row-center font400" id="addTaskNewContact" placeholder="Contact email"></input>
+                    </div>
+                    <div class="new_contact_input_icons row-center-center">
+                        <img src="assets/img/cancelBlue.svg" onclick="cancelNewContact()">
+                        <img src="assets/img/grauLineSmall.svg">
+                        <img src="assets/img/blueCheck.svg">
                     </div>
                 </div>
                 <div class="add_task_dueDate_cont column-flex-start">

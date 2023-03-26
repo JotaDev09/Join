@@ -173,6 +173,20 @@ function openContacts() {
     window.location.href = "contacts.html";
 }
 
+/**
+ *  open Legal notice window
+ */
+function openlegal() {
+    window.location.href = "legalNotice.html";
+};
+
+/**
+ *  open help window
+ */
+function openHelp() {
+    window.location.href = "help.html";
+}
+
 
 
 

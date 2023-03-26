@@ -20,14 +20,21 @@
     <script src="assets/js/header.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/board.js"></script>
+    <script src="assets/js/mini_backend.js"></script>
+    <script src="assets/js/login-signup.js"></script>
+    <script src="assets/js/addTask.js"></script>
+    <script>
+        setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
+    </script>
+
     <div w3-include-html="assets/templates/header.html"></div>
 </head>
 
-<body onload="init()">
+<body onload="initBoard()">
     <div w3-include-html="assets/templates/menu.html"></div>
     <div w3-include-html="assets/templates/addTaskPopUp.html"></div>
 
-    <div class="board_container">
+    <div class="board_container center-center">
         <div class="board_head row-center">
             <div class="board_head_findTask row-flexstart">
                 <div class="board_head_findT row-center">
@@ -45,22 +52,60 @@
                 </div>
             </div>
         </div>
-        <div class="board_columns row-flexstart">
-            <div class="board_column_tasks row-spacebet-center">
-                <a class="column_tasks_text font400">To do</a>
-                <img src="assets/img/plusbutton.svg" src="column_task_plus">
+        <div class="board_columns_container row-center-flexstart">
+            <div class="board_columns_column column-center">
+                <div class="board_column_tasks row-spacebet-center">
+                    <a class="column_tasks_text font400">To do</a>
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus">
+                </div>
+                <!-- task example -->
+                <div class="minitask_container column-center-center">
+                    <div class="minitask column-flex-start">
+                        <div class="minitask_title_cont column-flex-start">
+                            <a class="minitask_title font400">Design</a>
+                        </div>
+                        <div class="minitask_description_cont column-flex-start">
+                            <a class="minitask_descr_title font400">Example title</a>
+                            <a class="minitask_descr_text font400">This is an example of the description</a>
+                        </div>
+                        <div class="minitask_subtask row-center-center">
+                            <div class="minitask_sub_bar"></div>
+                            <a class="minitask_sub_text font400">1/2 Done</a>
+                        </div>
+                        <div class="minitask_buttom_cont row-center-center">
+                            <div class="minitask_contacts_cont row-center-center">
+                                <div class="minitask_contact column-center-center">
+                                    <a class="minitask_contact_text font400">FG</a>
+                                </div>
+                                <div class="minitask_contact column-center-center">
+                                    <a class="minitask_contact_text font400">AD</a>
+                                </div>
+                            </div>
+                            <div class="minitask_prio_cont row-center-center">
+                                <img src="assets/img/PrioAlta.svg" class="minitask_prio">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="board_column_tasks row-spacebet-center">
-                <a class="column_tasks_text font400">In progress</a>
-                <img src="assets/img/plusbutton.svg" src="column_task_plus">
+            <div class="board_columns_column column-center">
+                <div class="board_column_tasks row-spacebet-center">
+                    <a class="column_tasks_text font400">In progress</a>
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus">
+                </div>
             </div>
-            <div class="board_column_tasks row-spacebet-center">
-                <a class="column_tasks_text font400">Await feedback</a>
-                <img src="assets/img/plusbutton.svg" src="column_task_plus">
+            <div class="board_columns_column column-center">
+                <div class="board_column_tasks row-spacebet-center">
+                    <a class="column_tasks_text font400">Await feedback</a>
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus">
+                </div>
+                
             </div>
-            <div class="board_column_tasks row-spacebet-center">
-                <a class="column_tasks_text font400">Done</a>
-                <img src="assets/img/plusbutton.svg" src="column_task_plus">
+            <div class="board_columns_column column-center">
+                <div class="board_column_tasks row-spacebet-center">
+                    <a class="column_tasks_text font400">Done</a>
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus">
+                </div>
             </div>
         </div>
     </div>
