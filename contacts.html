@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +14,14 @@
     <link rel="stylesheet" href="assets/css/miniPopups.css">
     <link rel="stylesheet" href="assets/css/models.css">
     <link rel="stylesheet" href="assets/css/contacts.css">
+    <link rel="stylesheet" href="assets/css/newContactPops.css">
 
     <script src="assets/js/contacts.js"></script>
     <script src="assets/js/header.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/mini_backend.js"></script>
+    <script src="assets/js/board.js"></script>
     <script>
         setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
     </script>
@@ -28,6 +31,53 @@
 
 <body onload="initContacts()">
     <div w3-include-html="assets/templates/menu.html"></div>
-    
+    <div w3-include-html="assets/templates/newContactPopUp.html"></div>
+    <div w3-include-html="assets/templates/editContactPopUp.html"></div>
+    <div w3-include-html="assets/templates/addTaskPopUp.html"></div>
+
+    <div class="contacts_container">
+        <div class="contacts_column_cont"></div>
+
+        <div class="contacts_right column-flex-start">
+            <div class="contacts_display_contact column-flex-start">
+                <div class="contacts_display_name row-center">
+                    <div class="contacts_init_circle row-center-center">
+                        <a class="contacts_initials font400">NE</a>
+                    </div>
+                    <div class="contacts_name_cont column-flex-start">
+                        <div class="contacts_name column-flex-start">
+                            <a class="contactsName font400">Name Example</a>
+                        </div>
+                        <div class="contacts_addTask_cont row-center-center" onclick="createTaskPU()">
+                            <img src="assets/img/plusBlue.svg" class="contacts_plusBlue">
+                            <a class="contacts_addTask_text font400">Add Task</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts_subtitle_cont row-center">
+                    <a class="contacts_subtitle_text font400">Contact Information</a>
+                    <div class="contacts_editContact_cont row-center-flexend" onclick="openEditContact()">
+                        <img src="assets/img/bluePencil.svg" class="contacts_bluePencil">
+                        <a class="contacts_editContact_text font400">Edit Contact</a>
+                    </div>
+                </div>
+                <div class="contacts_info_cont column-flex-start">
+                    <div class="contacts_info column-flex-start">
+                        <a class="contacts_info_subt font400">Email</a>
+                        <a type="number" class="contacts_info_info font400">example@gmail.com</a>
+                    </div>
+                    <div class="contacts_info column-flex-start">
+                        <a class="contacts_info_subt font400">Movil</a>
+                        <a type="number" class="contacts_info_info font400">+49 12112425</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts_button_cont row-center-center" onclick="openNewContact()">
+                <a class="contact_newContact font400">New contact</a>
+                <img src="assets/img/newContact.png">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

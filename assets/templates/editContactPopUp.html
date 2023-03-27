@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/models.css">
+    <link rel="stylesheet" href="assets/css/newContactPops.css">
+
+    <script src="assets/js/login-signup.js"></script>
+    <script src="assets/js/forgotPassword.js"></script>
+    <script src="assets/js/summary.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/addTask.js"></script>
+</head>
+
+<body>
+    <div id="editContactPopUp">
+        <div class="newContact_popUp_container" id="editContactPop">
+            <div class="newContact_popUp_cont column-center">
+                <div class="new_contact_top column-center">
+                    <img src="assets/img/crossWhite.svg" class="new_contact_close" onclick="closeEditContact()">
+                    <img src="assets/img/JoinWhite.svg" class="new_contact_logo">
+                    <a class="new_contact_title font400">Edit contact</a>
+                </div>
+                <div class="new_contact_bottom column-center">
+                    <div class="new_contact_bottom1">
+                        <div class="new_contact_circle row-center-center">
+                            <img src="assets/img/userGrau.svg" class="new_contact_circle_user">
+                        </div>
+                    </div>
+                    <div class="new_contact_bottom2 column-flex-start">
+                        <div class="new_contact_info_user column-flex-start">
+                            <div class="new_contact_info row-center">
+                                <input type="text" class="newContact_input font400 row-spacebet-center"
+                                    placeholder="Name" id="editContactName">
+                                <img src="assets/img/userSmall.svg">
+                            </div>
+                            <a class="new_contact_required d-none" id="editFieldRequiredName">This field is required</a>
+                        </div>
+                        <div class="new_contact_info_user column-flex-start">
+                            <div class="new_contact_info row-center">
+                                <input type="email" class="newContact_input font400 row-spacebet-center"
+                                    placeholder="Email" id="editContactEmail">
+                                <img src="assets/img/briefSmall.svg">
+                            </div>
+                            <a class="new_contact_required d-none" id="EditFieldRequiredEmail">This field is required</a>
+                        </div>
+                        <div class="new_contact_info_user column-flex-start">
+                            <div class="new_contact_info row-center">
+                                <input type="number" class="newContact_input font400 row-spacebet-center"
+                                    placeholder="Phone" id="editContactPhone">
+                                <img src="assets/img/phoneSmall.svg">
+                            </div>
+                            <a class="new_contact_required d-none" id="editFieldRequiredPhone">This field is required</a>
+                        </div>
+                    </div>
+                    <form class="new_contact_bottom3 row-center-center" onsubmit="editContact(); return false">
+                        <button class="edit_contact_botton_create row-center-center">
+                            <a class="new_contact_button font400">Save</a>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

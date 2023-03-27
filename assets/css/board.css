@@ -6,11 +6,6 @@ body {
     padding-left: 232px;
 }
 
-.board_background {
-    background: #D2E3FF;
-    border-radius: 8px;
-}
-
 .board_head {
     gap: 474px;
     position: absolute;

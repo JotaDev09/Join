@@ -2,10 +2,6 @@ body {
     margin: 0;
 }
 
-.addTask_background {
-    background: #D2E3FF;
-    border-radius: 8px;
-}
 
 .menu_large {
     height: auto !important;
@@ -227,10 +223,6 @@ body {
     cursor: pointer;
 }
 
-.category_hidden_cont {
-   
-}
-
 /*Add Task assign priority*/
 .add_task_prio_cont {
     gap: 10px;
@@ -379,8 +371,19 @@ body {
     cursor: pointer;
 }
 
+.add_task_buttons_clear:hover {
+    background: #FFFFFF;
+    border: 2px solid #4589FF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.add_task_buttons_clear:hover > a {
+    color: #4589FF;
+}
+
 .add_task_clear_text {
-    width: 56px;
+    width: 80px;
     height: 28px;
     font-size: 23px;
     color: #647188;
@@ -395,6 +398,12 @@ body {
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+.add_task_buttons_create:hover {
+    background: #005DFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
 .add_task_create_text {

@@ -1,4 +1,204 @@
-.contacts_background {
-    background: #D2E3FF;
-    border-radius: 8px;
+body {
+    margin: 0;
+}
+
+.contacts_container {
+    width: -webkit-fill-available;
+    padding-left: 273px;
+    padding-top: 137px;
+    display: flex;
+}
+
+/*Contacts column*/
+
+.contacts_column_cont {
+    width: 453px;
+    height: 807px;
+    overflow-y: scroll;
+    background: #FFFFFF;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+}
+
+.contacts_column {
+    width: 357px;
+    height: 805px;
+    background: #FFFFFF;
+}
+
+
+.contacts_right {
+    padding-top: 58.5px;
+    padding-left: 65px;
+}
+
+.contacts_display_contact {
+    gap: 21px;
+    width: 700px;
+    height: 319.34px;
+}
+
+.contacts_display_name {
+    gap: 54px;
+    width: 700px;
+    height: 120px;
+}
+
+.contacts_init_circle {
+    gap: 10px;
+    width: 120px;
+    height: 120px;
+    background: red;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 70px;
+}
+
+.contacts_initials {
+    font-weight: 500 !important;
+    font-size: 47px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.contacts_name_cont {
+    gap: 13px;
+    width: 500px;
+    height: 90px;
+}
+
+.contacts_name {
+    gap: 5px;
+    width: 500px;
+    height: 58px;
+}
+
+.contactsName {
+    font-weight: 600 !important;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contacts_addTask_cont {
+    gap: 13px;
+    width: 128px;
+    height: 19px;
+    cursor: pointer;
+}
+
+.contacts_plusBlue {
+    width: 15px;
+    height: 15px;
+}
+
+.contacts_addTask_text {
+    width: 100px;
+    height: 19px;
+    font-size: 16px;
+    color: #005DFF;
+}
+
+.contacts_subtitle_cont {
+    gap: 59px;
+    width: 420.85px;
+    height: 29.34px;
+}
+
+.contacts_subtitle_text {
+    width: 235px;
+    height: 28px;
+    font-weight: 700 !important;
+    font-size: 23px;
+    color: #000000;
+}
+
+.contacts_editContact_cont {
+    gap: 6px;
+    width: 126.85px;
+    height: 29.34px;
+    cursor: pointer;
+}
+
+.contacts_editContact_text {
+    width: 100px;
+    height: 19px;
+    font-size: 16px;
+    color: #2A3647;
+    display: flex;
+    align-items: center;
+}
+
+.contacts_info_cont {
+    gap: 22px;
+    width: 140px;
+    height: 128px;
+}
+
+.contacts_info {
+    gap: 15px;
+    width: 250px;
+    height: 53px;
+}
+
+.contacts_info_subt {
+    width: 45px;
+    height: 19px;
+    font-weight: 700 !important;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contacts_info_info {
+    width: 250px;
+    height: 19px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #005DFF;
+    cursor: pointer;
+}
+
+/*butotn New contact*/
+.contacts_button_cont {
+    position: absolute;
+    gap: 10px;
+    width: 197px;
+    height: 53px;
+    right: 35px;
+    top: 857px;
+    background: #4589FF;
+    border: 1px solid #4589FF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contacts_button_cont:hover {
+    background: #005DFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.contacts_button_cont {
+    position: absolute;
+    gap: 10px;
+    width: 197px;
+    height: 53px;
+    right: 35px;
+    top: 857px;
+    background: #4589FF;
+    border: 1px solid #4589FF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contact_newContact {
+    width: 134px;
+    height: 28px;
+    font-size: 23px;
+    color: #FFFFFF;
 }

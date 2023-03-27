@@ -66,6 +66,16 @@ async function logInUser() {
 }
 
 /**
+ * login as guest
+ */
+function greetGuest() {
+    document.getElementById("newUserEmail").value = ""; // to prevent login to be executed
+    document.getElementById("newUserPassword").value = ""; // to prevent login to be executed
+    localStorage.clear();
+    window.location.href = "summary.html"
+}
+
+/**
  * check if the email and the password are correct
  */
 async function mailOrPasswordWrong(actualUser, existingEmail, existingpassword) {
@@ -91,7 +101,6 @@ async function mailOrPasswordWrong(actualUser, existingEmail, existingpassword) 
  */
 function wrongEmail() {
     document.getElementById('wrongEmail').classList.remove('d-none');;
-    // inputPass.setAttribute("placeholder", "");
 }
 
 /**
@@ -136,13 +145,6 @@ function showForgotPassword() {
  */
 function showSignup() {
     window.location.href = "signup.html";
-}
-
-/**
- * login as guest
- */
-function logInGuest() {
-    window.location.href = "summary.html";
 }
 
 /**

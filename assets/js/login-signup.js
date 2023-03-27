@@ -6,10 +6,16 @@ let users = [
     }
 ];
 
+/**
+ * neccesary functions in Sign-Up
+ */
 async function initSignUp() {
     await loadUsers();
 }
 
+/**
+ * Add a new user in Join
+ */
 async function addUser() {
     let name = document.getElementById('newUserName');
     let email = document.getElementById('newUserEmail');
@@ -20,6 +26,9 @@ async function addUser() {
     window.location.href = "index.html";
 }
 
+/**
+ * load users from array
+ */
 async function loadUsers() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];

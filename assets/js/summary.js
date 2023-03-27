@@ -29,7 +29,7 @@ function greetUserName() {
     if (users) {
         document.getElementById("summaryUser").innerHTML =
         users['name'];
-   // } else {
-    //    document.getElementById("summaryUser").innerHTML = "Guest";
+    } else {
+        document.getElementById("summaryUser").innerHTML = "Guest";
     }
 }
