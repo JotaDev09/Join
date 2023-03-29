@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="assets/js/contacts.js"></script>
+    <style>
+        .contacts_column_cont {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+
+            position: absolute;
+            width: 357px;
+            height: 850px;
+            left: 48px;
+            top: 2px;
+
+            /* white */
+
+            background: #FFFFFF;
+        }
+
+        .contacts_alphabet {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+
+            width: 357px;
+            height: 60px;
+        }
+
+        .contacts_alphabet_leters {
+            width: 282px;
+            height: 40px;
+
+            /* Version 2/t6 */
+
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 120%;
+            /* or 23px */
+
+            display: flex;
+            align-items: center;
+
+            color: #000000;
+        }
+
+        .contacts_separated_line {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 14px 12px;
+            gap: 10px;
+
+            width: 347px;
+            height: 28px;
+
+
+        }
+
+        .contacts_grau_line {
+            width: 323px;
+            height: 0px;
+
+            /* Style */
+
+            border: 1px solid #D1D1D1;
+            border-radius: 3px;
+
+        }
+
+        .contacts_list {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 15px 25px;
+            gap: 35px;
+
+            width: 357px;
+            height: 77px;
+
+            background: #FFFFFF;
+            border-radius: 10px;
+        }
+
+        .contacts_circle_in {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            gap: 10px;
+
+            width: 42px;
+            height: 42px;
+
+            background: #FFFFFF;
+            border-radius: 45px;
+        }
+
+        .contacts_circle {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            left: 0px;
+            top: 0px;
+
+            background: #FF7A00;
+            border: 1px solid #FFFFFF;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="contacts_column_cont" id="contactsColumn">
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var contactos = [
+                { nombre: "Juan", telefono: "555-1234" },
+                { nombre: "Juanjo", telefono: "555-1234" },
+                { nombre: "Maria", telefono: "555-5678" },
+                { nombre: "Pedro", telefono: "555-4321" },
+                { nombre: "Lucia", telefono: "555-8765" },
+                { nombre: "Acia", telefono: "555-8765" },
+            ];
+
+            var contactosPorLetra = {};
+
+            // Iterar sobre cada letra del alfabeto para inicializar el objeto de contactos por letra
+            for (var i = 65; i <= 90; i++) {
+                var letra = String.fromCharCode(i);
+                contactosPorLetra[letra] = [];
+            }
+
+            // Agregar cada contacto al objeto de contactos por letra correspondiente
+            contactos.forEach(function (contacto) {
+                var letraInicial = contacto.nombre.charAt(0).toUpperCase();
+                contactosPorLetra[letraInicial].push(contacto);
+            });
+
+            var contactsColumn = document.getElementById('contactsColumn');
+
+            for (var letra in contactosPorLetra) {
+                var contactsByLetter = contactosPorLetra[letra];
+                if (contactsByLetter.length > 0) {
+                    template()
+                }
+            }
+
+            function template() {
+                var html = '<div class="contacts_alphabet">';
+                html += '<a class="contacts_alphabet_leters">' + letra + '</a>';
+                html += '</div>'
+                html += '<div class="contacts_separated_line">';
+                html += '<span class="contacts_grau_line"></span>';
+                html += '</div>';
+                html += '<div class="contacts_list">';
+                html += '<div class="contacts_circle_in">'
+                html += '<div class="contacts_circle">'
+                html += '</div>'
+                html += '</div>'
+                contactsByLetter.forEach(function (contacto) {
+                    html += '<li>' + contacto.nombre + ' (' + contacto.telefono + ')</li>';
+                });
+                html += '</div>';
+                contactsColumn.innerHTML += html;
+            }
+            // Mostrar los contactos por letra en la consola del navegador
+            console.log(contactosPorLetra);
+
+            // Mostrar los contactos ordenados en la consola del navegador
+            console.log(contactos);
+        });
+    </script>
+</body>
+
+</html>

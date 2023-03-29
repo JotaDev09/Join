@@ -87,7 +87,7 @@
     position: absolute;
     right: -600px;
     width: 518px;
-    height: 1024px;
+    height: 950px;
     overflow-y: scroll;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
@@ -100,7 +100,7 @@
     gap: 20px;
     position: absolute;
     width: 561px;
-    height: 1056px;
+    height: 890px;
 }
 
 .add_task_popUp_close {
@@ -197,6 +197,10 @@
     background: #4589FF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    padding: 0;
+    transform: translateY(110%);
 }
 
 .pop_up_contact_created_text {
@@ -204,4 +208,9 @@
     height: 28px;
     font-size: 23px;
     color: #FFFFFF;
+}
+
+.new_contact_pop_ups {
+    display: flex;
+    justify-content: center;
 }

@@ -1,6 +1,6 @@
 let contacts = [
     {
-        'name': 'Juan',
+        'name': 'Juan de Santos',
         'email': 'juan@join.de',
         'phone': '+4912345678'
     }
@@ -29,7 +29,29 @@ function openNewContact() {
 function closeNewContact() {
     document.getElementById('newContactPop').classList.add('slide-left');
     document.getElementById('newContactPop').classList.remove('slide-right');
+    document.getElementById('contactCreated').classList.remove('d-none');
+    document.getElementById('newContactName').value = "";
+    document.getElementById('newContactEmail').value = "";
+    document.getElementById('newContactPhone').value = "";
+    createContactPopup()
+}
+
+/**
+ * show contact created pop-up
+ */
+function createContactPopup() {
+    document.getElementById('contactCreated').style =
+        "transform: translateY(-557%); transition-duration: 0.5s";
+    popUpCreateContact = setInterval(hiddeContactPopUp, 1500);
+}
+
+/**
+ * hidde contact created pop-up
+ */
+function hiddeContactPopUp() {
     document.getElementById('newContactPopUp').classList.remove('background_white_transp');
+    document.getElementById('contactCreated').style =
+        "display: none !important; transform: translateY(110%); transition-duration: 0.1s";
 }
 
 /**
@@ -66,10 +88,12 @@ function createNewContact() {
     let requiredName = document.getElementById('newFieldRequiredName');
     let requiredEmail = document.getElementById('newFieldRequiredEmail');
     let requiredPhone = document.getElementById('newFieldRequiredPhone');
-    
-    if (newName.value === "" || newEmail.value === "" || newPhone === "") {
+
+    if (newName.value === "") {
         requiredName.classList.remove('d-none');
+    } else if (newEmail.value === "") {
         requiredEmail.classList.remove('d-none');
+    } else if (newPhone === "") {
         requiredPhone.classList.remove('d-none');
     } else {
         closeNewContact()
@@ -83,12 +107,14 @@ function editContact() {
     let requiredNameE = document.getElementById('editFieldRequiredName');
     let requiredEmailE = document.getElementById('editFieldRequiredEmail');
     let requiredPhoneE = document.getElementById('editFieldRequiredPhone');
-    
-    if (editName.value === "" || editEmail.value === "" || editPhone === "") {
+
+    if (editName.value === "") {
         requiredNameE.classList.remove('d-none');
+    } else if (editEmail.value === "") {
         requiredEmailE.classList.remove('d-none');
+    } else if (editPhone === "") {
         requiredPhoneE.classList.remove('d-none');
     } else {
-        closeNewContact()
+        closeEditContact()
     }
 }

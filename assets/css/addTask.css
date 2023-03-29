@@ -3,10 +3,6 @@ body {
 }
 
 
-.menu_large {
-    height: auto !important;
-}
-
 /*Add Task container*/
 .add_task_container {
     width: -webkit-fill-available;
