@@ -25,49 +25,11 @@
 </head>
 
 <body>
-    <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
-        <div class="add_task_select_cat column-flex-start">
-            <div class="add_task_selectCat row-center" onclick="exapndCategory()" id="selecCategory">
-                <a class="add_task_subtitle font400">Select task category</a>
-                <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
-            </div>
-            <div class="category_hidden_cont column-flex-start" id="categoryList">
-                
-            </div>
-        </div>
-    </div>
-
-
-    <div class="add_task_contacts_Cont column-flex-start" id="assignedContactcont">
-        <div class="add_task_contacts column-flex-start" id="assignedContactcont">
-            <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
-                <a class="add_task_subtitle font400">Select contacts to assign</a>
-                <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
-            </div>
-            <div class="contacts_hidden_cont column-flex-start" id="contactsList">
-                <div class="contacts_choose_cont row-center">
-                    <a class="add_task_subtitle font400">Name contact</a>
-                    <input type="checkbox" class="add_task_check_cont">
-                </div>
-                <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
-                    <a class="add_task_subtitle font400">Invite new contact</a>
-                    <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="new_contact_cont row-center d-none" id="newContactCont">
-        <div>
-            <input class="new_contact_input row-center font400" id="addTaskNewContact"
-                placeholder="Contact email"></input>
-        </div>
-        <div class="new_contact_input_icons row-center-center">
-            <img src="assets/img/cancelBlue.svg">
-            <img src="assets/img/grauLineSmall.svg">
-            <img src="assets/img/blueCheck.svg">
-        </div>
-    </div>
-
+   
+<div class="add_task_contacts_list row-center">
+    <a class="add_task_contact_name font400">Juan de Santos</a>
+    <input type="checkbox" class="add_task_contacts_check">
+</div>
 </body>
 
 </html>

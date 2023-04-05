@@ -129,6 +129,19 @@ body {
     width: 250px;
 }
 
+.column_for_tasks {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 590px;
+    overflow: scroll;
+}
+
+.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .minitask_container {
     padding: 18px 19px;
     gap: 10px;

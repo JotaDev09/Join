@@ -19,7 +19,7 @@ body {
 }
 
 .add_task_title {
-    gap: 8px;
+    gap: 3px;
     width: 422px;
     height: 74px;
 }
@@ -91,15 +91,13 @@ body {
 }
 
 .new_contact_input {
-    padding: 18px 21px;
     gap: 10px;
     isolation: isolate;
-    width: 381px;
     height: 26px;
     justify-content: space-between;
     cursor: pointer;
     border: none;
-    width: 122px;
+    width: 250px;
     font-size: 19px;
     color: #D1D1D1;
     outline: none;
@@ -150,6 +148,33 @@ body {
     top: 22px;
 }
 
+.add_task_contacts_list {
+    padding-left: 18px;
+    gap: 10px;
+    isolation: isolate;
+    width: 381px;
+    height: 51px;
+    justify-content: space-between;
+}
+
+.add_task_contacts_list:hover {
+    background: #D2E3FF;
+}
+
+.add_task_contact_name {
+    width: 301px;
+    height: 23px;
+    font-size: 19px;
+    color: #000000;
+}
+
+.add_task_contacts_check {
+    width: 11px;
+    height: 11px;
+    border-radius: 31px;
+    margin-right: 8px;
+}
+
 /*Add Task assign due date*/
 .add_task_dueDate_cont {
     gap: 8px;
@@ -173,7 +198,7 @@ body {
     border-bottom: 1px solid #D1D1D1;
 }
 
-.Duedate_input {
+.Duedate_input[type="date"] {
     width: 422px;
     height: 23px;
     font-size: 19px;
@@ -181,12 +206,14 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
+    background: url('/assets/img/calendarAddTask.svg');
+    background-size: 28px;
+    background-repeat: no-repeat;
+    background-position: 100%;
 }
 
-.dueDate_img {
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
+.Duedate_input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
 }
 
 /*Add Task assign category*/
@@ -199,7 +226,7 @@ body {
 .add_task_category_cont {
     gap: 8px;
     width: 422px;
-    height: 102px;
+    height: 70px;
 }
 
 .add_task_select_cat {
@@ -216,6 +243,51 @@ body {
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
     justify-content: space-between;
+    cursor: pointer;
+}
+
+.category_circle_color {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+}
+
+.color_sales {
+    background: #FC71FF;
+}
+
+.color_backoffice {
+    background: #1FD7C1;
+}
+
+.new_category_colors {
+    padding: 18px 21px;
+    gap: 10px;
+    width: 422px;
+    height: 51px;
+}
+
+.new_category_select_color {
+    gap: 21px;
+    width: 225px;
+    height: 20px;
+}
+
+.new_category_circle {
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.new_category_circle:hover {
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
 }
 
@@ -374,7 +446,7 @@ body {
     border-radius: 10px;
 }
 
-.add_task_buttons_clear:hover > a {
+.add_task_buttons_clear:hover>a {
     color: #4589FF;
 }
 
@@ -407,4 +479,11 @@ body {
     height: 28px;
     font-size: 23px;
     color: #FFFFFF;
+}
+
+.field_required {
+    width: 125px;
+    height: 16px;
+    font-size: 13px;
+    color: #FF8190;
 }

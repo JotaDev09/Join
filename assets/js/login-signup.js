@@ -11,6 +11,7 @@ let users = [
  */
 async function initSignUp() {
     await loadUsers();
+    getSessionUser()
 }
 
 /**
@@ -20,10 +21,14 @@ async function addUser() {
     let name = document.getElementById('newUserName');
     let email = document.getElementById('newUserEmail');
     let password = document.getElementById('newUserPassword');
-
-    users.push({ name: name.value, email: email.value, password: password.value });
-    await backend.setItem('users', JSON.stringify(users));
-    window.location.href = "index.html";
+    let existingUser = users.find(u => u.email == email.value);
+    if (existingUser) {
+        alert('User already existing!');
+    } else {
+        users.push({ name: name.value, email: email.value, password: password.value });
+        await backend.setItem('users', JSON.stringify(users));
+        window.location.href = "index.html";
+    }
 }
 
 /**
@@ -32,6 +37,12 @@ async function addUser() {
 async function loadUsers() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+}
+
+function getSessionUser() {
+    let user = sessionStorage.getItem('sessionUser');
+    user = JSON.parse(user);
+    return user;
 }
 
 /**

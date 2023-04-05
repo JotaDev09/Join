@@ -20,6 +20,7 @@
     <script src="assets/js/addTask.js"></script>
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/mini_backend.js"></script>
+    <script src="assets/js/contacts.js"></script>
     <script>
         setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
     </script>
@@ -34,20 +35,19 @@
         <div class="add_task_cont column-flex-start">
             <div class="add_task_title column-flex-start">
                 <div class="add_task_title_cont row-center">
-                    <input class="add_task_input font400" placeholder="Enter a title" required></input>
+                    <input class="add_task_input font400" placeholder="Enter a title" required
+                        id="inputTitleTask"></input>
                 </div>
+                <a class="field_required d-none">This field is required</a>
             </div>
-            <div class="add_task_contacts_cont column-flex-start"  id="assignedContactcont">
+            <div class="add_task_contacts_cont column-flex-start" id="assignedContactcont">
                 <div class="add_task_contacts column-flex-start">
                     <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
-                        <a class="add_task_subtitle font400">Select contacts to assign</a>
+                        <a class="add_task_subtitle font400" id="assignedContacts">Select contacts to assign</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                     </div>
                     <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
-                        <div class="contacts_choose_cont row-center">
-                            <a class="add_task_subtitle font400">Name contact</a>
-                            <input type="checkbox" class="add_task_check_cont">
-                        </div>
+
                         <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
                             <a class="add_task_subtitle font400">Invite new contact</a>
                             <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
@@ -57,28 +57,64 @@
             </div>
             <div class="new_contact_cont row-center d-none" id="newContactCont">
                 <div>
-                <input class="new_contact_input row-center font400" id="addTaskNewContact" placeholder="Contact email"></input>
+                    <input class="new_contact_input row-center font400" id="addTaskNewContact"
+                        placeholder="Contact email"></input>
                 </div>
                 <div class="new_contact_input_icons row-center-center">
                     <img src="assets/img/cancelBlue.svg" onclick="cancelNewContact()">
                     <img src="assets/img/grauLineSmall.svg">
-                    <img src="assets/img/blueCheck.svg">
+                    <img src="assets/img/blueCheck.svg" onclick="createNewContactTask()">
                 </div>
             </div>
             <div class="add_task_dueDate_cont column-flex-start">
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
-                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="text" id="inputCalendarAddTask"
+                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
                         required>
-                    <img src="assets/img/calendarAddTask.svg" class="dueDate_img" id="imgCalendarAddTask">
                 </div>
+                <a class="field_required d-none">This field is required</a>
             </div>
-            <div class="add_task_category_cont column-flex-start">
-                <a class="add_task_titles font400">Category</a>
+            <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
                 <div class="add_task_select_cat column-flex-start">
-                    <div class="add_task_selectCat row-center">
+                    <div class="add_task_selectCat row-center" onclick="expandCategory()" id="selecCategory">
                         <a class="add_task_subtitle font400">Select task category</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
+                    </div>
+                    <div class="category_hidden_cont column-flex-start d-none" id="categoryList"
+                        onclick="createdNewCategory()">
+                        <div class="contacts_choose_cont row-center" onclick="">
+                            <a class="add_task_subtitle font400">New category</a>
+                        </div>
+                        <div class="contacts_choose_cont row-center">
+                            <a class="add_task_subtitle font400">Sales</a>
+                            <span class="category_circle_color color_sales"></span>
+                        </div>
+                        <div class="contacts_choose_cont row-center">
+                            <a class="add_task_subtitle font400">Backoffice</a>
+                            <span class="category_circle_color color_backoffice"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="new_contact_container column-flex-start d-none" id="newCategoryCont">
+                <div class="new_contact_cont row-center">
+                    <input class="new_contact_input row-center font400" id="addTaskNewCategory"
+                        placeholder="New category name"></input>
+
+                    <div class="new_contact_input_icons row-center-center">
+                        <img src="assets/img/cancelBlue.svg" onclick="cancelNewCategory()">
+                        <img src="assets/img/grauLineSmall.svg">
+                        <img src="assets/img/blueCheck.svg">
+                    </div>
+                </div>
+                <div class="new_category_colors row-center">
+                    <div class="new_category_select_color row-center">
+                        <span class="new_category_circle" style="background: #8AA4FF"></span>
+                        <span class="new_category_circle" style="background: #FF0000"></span>
+                        <span class="new_category_circle" style="background: #2AD300"></span>
+                        <span class="new_category_circle" style="background: #FF8A00"></span>
+                        <span class="new_category_circle" style="background: #E200BE"></span>
+                        <span class="new_category_circle" style="background: #0038FF"></span>
                     </div>
                 </div>
             </div>
@@ -99,12 +135,14 @@
             <div class="add_task_description_cont column-flex-start">
                 <a class="add_task_titles font400">Description</a>
                 <textarea class="add_task_descript_input row-flexstart font400" required
-                    placeholder="Enter a Description"></textarea>
+                    placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                <a class="field_required d-none">This field is required</a>
             </div>
             <div class="add_task_subtasks_cont column-flex-start">
                 <a class="add_task_titles font400">Subtasks</a>
                 <div class="subtasks_cont_input_img row-center">
-                    <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask">
+                    <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask"
+                        id="addTaskSubTask">
                     <img src="assets/img/plusBlue.svg" class="plus_blue_img">
                 </div>
                 <div class="subtasks_cont_check row-center-center">
@@ -114,10 +152,10 @@
             </div>
         </div>
         <div class="add_task_buttons_bottom row-center-center">
-            <button class="add_task_buttons_clear row-center-center">
+            <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
                 <a class="add_task_clear_text font400">Clear X</a>
             </button>
-            <button class="add_task_buttons_create row-center-center">
+            <button class="add_task_buttons_create row-center-center" onclick="createATask()">
                 <a class="add_task_create_text font400">Create Task</a>
                 <img src="assets/img/checkCreateT.svg" class="">
             </button>

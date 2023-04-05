@@ -84,7 +84,7 @@
         .contacts_list {
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
+            align-items: center;
             padding: 15px 25px;
             gap: 35px;
 
@@ -111,21 +111,89 @@
         }
 
         .contacts_circle {
-            position: absolute;
+
             width: 42px;
             height: 42px;
-            left: 0px;
-            top: 0px;
+            border-radius: 45px;
 
-            background: #FF7A00;
             border: 1px solid #FFFFFF;
+        }
+
+        .contacts_circle_in {
+            /* Version 2/t7 */
+            background: #FF7A00;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 120%;
+            /* or 14px */
+
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: #FFFFFF;
+
+        }
+
+        .contact_container_info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 5px;
+
+            width: 250px;
+            height: 47px;
+        }
+
+        .contact_name_info {
+            width: 215px;
+            height: 23px;
+
+            /* Version 2/t6 */
+
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 120%;
+            /* identical to box height, or 23px */
+
+            display: flex;
+            align-items: center;
+
+            color: #000000;
+        }
+
+        .contact_mail_info {
+            width: 215px;
+            height: 19px;
+
+            /* Version 2/body */
+
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 120%;
+            /* or 19px */
+
+            display: flex;
+            align-items: center;
+
+            /* Version 2/main color */
+
+            color: #4589FF;
         }
     </style>
 
 </head>
 
 <body>
-    <div class="contacts_column_cont" id="contactsColumn">
+    <div class="contacts_column_container">
+    <div class="contacts_column_cont" id="contactsColumn"></div>
 
     </div>
     <script>
@@ -158,28 +226,47 @@
             for (var letra in contactosPorLetra) {
                 var contactsByLetter = contactosPorLetra[letra];
                 if (contactsByLetter.length > 0) {
-                    template()
+                    template(letra, contactsByLetter)
                 }
             }
 
-            function template() {
-                var html = '<div class="contacts_alphabet">';
-                html += '<a class="contacts_alphabet_leters">' + letra + '</a>';
-                html += '</div>'
-                html += '<div class="contacts_separated_line">';
-                html += '<span class="contacts_grau_line"></span>';
-                html += '</div>';
-                html += '<div class="contacts_list">';
-                html += '<div class="contacts_circle_in">'
-                html += '<div class="contacts_circle">'
-                html += '</div>'
-                html += '</div>'
-                contactsByLetter.forEach(function (contacto) {
-                    html += '<li>' + contacto.nombre + ' (' + contacto.telefono + ')</li>';
-                });
-                html += '</div>';
-                contactsColumn.innerHTML += html;
-            }
+            function template(letra, contactsByLetter) {
+    let groupedContacts = {};
+    contactsByLetter.forEach(contacto => {
+        let initial = contacto.nombre.charAt(0).toUpperCase();
+        if (!groupedContacts[initial]) {
+            groupedContacts[initial] = [];
+        }
+        groupedContacts[initial].push(contacto);
+    });
+
+    for (let initial in groupedContacts) {
+        const html = `
+            <div class="contacts_alphabet">
+                <a class="contacts_alphabet_leters">${initial}</a>
+            </div>
+            <div class="contacts_separated_line">
+                <span class="contacts_grau_line"></span>
+            </div>
+            ${groupedContacts[initial].map(contacto => `
+            <div class="contacts_list">
+                <div class="contacts_circle_in">
+                    <div class="contacts_circle">
+                        <a class="contacts_circle_in">NE</a> 
+                    </div>
+                </div>
+                <div class="contact_container_info">
+                        <a class="contact_name_info">${contacto.nombre}</a> 
+                        <a class="contact_mail_info">${contacto.telefono}</a> 
+                    `).join('')}
+                </div>
+            </div>
+        `;
+        contactsColumn.innerHTML += html;
+    }
+}
+
+
             // Mostrar los contactos por letra en la consola del navegador
             console.log(contactosPorLetra);
 

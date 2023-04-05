@@ -10,12 +10,96 @@ body {
 
 /*Contacts column*/
 
-.contacts_column_cont {
+.contacts_column_container {
     width: 453px;
     height: 807px;
-    overflow-y: scroll;
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+    overflow-x: scroll;
+}
+
+.contacts_column_cont {
+    width: 357px;
+    height: 850px;
+    padding-left: 48px;
+    background: #FFFFFF;
+}
+
+.contacts_alphabet {
+    padding: 10px;
+    gap: 10px;
+    width: 357px;
+    height: 60px;
+}
+
+.contacts_alphabet_leters {
+    width: 282px;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contacts_separated_line {
+    padding: 14px 12px;
+    gap: 10px;
+    width: 347px;
+    height: 28px;
+}
+
+.contacts_grau_line {
+    width: 323px;
+    border: 1px solid #D1D1D1;
+    border-radius: 3px;
+}
+
+.contacts_list {
+    padding: 15px 25px;
+    gap: 35px;
+    width: 357px;
+    height: 77px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.contacts_circle_in {
+    gap: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.contacts_circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+}
+
+.contact_container_info {
+    gap: 5px;
+    width: 250px;
+    height: 47px;
+}
+
+.contact_name_info {
+    width: 215px;
+    height: 23px;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.contact_mail_info {
+    width: 215px;
+    height: 19px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #4589FF;
 }
 
 .contacts_column {
@@ -24,7 +108,7 @@ body {
     background: #FFFFFF;
 }
 
-
+/*Contacts display*/
 .contacts_right {
     padding-top: 58.5px;
     padding-left: 65px;
@@ -46,7 +130,6 @@ body {
     gap: 10px;
     width: 120px;
     height: 120px;
-    background: red;
     border: 3px solid #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 70px;

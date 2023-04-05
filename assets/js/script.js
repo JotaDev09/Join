@@ -69,6 +69,9 @@ async function logInUser() {
  * login as guest
  */
 function greetGuest() {
+    let actualUser;
+    actualUser = JSON.stringify(actualUser);
+    sessionStorage.setItem('sessionUser', actualUser)
     document.getElementById("newUserEmail").value = ""; // to prevent login to be executed
     document.getElementById("newUserPassword").value = ""; // to prevent login to be executed
     localStorage.clear();
