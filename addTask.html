@@ -31,12 +31,12 @@
 
 <body onload="initAddTask()">
     <div w3-include-html="assets/templates/menu.html"></div>
-    <div class="add_task_container">
+    <form class="add_task_container" onclick="createATask(); return false">
         <div class="add_task_cont column-flex-start">
             <div class="add_task_title column-flex-start">
                 <div class="add_task_title_cont row-center">
-                    <input class="add_task_input font400" placeholder="Enter a title" required
-                        id="inputTitleTask"></input>
+                    <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTask"
+                        onchange="addTitle()"></input>
                 </div>
                 <a class="field_required d-none">This field is required</a>
             </div>
@@ -70,7 +70,7 @@
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
                     <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
-                        required>
+                        required onchange="addDate()">
                 </div>
                 <a class="field_required d-none">This field is required</a>
             </div>
@@ -119,23 +119,26 @@
                 </div>
             </div>
             <div class="add_task_prio_cont row-center-center">
-                <div class="add_task_prio_buttons row-center-center urgent_hover">
-                    <a class="prio_buttons_text font400">Urgent</a>
-                    <img class="prio_buttons_img" src="assets/img/PrioAlta.svg">
+                <div class="add_task_prio_buttons row-center-center urgent_hover" id="addTaskPrioUrgent"
+                    onclick="choosePrio(this)">
+                    <a class="prio_buttons_text font400" id="addTaskPrioUrgentA">Urgent</a>
+                    <img class="prio_buttons_img" id="addTaskPrioUrgentImg" src="assets/img/PrioAlta.svg">
                 </div>
-                <div class="add_task_prio_buttons row-center-center urgent_medium">
-                    <a class="prio_buttons_text font400">Medium</a>
-                    <img class="prio_buttons_img" src="assets/img/PrioMedia.svg">
+                <div class="add_task_prio_buttons row-center-center urgent_medium" id="addTaskPrioMedium"
+                    onclick="choosePrio(this)">
+                    <a class="prio_buttons_text font400" id="addTaskPrioMediumA">Medium</a>
+                    <img class="prio_buttons_img" id="addTaskPrioMediumImg" src="assets/img/PrioMedia.svg">
                 </div>
-                <div class="add_task_prio_buttons row-center-center urgent_low">
-                    <a class="prio_buttons_text font400">Low</a>
-                    <img class="prio_buttons_img" src="assets/img/PrioBaja.svg">
+                <div class="add_task_prio_buttons row-center-center urgent_low" id="addTaskPrioLow"
+                    onclick="choosePrio(this)">
+                    <a class="prio_buttons_text font400" id="addTaskPrioLowA">Low</a>
+                    <img class="prio_buttons_img" id="addTaskPrioLowImg" src="assets/img/PrioBaja.svg">
                 </div>
             </div>
             <div class="add_task_description_cont column-flex-start">
                 <a class="add_task_titles font400">Description</a>
                 <textarea class="add_task_descript_input row-flexstart font400" required
-                    placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                    placeholder="Enter a Description" id="addTaskDescription" onchange="addDescription()"></textarea>
                 <a class="field_required d-none">This field is required</a>
             </div>
             <div class="add_task_subtasks_cont column-flex-start">
@@ -143,24 +146,21 @@
                 <div class="subtasks_cont_input_img row-center">
                     <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask"
                         id="addTaskSubTask">
-                    <img src="assets/img/plusBlue.svg" class="plus_blue_img">
+                    <img src="assets/img/plusBlue.svg" class="plus_blue_img" onclick="subTaskGenerate()">
                 </div>
-                <div class="subtasks_cont_check row-center-center">
-                    <input type="checkbox" class="subtasks_checkbox">
-                    <a class="subtask_text font400">Subtask 1</a>
-                </div>
+                <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
             </div>
         </div>
         <div class="add_task_buttons_bottom row-center-center">
             <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
                 <a class="add_task_clear_text font400">Clear X</a>
             </button>
-            <button class="add_task_buttons_create row-center-center" onclick="createATask()">
+            <button class="add_task_buttons_create row-center-center">
                 <a class="add_task_create_text font400">Create Task</a>
                 <img src="assets/img/checkCreateT.svg" class="">
             </button>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>
