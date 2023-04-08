@@ -141,7 +141,8 @@ function closePopUpCreate() {
     document.getElementById('createTaskPopUp').classList.add('slide_right');
     document.getElementById('createTaskPopUp').classList.remove('slide_left');
     document.getElementById('addTaskPopUpContainer').classList.remove('background_white_transp');
-    clearTask()
+    clearTask();
+    resetColors;
 }
 
 /**

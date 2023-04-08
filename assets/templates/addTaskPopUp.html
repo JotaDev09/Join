@@ -20,7 +20,7 @@
 
 <body>
     <div id="addTaskPopUpContainer">
-        <div class="add_task_popUp_container" id="createTaskPopUp">
+        <form class="add_task_popUp_container" id="createTaskPopUp" onclick="createATask(); return false">
             <div class="add_task_popUp_cont column-flex-start">
                 <img class="add_task_popUp_close" src="assets/img/closePopCreate.svg" onclick="closePopUpCreate()">
                 <div class="add_task_popUp_head row-flexstart">
@@ -34,21 +34,19 @@
                 </div>
                 <div class="add_task_title column-flex-start">
                     <div class="add_task_title_cont row-center">
-                        <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTask"></input>
+                        <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTask"
+                            onchange="addTitle()"></input>
                     </div>
-                    <a class="field_required d-none">This field is required</a>
+                    <a class="field_required d-none" id="titleRequiredPU">This field is required</a>
                 </div>
-                <div class="add_task_contacts_cont column-flex-start"  id="assignedContactcont">
+                <div class="add_task_contacts_cont column-flex-start" id="assignedContactcont">
                     <div class="add_task_contacts column-flex-start">
                         <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
                             <a class="add_task_subtitle font400">Select contacts to assign</a>
                             <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                         </div>
                         <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
-                            <div class="contacts_choose_cont row-center">
-                                <a class="add_task_subtitle font400">Name contact</a>
-                                <input type="checkbox" class="add_task_check_cont">
-                            </div>
+
                             <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
                                 <a class="add_task_subtitle font400">Invite new contact</a>
                                 <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
@@ -58,19 +56,20 @@
                 </div>
                 <div class="new_contact_cont row-center d-none" id="newContactCont">
                     <div>
-                    <input class="new_contact_input row-center font400" id="addTaskNewContact" placeholder="Contact email"></input>
+                        <input class="new_contact_input row-center font400" id="addTaskNewContact"
+                            placeholder="Contact email"></input>
                     </div>
                     <div class="new_contact_input_icons row-center-center">
                         <img src="assets/img/cancelBlue.svg" onclick="cancelNewContact()">
                         <img src="assets/img/grauLineSmall.svg">
-                        <img src="assets/img/blueCheck.svg">
+                        <img src="assets/img/blueCheck.svg" onclick="createNewContactTask()">
                     </div>
                 </div>
                 <div class="add_task_dueDate_cont column-flex-start">
                     <a class="add_task_titles font400">Due date</a>
                     <div class="add_task_Duedate_input row-center">
                         <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date"
-                            id="inputCalendarAddTask" required>
+                            id="inputCalendarAddTask" required onchange="addDate()">
                     </div>
                     <a class="field_required d-none">This field is required</a>
                 </div>
@@ -80,9 +79,8 @@
                             <a class="add_task_subtitle font400">Select task category</a>
                             <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                         </div>
-                        <div class="category_hidden_cont column-flex-start d-none" id="categoryList"
-                            onclick="createdNewCategory()">
-                            <div class="contacts_choose_cont row-center" onclick="">
+                        <div class="category_hidden_cont column-flex-start d-none" id="categoryList">
+                            <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
                                 <a class="add_task_subtitle font400">New category</a>
                             </div>
                             <div class="contacts_choose_cont row-center">
@@ -100,7 +98,7 @@
                     <div class="new_contact_cont row-center">
                         <input class="new_contact_input row-center font400" id="addTaskNewCategory"
                             placeholder="New category name"></input>
-    
+
                         <div class="new_contact_input_icons row-center-center">
                             <img src="assets/img/cancelBlue.svg" onclick="cancelNewCategory()">
                             <img src="assets/img/grauLineSmall.svg">
@@ -119,38 +117,40 @@
                     </div>
                 </div>
                 <div class="add_task_prio_cont row-center-center">
-                    <div class="add_task_prio_buttons row-center-center urgent_hover">
-                        <a class="prio_buttons_text font400">Urgent</a>
-                        <img class="prio_buttons_img" src="assets/img/PrioAlta.svg">
+                    <div class="add_task_prio_buttons row-center-center urgent_hover" id="addTaskPrioUrgentPU"
+                        onclick="choosePrioPU(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioUrgentAPU">Urgent</a>
+                        <img class="prio_buttons_img" id="addTaskPrioUrgentImgPU" src="assets/img/PrioAlta.svg">
                     </div>
-                    <div class="add_task_prio_buttons row-center-center urgent_medium">
-                        <a class="prio_buttons_text font400">Medium</a>
-                        <img class="prio_buttons_img" src="assets/img/PrioMedia.svg">
+                    <div class="add_task_prio_buttons row-center-center urgent_medium" id="addTaskPrioMediumPU"
+                        onclick="choosePrioPU(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioMediumAPU">Medium</a>
+                        <img class="prio_buttons_img" id="addTaskPrioMediumImgPU" src="assets/img/PrioMedia.svg">
                     </div>
-                    <div class="add_task_prio_buttons row-center-center urgent_low">
-                        <a class="prio_buttons_text font400">Low</a>
-                        <img class="prio_buttons_img" src="assets/img/PrioBaja.svg">
+                    <div class="add_task_prio_buttons row-center-center urgent_low" id="addTaskPrioLowPU"
+                        onclick="choosePrioPU(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioLowAPU">Low</a>
+                        <img class="prio_buttons_img" id="addTaskPrioLowImgPU" src="assets/img/PrioBaja.svg">
                     </div>
                 </div>
                 <div class="add_task_description_cont column-flex-start">
                     <a class="add_task_titles font400">Description</a>
                     <textarea class="add_task_descript_input row-flexstart font400" required
-                        placeholder="Enter a Description" id="addTaskDescription"></textarea>
-                        <a class="field_required d-none">This field is required</a>
+                        placeholder="Enter a Description" id="addTaskDescription"
+                        onchange="addDescription()"></textarea>
+                    <a class="field_required d-none">This field is required</a>
                 </div>
                 <div class="add_task_subtasks_cont column-flex-start">
                     <a class="add_task_titles font400">Subtasks</a>
                     <div class="subtasks_cont_input_img row-center">
-                        <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask" id="addTaskSubTask">
-                        <img src="assets/img/plusBlue.svg" class="plus_blue_img">
+                        <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask"
+                            id="addTaskSubTask">
+                        <img src="assets/img/plusBlue.svg" class="plus_blue_img" onclick="subTaskGenerate()">
                     </div>
-                    <div class="subtasks_cont_check row-center-center">
-                        <input type="checkbox" class="subtasks_checkbox">
-                        <a class="subtask_text font400">Subtask 1</a>
-                    </div>
+                    <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 

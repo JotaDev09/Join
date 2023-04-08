@@ -487,6 +487,7 @@ body {
 }
 
 .field_required {
+    display: none;
     width: 125px;
     height: 16px;
     font-size: 13px;

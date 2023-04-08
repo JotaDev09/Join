@@ -24,6 +24,7 @@
     <script>
         setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
 
 
     <div w3-include-html="assets/templates/header.html"></div>
@@ -31,14 +32,14 @@
 
 <body onload="initAddTask()">
     <div w3-include-html="assets/templates/menu.html"></div>
-    <form class="add_task_container" onclick="createATask(); return false">
+    <div class="add_task_container">
         <div class="add_task_cont column-flex-start">
             <div class="add_task_title column-flex-start">
                 <div class="add_task_title_cont row-center">
-                    <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTask"
-                        onchange="addTitle()"></input>
+                    <input class="add_task_input font400" placeholder="Enter a title" id="inputTitleTask"
+                        onclick="writeTitle()"></input>
                 </div>
-                <a class="field_required d-none">This field is required</a>
+                <a class="field_required" id="titleRequired">This field is required</a>
             </div>
             <div class="add_task_contacts_cont column-flex-start" id="assignedContactcont">
                 <div class="add_task_contacts column-flex-start">
@@ -47,11 +48,7 @@
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                     </div>
                     <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
-
-                        <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
-                            <a class="add_task_subtitle font400">Invite new contact</a>
-                            <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
-                        </div>
+                        <!--Template Contacts-->
                     </div>
                 </div>
             </div>
@@ -61,7 +58,7 @@
                         placeholder="Contact email"></input>
                 </div>
                 <div class="new_contact_input_icons row-center-center">
-                    <img src="assets/img/cancelBlue.svg" onclick="cancelNewContact()">
+                    <img src="assets/img/cancelBlue.svg" onclick="cancelNewContactTask()">
                     <img src="assets/img/grauLineSmall.svg">
                     <img src="assets/img/blueCheck.svg" onclick="createNewContactTask()">
                 </div>
@@ -70,9 +67,9 @@
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
                     <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
-                        required onchange="addDate()">
+                        onclick="writeDate()">
                 </div>
-                <a class="field_required d-none">This field is required</a>
+                <a class="field_required" id="dateRequired">This field is required</a>
             </div>
             <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
                 <div class="add_task_select_cat column-flex-start">
@@ -80,9 +77,8 @@
                         <a class="add_task_subtitle font400">Select task category</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                     </div>
-                    <div class="category_hidden_cont column-flex-start d-none" id="categoryList"
-                        onclick="createdNewCategory()">
-                        <div class="contacts_choose_cont row-center" onclick="">
+                    <div class="category_hidden_cont column-flex-start d-none" id="categoryList">
+                        <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
                             <a class="add_task_subtitle font400">New category</a>
                         </div>
                         <div class="contacts_choose_cont row-center">
@@ -138,8 +134,8 @@
             <div class="add_task_description_cont column-flex-start">
                 <a class="add_task_titles font400">Description</a>
                 <textarea class="add_task_descript_input row-flexstart font400" required
-                    placeholder="Enter a Description" id="addTaskDescription" onchange="addDescription()"></textarea>
-                <a class="field_required d-none">This field is required</a>
+                    placeholder="Enter a Description" id="addTaskDescription" onclick="writeDescription()"></textarea>
+                <a class="field_required" id="descriptionRequired">This field is required</a>
             </div>
             <div class="add_task_subtasks_cont column-flex-start">
                 <a class="add_task_titles font400">Subtasks</a>
@@ -155,12 +151,12 @@
             <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
                 <a class="add_task_clear_text font400">Clear X</a>
             </button>
-            <button class="add_task_buttons_create row-center-center">
+            <button class="add_task_buttons_create row-center-center" id="createButton" onclick="createATask()">
                 <a class="add_task_create_text font400">Create Task</a>
                 <img src="assets/img/checkCreateT.svg" class="">
             </button>
         </div>
-    </form>
+    </div>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ let selectedButtonId = '';
 let task = {
     id: "",
     title: "",
+    contacts: new Array,
     dueDate: "",
     prio: "",
     description: "",
@@ -18,7 +19,6 @@ let task = {
 async function initAddTask() {
     includeHTML();
     await loadUsers();
-    await getContacts();
     await loadTasksFromServer()
 }
 
@@ -31,61 +31,196 @@ async function loadTasksFromServer() {
  * Create a new Task
  */
 async function createATask() {
-    await loadTasksFromServer();
-    tasks = JSON.parse(await backend.getItem('tasks')) || [];
-    tasks.push(task);
-    await backend.setItem('tasks', JSON.stringify(tasks));
-
-    clearTask()
-}
-
-function addTitle() {
-    let taskTitle = document.getElementById('inputTitleTask').value;
-    task.title = taskTitle
-}
-
-function addDescription() {
-    let taskDescription = document.getElementById('addTaskDescription').value;
-    task.description = taskDescription;
-}
-
-function addDate() {
-    let taskDate = document.getElementById('inputCalendarAddTask').value;
-    task.dueDate = taskDate;
-}
-
-function subTaskGenerate() {
-    addSubTask()
-}
-function addSubTask() {
-    let taskSubTask = document.getElementById('addTaskSubTask').value;
-    if (taskSubTask) {
-        let subTask = {
-            title: taskSubTask, status: false
-        };
-        task.subTask.push(subTask);
-        renderSubtask();
+    if (checkInfo()) {
+        checkboxContact()
+    } else {
+        addInfoNewTask();
+        await loadTasksFromServer();
+        tasks = JSON.parse(await backend.getItem('tasks')) || [];
+        tasks.push(task);
+        await backend.setItem('tasks', JSON.stringify(tasks));
+        clearTask();
     }
-    document.getElementById('addTaskSubTask').value = '';
 }
 
-function renderSubtask() {
-    document.getElementById('subTaskContainer').innerHTML = ``;
-    for (let i = 0; i < task.subTask.length; i++) {
-        if (!task.subTask[i].status) {
-            document.getElementById('subTaskContainer').innerHTML += renderSubTask(i);
+/**
+ * Check the inputs and add an alert to required the info
+ */
+function checkInfo() {
+    let info = false
+    if (document.getElementById('inputTitleTask').value === "") {
+        document.getElementById('titleRequired').style.display = 'flex';
+        info = true;
+    } if (document.getElementById('inputCalendarAddTask').value === "") {
+        document.getElementById('dateRequired').style.display = 'flex';
+        info = true;
+    } if (document.getElementById('addTaskDescription').value === "") {
+        document.getElementById('descriptionRequired').style.display = 'flex';
+        info = true;
+    }
+    return info;
+}
+
+/**
+ * deletes the required information notice
+ */
+function writeTitle() {
+    document.getElementById('titleRequired').style.display = 'none';
+}
+
+/**
+ * deletes the required information notice
+ */
+function writeDate() {
+    document.getElementById('dateRequired').style.display = 'none';
+}
+
+/**
+ * deletes the required information notice
+ */
+function writeDescription() {
+    document.getElementById('descriptionRequired').style.display = 'none';
+}
+
+/**
+ * add the info of the new tasl to the array
+ */
+function addInfoNewTask() {
+    let taskTitle = document.getElementById('inputTitleTask').value;
+    let taskDate = document.getElementById('inputCalendarAddTask').value;
+    let taskDescription = document.getElementById('addTaskDescription').value;
+    let selectedContacts = checkboxContact();
+
+    task.id = uuidv4();
+    task.title = taskTitle;
+    task.dueDate = taskDate;
+    task.description = taskDescription;
+    tasks.contacts = selectedContacts;
+}
+
+
+/**
+ * expand Contacts Menu in AddTask
+ */
+function expandMenu() {
+    if (selecContacts) {
+        document.getElementById('contactsList').classList.add('d-none');
+        document.getElementById('assignedContactcont').style =
+            "height: 51px; overflox: inherit"
+        selecContacts = false;
+    } else {
+        document.getElementById('contactsList').classList.remove('d-none');
+        document.getElementById('assignedContactcont').style =
+            "height: 204px; overflow: auto"
+        selecContacts = true;
+    }
+}
+
+
+function checkboxContact() {
+
+    const selectedContacts = [];
+
+    const checkboxes = document.querySelectorAll('.add_task_contacts_check');
+    checkboxes.forEach(checkbox => {
+      const contactElement = checkbox.parentNode;
+      if (checkbox.checked) {
+        const contactName = contactElement.querySelector('a').textContent.trim();
+        selectedContacts.push({ name: contactName });
+      }
+    });
+  
+    return selectedContacts;
+}
+
+
+
+/**
+ * the function load the contacts array after DOM
+ */
+document.addEventListener('DOMContentLoaded', async function (event) {
+    await getContacts();
+    await initAddTask();
+    subTaskGenerate();
+});
+
+
+async function getContacts() {
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    const sortedContacts = sortContactsByInitialLetter(contacts);
+
+    let html = '';
+    for (let letter in sortedContacts) {
+        const contactsByLetter = sortedContacts[letter];
+        if (contactsByLetter.length > 0) {
+            html += showContactsInTemplate(contactsByLetter);
         }
     }
+    if (contacts.length > 0) {
+        contacts.sort(function (a, b) {
+            //  return a.name.localeCompare(b.name);
+        });
+        showContactsInTemplate(contacts);
+    }
+};
+
+function showContactsInTemplate(contacts) {
+    const contactsList = document.getElementById('contactsList');
+    const htmlArray = [];
+
+    contacts.forEach(contact => {
+        htmlArray.push(`
+        <div class="add_task_contacts_list row-center">
+          <a class="add_task_contact_name font400">${contact.name || contact.email}</a>
+          <input type="checkbox" class="add_task_contacts_check">
+        </div>
+      `);
+    });
+
+    htmlArray.push(`
+      <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
+        <a class="add_task_subtitle font400">Invite new contact</a>
+        <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
+      </div>
+    `);
+
+    const html = htmlArray.join('');
+    contactsList.innerHTML = html;
 }
 
-function renderSubTask(i) {
-    return `
-    <div class="subtasks_cont_check row-center">
-        <input type="checkbox" class="subtasks_checkbox">
-        <a class="subtask_text font400">${task.subTask[i].title}</a>
-    </div>`
+/**
+ * the function creates a new contact bei new Task
+ */
+async function createNewContactTask() {
+    let emailContactTask = document.getElementById('addTaskNewContact');
+    let newContact = {
+        email: emailContactTask.value,
+    };
+    contacts.push(newContact);
+    await backend.setItem('contacts', JSON.stringify(contacts));
+
+    addContactToHTML();
 }
 
+
+/**
+ * write a new Contact in AddTask
+ */
+function assignedNewContact() {
+    document.getElementById('assignedContactcont').classList.add('d-none');
+    document.getElementById('addTaskNewContact').classList.remove('d-none');
+    document.getElementById('newContactCont').classList.remove('d-none');
+}
+
+/**
+ * close write a new Contact in AddTask
+ */
+function cancelNewContactTask() {
+    document.getElementById('assignedContactcont').classList.remove('d-none');
+    document.getElementById('addTaskNewContact').classList.add('d-none');
+    document.getElementById('newContactCont').classList.add('d-none');
+}
 /**
  * the function change the colors of the prio buttons
  * 
@@ -155,183 +290,85 @@ function selectedButtons(buttonId) {
             break;
     }
 }
+/**
+ * the function change the colors of the prio buttons Pop Up
+ * 
+ * @param {button} - take the info from prio buttons
+ */
+function choosePrioPU(button) {
+    if (selectedButtonId !== button.id) {
+        deselectedButtonsPU(selectedButtonId);
+        selectedButtonsPU(button.id);
+        selectedButtonId = button.id;
+    }
+}
+
+/**
+ * the function change the colors of the prio buttons to initials colors  Pop Up
+ * 
+ * @param {selectedButtonId} - take the info from id of the prio buttons
+ */
+function deselectedButtonsPU(selectedButtonId) {
+    switch (selectedButtonId) {
+        case 'addTaskPrioUrgentPU':
+            document.getElementById('addTaskPrioUrgentPU').style.backgroundColor = '#FFFFFF';
+            document.getElementById('addTaskPrioUrgentAPU').style.color = '#000000';
+            document.getElementById('addTaskPrioUrgentImgPU').src = 'assets/img/PrioAlta.svg';
+            break;
+        case 'addTaskPrioMediumPU':
+            document.getElementById('addTaskPrioMediumPU').style.backgroundColor = '#FFFFFF';
+            document.getElementById('addTaskPrioMediumAPU').style.color = '#000000';
+            document.getElementById('addTaskPrioMediumImgPU').src = 'assets/img/PrioMedia.svg';
+            break;
+        case 'addTaskPrioLowPU':
+            document.getElementById('addTaskPrioLowPU').style.backgroundColor = '#FFFFFF';
+            document.getElementById('addTaskPrioLowAPU').style.color = '#000000';
+            document.getElementById('addTaskPrioLowImgPU').src = 'assets/img/PrioBaja.svg';
+            break;
+        default:
+            break;
+    }
+}
+
+/**
+ * the function change the colors of the prio buttons to selected colors  Pop Up
+ * 
+ * @param {buttonId} - take the info from id of the prio buttons
+ */
+function selectedButtonsPU(buttonId) {
+    switch (buttonId) {
+        case 'addTaskPrioUrgentPU':
+            document.getElementById(buttonId).style.backgroundColor = '#FF3D00';
+            document.getElementById('addTaskPrioUrgentAPU').style.color = '#FFFFFF';
+            document.getElementById('addTaskPrioUrgentImgPU').src = 'assets/img/prioAltaWhite.svg';
+            task.prio = 'urgent';
+            break;
+        case 'addTaskPrioMediumPU':
+            document.getElementById(buttonId).style.backgroundColor = '#FFA800';
+            document.getElementById('addTaskPrioMediumAPU').style.color = '#FFFFFF';
+            document.getElementById('addTaskPrioMediumImgPU').src = 'assets/img/prioMediaWhite.svg';
+            task.prio = 'medium';
+            break;
+        case 'addTaskPrioLowPU':
+            document.getElementById(buttonId).style.backgroundColor = '#7AE229';
+            document.getElementById('addTaskPrioLowAPU').style.color = '#FFFFFF';
+            document.getElementById('addTaskPrioLowImgPU').src = 'assets/img/prioBajaWhite.svg';
+            task.prio = 'low';
+            break;
+        default:
+            break;
+    }
+}
 
 /**
  * the function reset the colors with the clearTask
  */
 function resetColors() {
     deselectedButtons(selectedButtonId);
+    deselectedButtonsPU(selectedButtonId);
 }
 
 
-/**
- * expand Contacts Menu in AddTask
- */
-function expandMenu() {
-    if (selecContacts) {
-        document.getElementById('contactsList').classList.add('d-none');
-        document.getElementById('assignedContactcont').style =
-            "height: 51px; overflox: inherit"
-        selecContacts = false;
-    } else {
-        document.getElementById('contactsList').classList.remove('d-none');
-        document.getElementById('assignedContactcont').style =
-            "height: 204px; overflow: auto"
-        selecContacts = true;
-    }
-}
-
-function checkContactTask(id, i) {
-    let checkbox = document.getElementById(id);
-    checkbox.checked = !checkbox.checked;
-    checkboxContact(id, i)
-}
-
-function checkboxContact(checboxId, i) {
-    let checkbox = document.getElementById(checboxId);
-    let userIndex = task.assignedTo.findIndex(u => u.name == contacts[i].name);
-    if (checkbox.checked) {
-        if (userIndex === -1) {
-            task.assignedTo.push(contacts[i]);
-            numberAssingendUser++;
-        }
-    } else if (userIndex !== -1) {
-        task.assignedTo.splice(userIndex, 1);
-        numberAssingendUser--;
-    }
-    renderContactNumber();
-}
-
-function renderContactNumber() {
-    let contactNumber = document.getElementById('assignedContacts');
-    switch (numberAssingendUser) {
-        case 0:
-            contactNumber.innerHTML = `Select contacts to assign`;
-            break;
-        case 1:
-            contactNumber.innerHTML = `${numberAssingendUser} contact assigned`;
-            break;
-        default:
-            contactNumber.innerHTML = `${numberAssingendUser} contacts assigned`;
-    }
-
-}
-
-/**
- * the function take the contacts from Server and send them to sort function
- */
-async function getContacts() {
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
-    if (contacts.length > 0) {
-        sortContactsByInitialLetter(contacts)
-    }
-}
-
-/**
- * the function sort the contactos by initial letter
- * 
- * @param {contacts} - take the contactos from the array
- */
-function sortContactsByInitialLetter(contacts) {
-    const sortedContacts = {};
-    for (let i = 65; i <= 90; i++) {
-        const letter = String.fromCharCode(i);
-        sortedContacts[letter] = [];
-    }
-
-    contacts.forEach(function (contact) {
-        if (contact && contact.name) {
-            const initialLetter = contact.name.charAt(0).toUpperCase();
-            sortedContacts[initialLetter].push(contact);
-        }
-    });
-
-    return sortedContacts;
-}
-
-/**
- * the function do the html element to send the contacts sorted
- * 
- * @param {contactsByLetter} - take the contactos by initial letter
- */
-function generateContactAddTask(contactsByLetter, i) {
-    const groupedContacts = {};
-
-    contactsByLetter.forEach(contact => {
-        const initialName = contact.name.charAt(0).toUpperCase();
-
-        if (!groupedContacts[initialName]) {
-            groupedContacts[initialName] = [];
-        }
-        groupedContacts[initialName].push(contact);
-
-    });
-
-    let html = '';
-    for (let initial in groupedContacts) {
-        if (Array.isArray(groupedContacts[initial])) {
-            html += `
-            ${groupedContacts[initial].map(contact => `
-    <div class="add_task_contacts_list row-center">
-        <a class="add_task_contact_name font400">${contact.name}</a>
-        <input type="checkbox" id="checkboxAssignedTo${i + 1}" class="add_task_contacts_check" onclick="checkContactTask(checkboxAssignedTo${i + 1}', ${i})">
-    </div>
-    `).join('')}
-    `
-
-        }
-        return html;
-    }
-}
-
-/**
- * the function load the contacts array after DOM
- */
-document.addEventListener('DOMContentLoaded', async function (event) {
-    await initAddTask();
-    subTaskGenerate()
-    const contactsTask = document.getElementById('contactsList');
-    const sortedContacts = sortContactsByInitialLetter(contacts);
-
-    for (let letter in sortedContacts) {
-        const contactsByLetter = sortedContacts[letter];
-        if (contactsByLetter.length > 0) {
-            const html = generateContactAddTask(contactsByLetter);
-            contactsTask.innerHTML += html;
-        }
-    }
-});
-
-/**
- * the function creates a new contact bei new Task
- */
-async function createNewContactTask() {
-    let emailContactTask = document.getElementById('addTaskNewContact');
-    let newContact = {
-        email: emailContactTask.value,
-    };
-    contacts.push(newContact);
-    await backend.setItem('contacts', JSON.stringify(contacts));
-
-    addContactToHTML();
-}
-/**
- * write a new Contact in AddTask
- */
-function assignedNewContact() {
-    document.getElementById('assignedContactcont').classList.add('d-none');
-    document.getElementById('addTaskNewContact').classList.remove('d-none');
-    document.getElementById('newContactCont').classList.remove('d-none');
-}
-
-/**
- * close write a new Contact in AddTask
- */
-function cancelNewContact() {
-    document.getElementById('assignedContactcont').classList.remove('d-none');
-    document.getElementById('addTaskNewContact').classList.add('d-none');
-    document.getElementById('newContactCont').classList.add('d-none');
-}
 
 /**
  * expand Category Menu in AddTask
@@ -366,6 +403,44 @@ function cancelNewCategory() {
     document.getElementById('selecCategoryCont').classList.remove('d-none');
     document.getElementById('addTaskNewCategory').classList.add('d-none');
     document.getElementById('newCategoryCont').classList.add('d-none');
+}
+
+/**
+ * create a new subtask
+ */
+function subTaskGenerate() {
+    let taskSubTask = document.getElementById('addTaskSubTask').value;
+    if (taskSubTask) {
+        let subTask = {
+            title: taskSubTask, status: false
+        };
+        task.subTask.push(subTask);
+        renderSubtask();
+    }
+    document.getElementById('addTaskSubTask').value = '';
+}
+
+/**
+ * render the new subtask
+ */
+function renderSubtask() {
+    document.getElementById('subTaskContainer').innerHTML = ``;
+    for (let i = 0; i < task.subTask.length; i++) {
+        if (!task.subTask[i].status) {
+            document.getElementById('subTaskContainer').innerHTML += renderSubTask(i);
+        }
+    }
+}
+
+/**
+ * include de html of the new subtask
+ */
+function renderSubTask(i) {
+    return `
+    <div class="subtasks_cont_check row-center">
+        <input type="checkbox" class="subtasks_checkbox">
+        <a class="subtask_text font400">${task.subTask[i].title}</a>
+    </div>`
 }
 
 /**
