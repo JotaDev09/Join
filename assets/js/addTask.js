@@ -2,12 +2,14 @@ let selecContacts = false;
 let selectContactsTask = null;
 let selecCategory = false;
 let selectedButtonId = '';
+let categoryList = []
 
 let task = {
     id: "",
     title: "",
     contacts: new Array,
     dueDate: "",
+    category: "",
     prio: "",
     description: "",
     subTask: new Array,
@@ -57,6 +59,22 @@ async function createATask() {
 };
 
 /**
+ * Create a new Task Pop-Up
+ */
+async function createATaskPU() {
+
+    if (checkInfoPU()) {
+    } else {
+        addInfoNewTask();
+        await loadTasksFromServer();
+        tasks = JSON.parse(await backend.getItem('tasks')) || [];
+        tasks.push(task);
+        await backend.setItem('tasks', JSON.stringify(tasks));
+        //clearTaskPU();
+    };
+};
+
+/**
  * Check the inputs and add an alert to required the info
  */
 function checkInfo() {
@@ -69,6 +87,21 @@ function checkInfo() {
         info = true;
     } if (document.getElementById('addTaskDescription').value === "") {
         document.getElementById('descriptionRequired').style.display = 'flex';
+        info = true;
+    }
+    return info;
+};
+
+function checkInfoPU() {
+    let info = false
+    if (document.getElementById('inputTitleTaskPU').value === "") {
+        document.getElementById('titleRequiredPU').style.display = 'flex';
+        info = true;
+    } if (document.getElementById('inputCalendarAddTaskPU').value === "") {
+        document.getElementById('dateRequiredPU').style.display = 'flex';
+        info = true;
+    } if (document.getElementById('addTaskDescriptionPU').value === "") {
+        document.getElementById('descriptionRequiredPU').style.display = 'flex';
         info = true;
     }
     return info;

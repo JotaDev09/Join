@@ -81,14 +81,14 @@
                         <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
                             <a class="add_task_subtitle font400">New category</a>
                         </div>
-                        <div class="contacts_choose_cont row-center">
+                <!--    <div class="contacts_choose_cont row-center">
                             <a class="add_task_subtitle font400">Sales</a>
                             <span class="category_circle_color color_sales"></span>
                         </div>
                         <div class="contacts_choose_cont row-center">
                             <a class="add_task_subtitle font400">Backoffice</a>
                             <span class="category_circle_color color_backoffice"></span>
-                        </div>
+                        </div>-->  
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
             </div>
             <div class="add_task_description_cont column-flex-start">
                 <a class="add_task_titles font400">Description</a>
-                <textarea class="add_task_descript_input row-flexstart font400" required
+                <textarea class="add_task_descript_input row-flexstart font400"
                     placeholder="Enter a Description" id="addTaskDescription" onclick="writeDescription()"></textarea>
                 <a class="field_required" id="descriptionRequired">This field is required</a>
             </div>
@@ -151,7 +151,7 @@
             <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
                 <a class="add_task_clear_text font400">Clear X</a>
             </button>
-            <button class="add_task_buttons_create row-center-center" id="createButton" onclick="createATask()">
+            <button class="add_task_buttons_create row-center-center" onclick="createATask()">
                 <a class="add_task_create_text font400">Create Task</a>
                 <img src="assets/img/checkCreateT.svg" class="">
             </button>

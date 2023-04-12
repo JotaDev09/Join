@@ -140,6 +140,7 @@
     background: #4589FF;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
 }
 
 .add_task_button_create {

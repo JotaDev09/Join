@@ -20,21 +20,21 @@
 
 <body>
     <div id="addTaskPopUpContainer">
-        <form class="add_task_popUp_container" id="createTaskPopUp" onclick="createATask(); return false">
+        <div class="add_task_popUp_container" id="createTaskPopUp">
             <div class="add_task_popUp_cont column-flex-start">
                 <img class="add_task_popUp_close" src="assets/img/closePopCreate.svg" onclick="closePopUpCreate()">
                 <div class="add_task_popUp_head row-flexstart">
                     <div class="add_task_popUp_title">
                         <a class="add_task_popUp_Title font400">Add Task</a>
                     </div>
-                    <button class="add_task_popUp_button_create row-center-center">
+                    <button class="add_task_popUp_button_create row-center-center" onclick="createATaskPU()">
                         <a class="add_task_button_create font400">Create Task</a>
                         <img src="assets/img/checkCreateT.svg" class="add_task_crate_check">
                     </button>
                 </div>
                 <div class="add_task_title column-flex-start">
                     <div class="add_task_title_cont row-center">
-                        <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTask"
+                        <input class="add_task_input font400" placeholder="Enter a title" required id="inputTitleTaskPU"
                             onchange="addTitle()"></input>
                     </div>
                     <a class="field_required d-none" id="titleRequiredPU">This field is required</a>
@@ -46,11 +46,7 @@
                             <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                         </div>
                         <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
-
-                            <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
-                                <a class="add_task_subtitle font400">Invite new contact</a>
-                                <img src="assets/img/newContactBlue.svg" class="add_task_new_contact">
-                            </div>
+                            <!--Template Contacts-->
                         </div>
                     </div>
                 </div>
@@ -69,9 +65,9 @@
                     <a class="add_task_titles font400">Due date</a>
                     <div class="add_task_Duedate_input row-center">
                         <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date"
-                            id="inputCalendarAddTask" required onchange="addDate()">
+                            id="inputCalendarAddTaskPU" required onchange="addDate()">
                     </div>
-                    <a class="field_required d-none">This field is required</a>
+                    <a class="field_required d-none" id="dateRequiredPU">This field is required</a>
                 </div>
                 <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
                     <div class="add_task_select_cat column-flex-start">
@@ -136,9 +132,9 @@
                 <div class="add_task_description_cont column-flex-start">
                     <a class="add_task_titles font400">Description</a>
                     <textarea class="add_task_descript_input row-flexstart font400" required
-                        placeholder="Enter a Description" id="addTaskDescription"
+                        placeholder="Enter a Description" id="addTaskDescriptionPU"
                         onchange="addDescription()"></textarea>
-                    <a class="field_required d-none">This field is required</a>
+                    <a class="field_required d-none" id="descriptionRequiredPU">This field is required</a>
                 </div>
                 <div class="add_task_subtasks_cont column-flex-start">
                     <a class="add_task_titles font400">Subtasks</a>
@@ -150,7 +146,7 @@
                     <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 
