@@ -1,55 +1,28 @@
-let tasks = [
-    {
-        'id': 0,
-        'title': 'Example',
-        'description': 'This is an example of the description',
-        'contacts': 'NE',
-        'categoryTask': 'Design',
-        'column': 'todo',
-    },
-    {
-        'id': 1,
-        'title': 'Example',
-        'description': 'This is an example of the description',
-        'contacts': 'NE',
-        'categoryTask': 'Design',
-        'column': 'feedback',
-    },
-    {
-        'id': 2,
-        'title': 'Example',
-        'description': 'This is an example of the description',
-        'contacts': 'NE',
-        'categoryTask': 'Design',
-        'column': 'feedback',
-    },
-    {
-        'id': 3,
-        'title': 'Example',
-        'description': 'This is an example of the description',
-        'contacts': 'NE',
-        'categoryTask': 'Design',
-        'column': 'feedback',
-    },
-    {
-        'id': 4,
-        'title': 'Example',
-        'description': 'This is an example of the description',
-        'contacts': 'NE',
-        'categoryTask': 'Design',
-        'column': 'feedback',
-    },
-]
+let tasks = []
 
 let currentDraggedElement;
 
 async function initBoard() {
     includeHTML();
     await loadUsers();
-    loadTasks()
+    await loadTasksFromServer();
+    await getContactsBoard();
+    await loadCategories();
+    await loadTasksFromServer();
+    loadTasksColumns();
+
+}
+async function loadCategories() {
+    await downloadFromServer();
+    categoryList = JSON.parse(backend.getItem('categoryList')) || [];
 }
 
-function loadTasks() {
+async function getContactsBoard() {
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+}
+
+function loadTasksColumns() {
     let todo = tasks.filter(t => t['column'] == 'todo');
     document.getElementById('todoColumn').innerHTML = '';
 
@@ -88,11 +61,12 @@ function startDragging(id) {
 }
 
 function generateTodoHTML(element) {
+    
     return `
     <div class="minitask_container column-center-center" draggable="true" ondragstart="startDragging(${element['id']})">
         <div class="minitask column-flex-start">
-            <div class="minitask_title_cont column-flex-start">
-                <a class="minitask_title font400">${element['categoryTask']}</a>
+            <div class="minitask_title_cont column-flex-start" style="background:${element['category']['color']}">
+                <a class="minitask_title font400">${element['category']['name']}</a>
             </div>
             <div class="minitask_description_cont column-flex-start">
                 <a class="minitask_descr_title font400">${element['title']}</a>
@@ -104,12 +78,12 @@ function generateTodoHTML(element) {
             </div>
             <div class="minitask_buttom_cont row-center-center">
                 <div class="minitask_contacts_cont row-center-center">
-                    <div class="minitask_contact column-center-center">
-                        <a class="minitask_contact_text font400">${element['contacts']}</a>
+                    <div class="minitask_contact column-center-center" style="background:${contacts.color}">
+                        <a class="minitask_contact_text font400">${element['contacts']['name']}</a>
                     </div>
                 </div>
                 <div class="minitask_prio_cont row-center-center">
-                    <img src="assets/img/PrioAlta.svg" class="minitask_prio">
+                    <img src="" class="minitask_prio">
                 </div>
             </div>
         </div>
@@ -122,7 +96,7 @@ function allowDrop(ev) {
 
 function moveTo(column) {
     tasks[currentDraggedElement]['column'] = column;
-    loadTasks();
+    loadTasksColumns();
 }
 
 /**

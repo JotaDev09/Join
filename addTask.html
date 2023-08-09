@@ -21,6 +21,7 @@
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/mini_backend.js"></script>
     <script src="assets/js/contacts.js"></script>
+    <script src="assets/js/board.js"></script>
     <script>
         setURL('https://juan-desantos.developerakademie.net/smallest_backend_ever');
     </script>
@@ -81,6 +82,7 @@
                         <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
                             <a class="add_task_subtitle font400">New category</a>
                         </div>
+                        <div class="new_category_container" id="newCategoryContainer"></div>
                 <!--    <div class="contacts_choose_cont row-center">
                             <a class="add_task_subtitle font400">Sales</a>
                             <span class="category_circle_color color_sales"></span>
@@ -93,26 +95,6 @@
                 </div>
             </div>
             <div class="new_contact_container column-flex-start d-none" id="newCategoryCont">
-                <div class="new_contact_cont row-center">
-                    <input class="new_contact_input row-center font400" id="addTaskNewCategory"
-                        placeholder="New category name"></input>
-
-                    <div class="new_contact_input_icons row-center-center">
-                        <img src="assets/img/cancelBlue.svg" onclick="cancelNewCategory()">
-                        <img src="assets/img/grauLineSmall.svg">
-                        <img src="assets/img/blueCheck.svg">
-                    </div>
-                </div>
-                <div class="new_category_colors row-center">
-                    <div class="new_category_select_color row-center">
-                        <button class="new_category_circle" style="background: #8AA4FF"></button>
-                        <button class="new_category_circle" style="background: #FF0000"></button>
-                        <button class="new_category_circle" style="background: #2AD300"></button>
-                        <button class="new_category_circle" style="background: #FF8A00"></button>
-                        <button class="new_category_circle" style="background: #E200BE"></button>
-                        <button class="new_category_circle" style="background: #0038FF"></button>
-                    </div>
-                </div>
             </div>
             <div class="add_task_prio_cont row-center-center">
                 <div class="add_task_prio_buttons row-center-center urgent_hover" id="addTaskPrioUrgent"

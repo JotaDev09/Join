@@ -127,6 +127,7 @@ body {
 }
 
 .input_mail {
+    width: 300px;
     border: none;
     font-size: 19px;
     color: #D1D1D1;
@@ -152,6 +153,7 @@ body {
 }
 
 .input_password {
+    width: 300px;
     border: none;
     font-size: 19px;
     color: #D1D1D1;
@@ -311,6 +313,7 @@ body {
 }
 
 .input_user {
+    width: 300px;
     font-size: 19px;
     color: #D1D1D1;
     border: none;
