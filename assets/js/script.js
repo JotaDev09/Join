@@ -49,18 +49,20 @@ function showPassword() {
  */
 async function logInUser() {
   await downloadFromServer();
-  users = JSON.parse(backend.getItem("users")) || [];
-  const email = document.getElementById("newUserEmail");
-  const password = document.getElementById("newUserPassword");
+  users = JSON.parse(backend.getItem("users")) || []; // Assuming the server response has a "users" property
+  const email = document.getElementById("newUserEmail").value;
+  const password = document.getElementById("newUserPassword").value;
   const actualUser = users.find(
-    (u) => u.email == email.value && u.password == password.value
+    (u) => u.email === email && u.password === password
   );
+
   if (actualUser) {
-    loginCorrect();
+    saveUserData(actualUser); // Save user data to local storage
+    loginCorrect(actualUser);
   } else {
-    let existingEmail = users.find((u) => u.email == email);
-    let existingpassword = users.find((u) => u.password == password);
-    mailOrPasswordWrong(existingEmail, existingpassword);
+    let existingEmail = users.find((u) => u.email === email);
+    let existingPassword = users.find((u) => u.password === password);
+    mailOrPasswordWrong(existingEmail, existingPassword);
   }
 }
 
@@ -77,7 +79,7 @@ function greetGuest() {
   window.location.href = "summary.html";
 }
 
-async function loginCorrect() {
+async function loginCorrect(actualUser) {
   currentUserId = actualUser.id;
   console.log("Logged in user ID:", currentUserId);
   localStorage.setItem("actualUser", JSON.stringify(actualUser));

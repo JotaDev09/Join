@@ -16,12 +16,7 @@
     <link rel="stylesheet" href="assets/css/contacts.css">
     <link rel="stylesheet" href="assets/css/newContactPops.css">
 
-    <script src="assets/js/contacts.js"></script>
-    <script src="assets/js/header.js"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/mini_backend.js"></script>
-    <script src="assets/js/board.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
 
     <script>
@@ -37,13 +32,13 @@
     <div w3-include-html="assets/templates/editContactPopUp.html"></div>
     <div w3-include-html="assets/templates/addTaskPopUp.html"></div>
 
-    <div class="contacts_container">
+    <div class="contacts_container" id="contactsContainer">
         <div class="contacts_column_container">
             <div class="contacts_column_cont column-center" id="contactsColumn"></div>
         </div>
         <div class="contacts_right column-flex-start">
             <div class="contacts_display_contact column-flex-start" id="bigContactCard">
-                
+
             </div>
             <div class="contacts_button_cont row-center-center" onclick="openNewContact()">
                 <a class="contact_newContact font400">New contact</a>
@@ -51,6 +46,13 @@
             </div>
         </div>
     </div>
+
+    <script src="assets/js/summary.js"></script>
+    <script src="assets/js/contacts.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/login-signup.js"></script>
+    <script src="assets/js/board.js"></script>
 </body>
 
 </html>

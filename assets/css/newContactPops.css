@@ -1,5 +1,3 @@
-
-
 .newContact_popUp_container {
     z-index: 9;
     position: absolute;
@@ -150,7 +148,7 @@
     border-radius: 10px;
 }
 
-.new_contact_botton_cancel:hover > a {
+.new_contact_botton_cancel:hover>a {
     color: #4589FF;
 }
 

@@ -35,18 +35,11 @@ async function initAddTask() {
     loadUsers(),
     loadCategoriesFromServer(),
     loadTasksFromServer(),
+    loadUserData(),
+    getContacts(),
+    subTaskGenerate(),
   ]);
 }
-
-/**
- * the function load the contacts array after DOM
- */
-document.addEventListener("DOMContentLoaded", async function (event) {
-  await getContacts();
-  await initAddTask();
-  await loadCategoriesFromServer();
-  subTaskGenerate();
-});
 
 /**
  * the function load the tasks from Server
@@ -63,9 +56,8 @@ async function loadCategoriesFromServer() {
     renderCategory(categoryList);
   }
 }
-console.time("miFuncion");
+
 createATask(); // La función que deseas medir
-console.timeEnd("miFuncion");
 
 /**
  * Create a new Task
@@ -217,54 +209,46 @@ function expandMenu() {
 /**
  * the function load the contacts from Server
  */
-async function getContacts() {
-  await downloadFromServer();
-  contacts = JSON.parse(backend.getItem("contacts")) || [];
-  const sortedContacts = sortContactsByInitialLetter(contacts);
+function getContacts() {
+  const currentUser = loadUserData();
+  const sortedContacts = sortContactsByInitialLetter(currentUser.contacts);
 
   let html = "";
   for (let letter in sortedContacts) {
     const contactsByLetter = sortedContacts[letter];
     if (contactsByLetter.length > 0) {
-      html += showContactsInTemplate(contactsByLetter);
+      html += generateContactsHtml(contactsByLetter);
     }
   }
 
-  if (contacts.length > 0) {
-    contacts.sort(function (a, b) {
-      //  return a.name.localeCompare(b.name);
-    });
-    showContactsInTemplate(contacts);
-  }
+  const contactsList = document.getElementById("contactsList");
+  contactsList.innerHTML = html + generateInviteNewContactHtml();
 }
 
-/**
- * the function send the contacts from the Array to the HTML add Tasks
- */
-function showContactsInTemplate(contacts) {
-  const contactsList = document.getElementById("contactsList");
-  const htmlArray = [];
+function generateContactsHtml(contacts) {
+  let html = "";
 
   contacts.forEach((contact, index) => {
-    htmlArray.push(`
-        <div class="add_task_contacts_list row-center" id="contactContainer${index}">
-          <a class="add_task_contact_name font400" id="addUserTask${index}">${
+    html += `
+      <div class="add_task_contacts_list row-center" id="contactContainer${index}">
+        <a class="add_task_contact_name font400" id="addUserTask${index}">${
       contact.name || contact.email
     }</a>
-          <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" onclick="checkboxContact(${index}, 'checkContact${index}')">
-        </div>
-      `);
+        <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" onclick="checkboxContact(${index}, 'checkContact${index}')">
+      </div>
+    `;
   });
 
-  htmlArray.push(`
-      <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
-        <a class="add_task_subtitle font400">Invite new contact</a>
-        <img src="assets/img/newContactBlue.svg" class="add_task_new_contact" >
-      </div>
-    `);
+  return html;
+}
 
-  const html = htmlArray.join("");
-  contactsList.innerHTML = html;
+function generateInviteNewContactHtml() {
+  return `
+    <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
+      <a class="add_task_subtitle font400">Invite new contact</a>
+      <img src="assets/img/newContactBlue.svg" class="add_task_new_contact" >
+    </div>
+  `;
 }
 
 /**
@@ -292,13 +276,37 @@ function checkboxContact(index, checkboxId) {
  */
 async function createNewContactTask() {
   let emailContactTask = document.getElementById("addTaskNewContact");
+  const currentUser = loadUserData(); // Load current user's data
+  if (!currentUser.contacts) {
+    currentUser.contacts = []; // Initialize contacts array if not exists
+  }
   let newContact = {
+    id: uuidv4(),
+    name: "",
     email: emailContactTask.value,
+    phone: "",
+    color: getRandomColor(),
   };
-  contacts.push(newContact);
-  await backend.setItem("contacts", JSON.stringify(contacts));
+  currentUser.contacts.push(newContact);
+  saveUserData(currentUser);
 
-  addContactToHTML();
+  const userIndex = users.findIndex((user) => user.id === currentUser.id);
+  if (userIndex !== -1) {
+    // Update the user's data in the users array
+    users[userIndex] = currentUser;
+    await backend.setItem("users", JSON.stringify(users)); // Update the users data in the backend
+  }
+
+  const contactsList = document.getElementById("contactsList");
+  const newContactHtml = generateContactsHtml([newContact]);
+  contactsList.insertAdjacentHTML("beforeend", newContactHtml);
+
+  // Reset the input field
+  emailContactTask.value = "";
+
+  // Hide the new contact input
+  //document.getElementById("newContactCont").classList.add("d-none");
+  cancelNewContactTask();
 }
 
 /**

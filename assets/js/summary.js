@@ -1,6 +1,7 @@
 async function initSummary() {
   includeHTML();
   greetUser();
+  await Promise.all([loadUsers(), loadUserData()]);
 }
 
 /**
@@ -30,6 +31,7 @@ function greetUserName() {
   } else {
     document.getElementById("summaryUser").innerHTML = "Guest";
   }
-  let currentUserId = users ? users.id : null;
+  currentUserId = users ? users.id : null;
   console.log(currentUserId);
+  console.log(loadUserData);
 }

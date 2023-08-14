@@ -1,84 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="assets/css/models.css">
-    <link rel="stylesheet" href="assets/css/newContactPops.css">
+    <link rel="stylesheet" href="assets/css/models.css" />
+    <link rel="stylesheet" href="assets/css/newContactPops.css" />
+  </head>
 
+  <body>
+    <div id="newContactPopUp" class="new_contact_pop_ups">
+      <div class="newContact_popUp_container" id="newContactPop">
+        <div class="newContact_popUp_cont column-center">
+          <div class="new_contact_top column-center">
+            <img
+              src="assets/img/crossWhite.svg"
+              class="new_contact_close"
+              onclick="closeNewContact()"
+            />
+            <img src="assets/img/JoinWhite.svg" class="new_contact_logo" />
+            <a class="new_contact_title font400">Add contact</a>
+            <a class="new_contact_subtitle font400"
+              >Tasks are better with a team!</a
+            >
+          </div>
+          <form
+            class="new_contact_bottom column-center"
+            onsubmit="createNewContact(); return false"
+          >
+            <div class="new_contact_bottom1">
+              <div class="new_contact_circle row-center-center">
+                <img
+                  src="assets/img/userGrau.svg"
+                  class="new_contact_circle_user"
+                />
+              </div>
+            </div>
+            <div class="new_contact_bottom2 column-flex-start">
+              <div class="new_contact_info_user column-flex-start">
+                <div class="new_contact_info row-center">
+                  <input
+                    type="text"
+                    class="newContact_input font400 row-spacebet-center"
+                    placeholder="Name"
+                    id="newContactName"
+                  />
+                  <img src="assets/img/userSmall.svg" />
+                </div>
+                <a
+                  class="new_contact_required d-none"
+                  id="newFieldRequiredName"
+                  pattern="[A-Za-z]+\s[A-Za-z]+"
+                  >This field is required</a
+                >
+              </div>
+              <div class="new_contact_info_user column-flex-start">
+                <div class="new_contact_info row-center">
+                  <input
+                    type="email"
+                    class="newContact_input font400 row-spacebet-center"
+                    placeholder="Email"
+                    id="newContactEmail"
+                  />
+                  <img src="assets/img/briefSmall.svg" />
+                </div>
+                <a
+                  class="new_contact_required d-none"
+                  id="newFieldRequiredEmail"
+                  >This field is required</a
+                >
+              </div>
+              <div class="new_contact_info_user column-flex-start">
+                <div class="new_contact_info row-center">
+                  <input
+                    type="number"
+                    class="newContact_input font400 row-spacebet-center"
+                    placeholder="Phone"
+                    id="newContactPhone"
+                  />
+                  <img src="assets/img/phoneSmall.svg" />
+                </div>
+                <a
+                  class="new_contact_required d-none"
+                  id="newFieldRequiredPhone"
+                  >This field is required</a
+                >
+              </div>
+            </div>
+            <div class="new_contact_bottom3 column_flexend_center">
+              <div class="new_contact_bottons row-center-center">
+                <button
+                  class="new_contact_botton_cancel row-center-center"
+                  onclick="cancelNewContact()"
+                >
+                  <a class="new_contact_cancel font400">Cancel X</a>
+                </button>
+                <button class="new_contact_botton_create row-center-center">
+                  <a class="new_contact_button font400">Create contact</a>
+                  <img src="assets/img/checkCreateT.svg" />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="pop_up_contact_created row-center-center d-none"
+        id="contactCreated"
+      >
+        <a class="pop_up_contact_created_text font400"
+          >Contact succesfully created</a
+        >
+      </div>
+    </div>
+
+    <script src="assets/js/contacts.js"></script>
     <script src="assets/js/login-signup.js"></script>
     <script src="assets/js/forgotPassword.js"></script>
     <script src="assets/js/summary.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/addTask.js"></script>
-</head>
-
-<body>
-    <div id="newContactPopUp" class="new_contact_pop_ups">
-        <div class="newContact_popUp_container" id="newContactPop">
-            <div class="newContact_popUp_cont column-center">
-                <div class="new_contact_top column-center">
-                    <img src="assets/img/crossWhite.svg" class="new_contact_close" onclick="closeNewContact()">
-                    <img src="assets/img/JoinWhite.svg" class="new_contact_logo">
-                    <a class="new_contact_title font400">Add contact</a>
-                    <a class="new_contact_subtitle font400">Tasks are better with a team!</a>
-                </div>
-                <form class="new_contact_bottom column-center" onsubmit="createNewContact(); return false">
-                    <div class="new_contact_bottom1">
-                        <div class="new_contact_circle row-center-center">
-                            <img src="assets/img/userGrau.svg" class="new_contact_circle_user">
-                        </div>
-                    </div>
-                    <div class="new_contact_bottom2 column-flex-start">
-                        <div class="new_contact_info_user column-flex-start">
-                            <div class="new_contact_info row-center">
-                                <input type="text" class="newContact_input font400 row-spacebet-center"
-                                    placeholder="Name" id="newContactName">
-                                <img src="assets/img/userSmall.svg">
-                            </div>
-                            <a class="new_contact_required d-none" id="newFieldRequiredName" pattern="[A-Za-z]+\s[A-Za-z]+">This field is required</a>
-                        </div>
-                        <div class="new_contact_info_user column-flex-start">
-                            <div class="new_contact_info row-center">
-                                <input type="email" class="newContact_input font400 row-spacebet-center"
-                                    placeholder="Email" id="newContactEmail">
-                                <img src="assets/img/briefSmall.svg">
-                            </div>
-                            <a class="new_contact_required d-none" id="newFieldRequiredEmail">This field is required</a>
-                        </div>
-                        <div class="new_contact_info_user column-flex-start">
-                            <div class="new_contact_info row-center">
-                                <input type="number" class="newContact_input font400 row-spacebet-center"
-                                    placeholder="Phone" id="newContactPhone">
-                                <img src="assets/img/phoneSmall.svg">
-                            </div>
-                            <a class="new_contact_required d-none" id="newFieldRequiredPhone">This field is required</a>
-                        </div>
-                    </div>
-                    <div class="new_contact_bottom3 column_flexend_center">
-                        <div class="new_contact_bottons row-center-center">
-                            <button class="new_contact_botton_cancel row-center-center" onclick="cancelNewContact()">
-                                <a class="new_contact_cancel font400">Cancel X</a>
-                            </button>
-                            <button class="new_contact_botton_create row-center-center">
-                                <a class="new_contact_button font400">Create contact</a>
-                                <img src="assets/img/checkCreateT.svg">
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="pop_up_contact_created row-center-center d-none" id="contactCreated">
-            <a class="pop_up_contact_created_text font400">Contact succesfully created</a>
-        </div>
-    </div>
-</body>
+  </body>
+</html>
