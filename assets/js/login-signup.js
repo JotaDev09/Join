@@ -37,6 +37,7 @@ async function addUser() {
       password: password.value,
       tasks: [],
       contacts: [],
+      categories: [],
     });
     await backend.setItem("users", JSON.stringify(users));
     window.location.href = "index.html";

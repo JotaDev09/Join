@@ -34,30 +34,20 @@ async function initAddTask() {
   await Promise.all([
     loadUsers(),
     loadCategoriesFromServer(),
-    loadTasksFromServer(),
     loadUserData(),
     getContacts(),
     subTaskGenerate(),
   ]);
 }
 
-/**
- * the function load the tasks from Server
- */
-async function loadTasksFromServer() {
-  await downloadFromServer();
-  tasks = JSON.parse(backend.getItem("tasks")) || [];
-}
-
 async function loadCategoriesFromServer() {
-  await downloadFromServer();
-  categoryList = JSON.parse(backend.getItem("categoryList")) || [];
-  if (categoryList.length > 0) {
-    renderCategory(categoryList);
+  const currentUser = loadUserData();
+  if (currentUser.categories.length > 0) {
+    renderCategory(currentUser.categories);
   }
 }
 
-createATask(); // La función que deseas medir
+//createATask(); // La función que deseas medir
 
 /**
  * Create a new Task
@@ -66,33 +56,41 @@ async function createATask() {
   if (checkInfo()) {
     // Lógica para verificar información
   } else {
-    addInfoNewTask();
+    let titleTask = document.getElementById("inputTitleTask");
+    let contactsTask = getCheckedContacts();
+    let dueDateTask = document.getElementById("inputCalendarAddTask");
+    let categoryTask = renderCategory();
+    //let prioTask = choosePrioPU();
+    let descriptionTask = document.getElementById("addTaskDescription");
+    //let subtaskTask = renderSubtask();
 
-    // Obtén el usuario actual de alguna manera (por ejemplo, de la sesión o las cookies)
-    const currentUser = loadUsers(); // Reemplaza esto con la forma en que obtienes el usuario
-
-    if (currentUser) {
-      // Asocia la tarea con el ID del usuario actual
-      task.userId = currentUser.id; // Reemplaza 'id' con la propiedad correcta del usuario
-
-      console.log("added");
-      // Encuentra al usuario correspondiente en el array de usuarios
-      const user = users.find((u) => u.id === currentUser.id);
-
-      if (user) {
-        // Agrega la tarea al array de tareas del usuario
-        user.tasks.push(task);
-
-        // Almacena la lista de usuarios actualizada en el servidor
-        await backend.setItem("users", JSON.stringify(users));
-
-        clearTask();
-      } else {
-        // El usuario no está autenticado o no se encontró en el array de usuarios, muestra un mensaje de error o realiza alguna otra acción
-      }
-    } else {
-      // El usuario no está autenticado, muestra un mensaje de error o realiza alguna otra acción
+    const currentUser = loadUserData(); // Load current user's data
+    if (!currentUser.tasks) {
+      currentUser.tasks = []; // Initialize contacts array if not exists
     }
+
+    let newTask = {
+      id: uuidv4(),
+      title: titleTask.value,
+      contacts: contactsTask,
+      dueDate: dueDateTask.value,
+      category: categoryTask,
+      //prio: prioTask,
+      description: descriptionTask.value,
+      //subTask: subtaskTask, // Replace with the actual description
+      // Add any other properties that your task object requires
+    };
+
+    currentUser.tasks.push(newTask);
+    saveUserData(currentUser);
+    const userIndex = users.findIndex((user) => user.id === currentUser.id);
+    if (userIndex !== -1) {
+      // Update the user's data in the users array
+      users[userIndex] = currentUser;
+      await backend.setItem("users", JSON.stringify(users)); // Update the users data in the backend
+    }
+
+    clearTask();
   }
 }
 
@@ -170,26 +168,6 @@ function writeDescription() {
 }
 
 /**
- * add the info of the new tasl to the array
- */
-function addInfoNewTask() {
-  let taskTitle = document.getElementById("inputTitleTask").value;
-  let taskDate = document.getElementById("inputCalendarAddTask").value;
-  let taskDescription = document.getElementById("addTaskDescription").value;
-
-  task.id = uuidv4();
-  task.title = taskTitle;
-  task.contacts = selectContactsTask;
-  task.dueDate = taskDate;
-  task.category = selectedCategory;
-  task.description = taskDescription;
-
-  if (!columns.includes(task.column)) {
-    task.column = "todo"; // Establecer 'todo' como la categoría por defecto
-  }
-}
-
-/**
  * expand Contacts Menu in AddTask
  */
 function expandMenu() {
@@ -234,7 +212,9 @@ function generateContactsHtml(contacts) {
         <a class="add_task_contact_name font400" id="addUserTask${index}">${
       contact.name || contact.email
     }</a>
-        <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" onclick="checkboxContact(${index}, 'checkContact${index}')">
+    <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" data-contact-index="${index}" data-contact-id="${
+      contact.id
+    }" ${contact.check ? "checked" : ""} >
       </div>
     `;
   });
@@ -257,18 +237,28 @@ function generateInviteNewContactHtml() {
  * @param {index} - take the info from array contacts
  * @param {checkboxId} - take the info from the input checkbox
  */
-function checkboxContact(index, checkboxId) {
-  const checkbox = document.getElementById(checkboxId);
-  const contactName = document.getElementById(
-    `addUserTask${index}`
-  ).textContent;
+function getCheckedContacts() {
+  const checkedContacts = [];
+  const checkboxes = document.querySelectorAll(".add_task_contacts_check");
 
-  if (checkbox.checked) {
-    selectContactsTask = { name: contactName };
-    console.log(`Se ha marcado el contacto '${contactName}'`);
-  } else {
-    selectContactsTask = null;
-  }
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      const contactId = checkbox.getAttribute("data-contact-id");
+      const currentUser = loadUserData();
+
+      if (currentUser && currentUser.contacts) {
+        const checkedContact = currentUser.contacts.find(
+          (contact) => contact.id === contactId
+        );
+
+        if (checkedContact) {
+          checkedContacts.push(checkedContact);
+        }
+      }
+    }
+  });
+
+  return checkedContacts;
 }
 
 /**
@@ -286,6 +276,7 @@ async function createNewContactTask() {
     email: emailContactTask.value,
     phone: "",
     color: getRandomColor(),
+    check: true,
   };
   currentUser.contacts.push(newContact);
   saveUserData(currentUser);
@@ -417,6 +408,7 @@ function choosePrioPU(button) {
     selectedButtonsPU(button.id);
     selectedButtonId = button.id;
   }
+  return selectedButtonId;
 }
 
 /**
@@ -567,17 +559,27 @@ function selectCategoryColor(color) {
 }
 
 async function createNewCategoryTask() {
-  const newCategory = document.getElementById("addTaskNewCategory").value;
+  const category = document.getElementById("addTaskNewCategory").value;
   const newCategoryColor = selectedCategoryColor;
-  if (newCategory) {
-    categoryList.push({
-      name: newCategory,
-      status: false,
-      color: newCategoryColor,
-    });
-    await backend.setItem("categoryList", JSON.stringify(categoryList));
-    generateNewCategory();
+  const currentUser = loadUserData(); // Load current user's data
+  if (!currentUser.contacts) {
+    currentUser.contacts = []; // Initialize contacts array if not exists
   }
+  let newCategory = {
+    name: category,
+    status: false,
+    color: newCategoryColor,
+  };
+  currentUser.categories.push(newCategory);
+  saveUserData(currentUser);
+
+  const userIndex = users.findIndex((user) => user.id === currentUser.id);
+  if (userIndex !== -1) {
+    // Update the user's data in the users array
+    users[userIndex] = currentUser;
+    await backend.setItem("users", JSON.stringify(users)); // Update the users data in the backend
+  }
+
   document.getElementById("addTaskNewCategory").value = "";
   cancelNewCategory();
 }
@@ -609,11 +611,10 @@ function renderCategory(categories) {
         <span class="category_circle_color color_sales" style="background:${categoryColor}"></span>
       `;
     categoryDiv.addEventListener("click", () => {
-      // Handle category click event here
       console.log(`Clicked category ${index}`);
-      selectedCategory = category;
     });
     categoryContainer.appendChild(categoryDiv);
+    return selectedCategory;
   });
 }
 
@@ -664,5 +665,13 @@ function clearTask() {
   document.getElementById("inputCalendarAddTask").value = "";
   document.getElementById("addTaskDescription").value = "";
   document.getElementById("addTaskSubTask").value = "";
+  document.getElementById("contactsList").classList.add("d-none");
+  document.getElementById("assignedContactcont").style =
+    "height: 51px; overflox: inherit";
   resetColors();
+
+  const checkboxes = document.querySelectorAll(".add_task_contacts_check");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 }

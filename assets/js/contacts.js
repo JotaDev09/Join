@@ -244,6 +244,7 @@ async function createNewContact() {
     email: emailContact.value,
     phone: phoneContact.value,
     color: getRandomColor(),
+    check: false,
   };
   currentUser.contacts.push(newContact);
   saveUserData(currentUser);
