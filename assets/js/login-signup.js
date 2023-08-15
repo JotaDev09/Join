@@ -38,6 +38,7 @@ async function addUser() {
       tasks: [],
       contacts: [],
       categories: [],
+      subTasks: [],
     });
     await backend.setItem("users", JSON.stringify(users));
     window.location.href = "index.html";

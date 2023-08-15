@@ -246,6 +246,10 @@ body {
     cursor: pointer;
 }
 
+.add_task_selected {
+    background-color: #D2E3FF;
+}
+
 .category_circle_color {
     box-sizing: border-box;
     width: 20px;
