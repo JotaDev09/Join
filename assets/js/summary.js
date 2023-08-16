@@ -1,6 +1,7 @@
 async function initSummary() {
   includeHTML();
   greetUser();
+  updatePriorityCount;
   await Promise.all([loadUsers(), loadUserData()]);
 }
 
@@ -11,6 +12,27 @@ function greetUser() {
   greetAccordingToDayTime();
   greetUserName();
 }
+
+function countTasksWithPriority(priority, tasks) {
+  return tasks.filter((task) => task.prio === priority).length;
+}
+
+function loadUserData() {
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+
+function updatePriorityCount() {
+  const currentUser = loadUserData();
+  const urgentTaskCount = countTasksWithPriority(
+    "addTaskPrioUrgent",
+    currentUser.tasks
+  );
+  const urgentTaskCountElement = document.getElementById("summaryTasksUrgent");
+  urgentTaskCountElement.textContent = urgentTaskCount;
+}
+
+// Llama a la función para actualizar el conteo al cargar los datos del usuario
+updatePriorityCount();
 
 //greeting according with the time
 function greetAccordingToDayTime() {

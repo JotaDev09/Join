@@ -214,9 +214,9 @@ function expandCategory() {
  */
 function createdNewCategory() {
   document.getElementById("selecCategoryCont").classList.add("d-none");
-  document
-    .getElementById("newCategoryCont")
-    .classList.remove("d-none").innerHTML = ``.innerHTML += newCategoryName();
+  document.getElementById("newCategoryCont").classList.remove("d-none");
+  document.getElementById("newCategoryCont").innerHTML = ``;
+  document.getElementById("newCategoryCont").innerHTML += newCategoryName();
   document.getElementById("colorsContainer").innerHTML += ``;
   for (let color = 0; color < colorsCategory.length; color++) {
     let colorCategory = colorsCategory[color];
@@ -493,7 +493,6 @@ function loadSubTasks() {
  */
 async function createATask() {
   if (checkInfo()) {
-    // Lógica para verificar información
   } else {
     let titleTask = document.getElementById("inputTitleTask");
     let contactsTask = getCheckedContacts();
@@ -503,9 +502,9 @@ async function createATask() {
     let descriptionTask = document.getElementById("addTaskDescription");
     let subtaskTask = selectedSubTasks;
 
-    const currentUser = loadUserData(); // Load current user's data
+    const currentUser = loadUserData();
     if (!currentUser.tasks) {
-      currentUser.tasks = []; // Initialize contacts array if not exists
+      currentUser.tasks = [];
     }
 
     let newTask = {
@@ -516,17 +515,16 @@ async function createATask() {
       category: categoryTask,
       prio: prioTask,
       description: descriptionTask.value,
-      subTask: subtaskTask, // Replace with the actual description
-      // Add any other properties that your task object requires
+      subTask: subtaskTask,
+      columns: "todo",
     };
 
     currentUser.tasks.push(newTask);
     saveUserData(currentUser);
     const userIndex = users.findIndex((user) => user.id === currentUser.id);
     if (userIndex !== -1) {
-      // Update the user's data in the users array
       users[userIndex] = currentUser;
-      await backend.setItem("users", JSON.stringify(users)); // Update the users data in the backend
+      await backend.setItem("users", JSON.stringify(users));
     }
 
     clearTask();

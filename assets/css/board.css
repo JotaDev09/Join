@@ -206,7 +206,7 @@ body {
 .minitask_sub_bar {
     width: 138px;
     height: 8px;
-    background: #F4F4F4;
+    background: linear-gradient(to right, #0038FF 0%, #0038FF calc(100% * var(--progress)), #F4F4F4 calc(100% * var(--progress)), #F4F4F4 100%);
     border-radius: 2px;
 }
 
@@ -218,13 +218,14 @@ body {
 }
 
 .minitask_buttom_cont {
-    gap: 83px;
+    gap: 50px;
     width: 207px;
     height: 35px;
 }
 
 .minitask_contacts_cont {
-    width: 150px;
+    position: relative;
+    width: 250px;
     height: 35px;
 }
 
@@ -235,6 +236,8 @@ body {
 }
 
 .minitask_contact {
+    position: absolute;
+    top: 0;
     gap: 10px;
     width: 35px;
     height: 35px;
