@@ -2,7 +2,7 @@ let currentDraggedtask;
 
 async function initBoard() {
   includeHTML();
-
+  setupSearchEventListener();
   await Promise.all([loadUsers(), loadTasksFromServer()]);
 }
 
@@ -114,7 +114,7 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function moveTo(column) {
+async function moveTo(column) {
   const currentUser = loadUserData();
   const taskIndex = currentUser.tasks.findIndex(
     (task) => task.id === currentDraggedtask
@@ -122,8 +122,25 @@ function moveTo(column) {
 
   if (taskIndex !== -1) {
     currentUser.tasks[taskIndex].columns = column;
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    loadTasksColumns(currentUser.tasks);
+
+    try {
+      await backend.setItem("currentUser", currentUser);
+      await refreshFromBackend(); // Retrieve updated data from the backend
+    } catch (error) {
+      console.error("Error updating backend:", error);
+    }
+  }
+}
+
+async function refreshFromBackend() {
+  try {
+    const updatedUserData = await backend.getItem("currentUser");
+    if (updatedUserData) {
+      localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
+      loadTasksColumns(updatedUserData.tasks);
+    }
+  } catch (error) {
+    console.error("Error fetching updated data:", error);
   }
 }
 
@@ -140,6 +157,24 @@ function prioInBoard(prio) {
 
   return imagePath;
 }
+
+function setupSearchEventListener() {
+  const findTaskInput = document.getElementById("findTaskInput");
+
+  findTaskInput.addEventListener("input", function () {
+    const searchTerm = this.value.trim().toLowerCase();
+    const filteredTasks = filterTasksBySearchTerm(searchTerm);
+    loadTasksColumns(filteredTasks);
+  });
+}
+
+function filterTasksBySearchTerm(searchTerm) {
+  const currentUser = loadUserData();
+  return currentUser.tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTerm)
+  );
+}
+
 /**
  * open the pop-up create Task
  */

@@ -1,8 +1,21 @@
+const columnTodoElements = document.getElementById("summaryTodoCount");
+const columnProgressElements = document.getElementById("summaryProgressCount");
+const columnFeedbacksElements = document.getElementById("summaryFeedbackCount");
+const columnDoneElements = document.getElementById("summaryDoneCount");
+
 async function initSummary() {
   includeHTML();
   greetUser();
-  updatePriorityCount;
-  await Promise.all([loadUsers(), loadUserData()]);
+  await Promise.all([
+    loadUsers(),
+    loadUserData(),
+    updatePriorityCount(),
+    updateTodoCount(),
+  ]);
+}
+
+function loadUserData() {
+  return JSON.parse(localStorage.getItem("currentUser"));
 }
 
 /**
@@ -16,9 +29,8 @@ function greetUser() {
 function countTasksWithPriority(priority, tasks) {
   return tasks.filter((task) => task.prio === priority).length;
 }
-
-function loadUserData() {
-  return JSON.parse(localStorage.getItem("currentUser"));
+function countTasksInColumns(column, tasks) {
+  return tasks.filter((task) => task.columns === column).length;
 }
 
 function updatePriorityCount() {
@@ -31,8 +43,26 @@ function updatePriorityCount() {
   urgentTaskCountElement.textContent = urgentTaskCount;
 }
 
-// Llama a la función para actualizar el conteo al cargar los datos del usuario
-updatePriorityCount();
+function updateTodoCount() {
+  const currentUser = loadUserData();
+  const todoColumn = countTasksInColumns("todo", currentUser.tasks);
+  const progressColumn = countTasksInColumns("progress", currentUser.tasks);
+  const feedbackColumn = countTasksInColumns("feedback", currentUser.tasks);
+  const doneColumn = countTasksInColumns("done", currentUser.tasks);
+
+  if (todoColumn !== null) {
+    columnTodoElements.textContent = todoColumn;
+  }
+  if (progressColumn !== null) {
+    columnProgressElements.textContent = progressColumn;
+  }
+  if (feedbackColumn !== null) {
+    columnFeedbacksElements.textContent = feedbackColumn;
+  }
+  if (doneColumn !== null) {
+    columnDoneElements.textContent = doneColumn;
+  }
+}
 
 //greeting according with the time
 function greetAccordingToDayTime() {
