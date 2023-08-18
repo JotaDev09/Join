@@ -95,3 +95,39 @@ body {
     background: #D2E3FF;
     border-radius: 8px;
 }
+
+@media (width < 600px) {
+    .menu_principal {
+        width: -webkit-fill-available;
+        height: 76px;
+        flex-direction: inherit;
+        padding: 0 16px;
+        top: initial;
+        bottom: 0;
+    }
+
+    .menu_legal {
+        display: none;
+    }
+
+    .menu_links {
+        padding-top: 0;
+        width: -webkit-fill-available;
+        height: 76px;
+        flex-direction: initial;
+        justify-content: space-between;
+    }
+
+    .menu_all {
+        width: 76px;
+        height: 76px;
+        flex-direction: column;
+        gap: 4px;
+        padding: 15px 0;
+    }
+
+    .text_menu {
+        display: flex;
+        justify-content: center;
+    }
+}

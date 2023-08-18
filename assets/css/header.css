@@ -53,7 +53,7 @@ body {
 }
 
 .header_circle {
-   cursor: pointer;
+    cursor: pointer;
 }
 
 .header_user_circle {
@@ -68,4 +68,45 @@ body {
     width: 49px;
     height: 49px;
     border-radius: 559px;
+}
+
+@media (width < 600px) {
+
+    .header_container {
+        height: 50px;
+        padding: 20px 25px;
+    }
+
+    .header_title_user {
+        justify-content: end;
+    }
+
+    .header_kanban {
+        display: none;
+    }
+
+    .header_logo {
+        width: 32px;
+        height: 39px;
+    }
+
+    .header_logo_white {
+        width: 32px;
+        height: 39px;
+    }
+
+    .header_help {
+        display: none;
+    }
+
+    .header_user_circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header_user_foto {
+        width: 32px;
+        height: 32px;
+    }
+
 }

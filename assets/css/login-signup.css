@@ -440,3 +440,259 @@ body {
     border: none;
     cursor: pointer;
 }
+
+@media (width < 700px) {
+
+    .login {
+        justify-content: center;
+    }
+
+    .login_not_user {
+        width: 272px;
+        top: 782px;
+        right: initial;
+    }
+
+    .not_user {
+        font-size: 18px;
+    }
+
+    .login_logo_join_blue {
+        top: 37px;
+        left: 38px;
+        width: 66px;
+        height: 80px;
+    }
+
+    .login_logo_blue_img {
+        width: 64px;
+        height: 78px;
+    }
+
+    .login_signup {
+        width: 94px;
+        height: 40px;
+    }
+
+    .login_signup_text {
+        font-size: 18px;
+    }
+
+    .login_container {
+        top: 144px;
+        width: 500px;
+    }
+
+    .user_container {
+        align-items: center !important;
+    }
+
+    .user_mail {
+        align-items: center !important;
+        width: 330px;
+    }
+
+    .user_password {
+        align-items: center !important;
+        width: 330px;
+    }
+
+    .login_checkbox {
+        width: 14px;
+        height: 14px;
+    }
+
+    .login_remember_me {
+        gap: 8px;
+    }
+
+    .login_rememberMe {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    .login_forgot_password {
+        font-size: 15px;
+    }
+
+    .login_button_cont {
+        width: 122px;
+        height: 40px;
+    }
+
+    .login_button {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    .guest_login_button_cont {
+        width: 175px;
+        height: 40px;
+    }
+
+    .guest_login_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .forgot_passw_container {
+        width: 500px;
+    }
+
+    .forgot_title {
+        width: 450px;
+    }
+
+    .login_text {
+        font-size: 47px;
+    }
+
+    .forgot_text_parraf {
+        font-size: 18px;
+    }
+
+    .forgot_button_cont {
+        width: 220px;
+    }
+
+    .reset_passw_container {
+        width: 500px;
+    }
+
+    .reset_text_parraf {
+        font-size: 18px;
+    }
+
+    .input_mail {
+        font-size: 16px;
+    }
+
+    .input_password {
+        font-size: 16px;
+    }
+
+    .reset_button_cont {
+        width: 150px;
+    }
+
+    .sign_button {
+        font-size: 16px;
+    }
+}
+
+
+@media (width < 500px) {
+    .logo_init_size {
+        width: 402px;
+        height: 121.97px;
+    }
+
+    .login_container {
+        width: 396px;
+        height: 552px;
+        gap: 32px;
+        padding: 32px 16px;
+    }
+
+    .login_blue_line {
+        width: 88px;
+        border: 1.5px solid #4589FF;
+    }
+
+    .user_container {
+        width: 364px;
+        height: 135px;
+        gap: 16px;
+    }
+
+    .login_input_img {
+        right: 80px;
+    }
+
+    .login_remember {
+        flex-direction: column-reverse !important;
+        width: 327px;
+        height: 67px;
+        padding: 0 16px;
+        gap: 16px;
+    }
+
+    .login_remember_me {
+        justify-content: left !important;
+    }
+
+    .login_buttons {
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 180px;
+        height: 117px;
+        gap: 21px;
+    }
+
+    .login_button_cont {
+        width: 180px;
+        height: 48px;
+        padding: 4px 0;
+        gap: 10px;
+    }
+
+    .login_button {
+        width: 54px;
+        height: 23px;
+    }
+
+    .guest_login_button_cont {
+        width: 180px;
+        height: 48px;
+        padding: 4px 0;
+        gap: 10px;
+    }
+
+    .guest_login_button {
+        width: 180px;
+        height: 48px;
+    }
+
+    .forgot_passw_container {
+        width: 396px;
+        height: 442px;
+        top: 242px;
+    }
+
+    .forgot_title {
+        width: 321px;
+        height: 112px;
+    }
+
+    .login_text {
+        font-size: 40px;
+    }
+
+    .forgot_text_parraf {
+        width: 321px;
+        height: 69px;
+        font-size: 19px;
+    }
+
+    .forgot_button_cont {
+        width: 208px;
+        height: 48px;
+    }
+
+    .reset_passw_container {
+        width: 396px;
+        height: 502px;
+        top: 212px;
+    }
+
+    .forgot_passwords {
+        width: 364px;
+        height: 144px;
+        align-items: center !important;
+    }
+
+}

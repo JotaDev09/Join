@@ -132,3 +132,11 @@
     transition-duration: 0.3s;
     animation-name: slide-left;
 }
+
+@media (width < 700px) {
+    .inputs {
+        width: 330px;
+    }
+
+
+}

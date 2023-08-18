@@ -2,15 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
+     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic"
         rel="stylesheet" />
-    <title>Join</title>
-    <link rel="icon" type="image/icon" href="assets/img/logo_join_white.svg" />
-
+    
     <link rel="stylesheet" href="assets/css/miniPopups.css">
     <link rel="stylesheet" href="assets/css/models.css">
     <link rel="stylesheet" href="assets/css/addTask.css">
@@ -27,13 +22,10 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
 
-
-    <div w3-include-html="assets/templates/header.html"></div>
 </head>
 
 <body onload="initAddTask()">
-    <div w3-include-html="assets/templates/menu.html"></div>
-    <div class="add_task_container">
+        <div w3-include-html="assets/templates/addTask.html"></div>
         <div class="add_task_cont column-flex-start">
             <div class="add_task_title column-flex-start">
                 <div class="add_task_title_cont row-center">
@@ -84,13 +76,13 @@
                         </div>
                         <div class="new_category_container" id="newCategoryContainer"></div>
                         <!--    <div class="contacts_choose_cont row-center">
-                <a class="add_task_subtitle font400">Sales</a>
-                <span class="category_circle_color color_sales"></span>
-            </div>
-            <div class="contacts_choose_cont row-center">
-                <a class="add_task_subtitle font400">Backoffice</a>
-                <span class="category_circle_color color_backoffice"></span>
-            </div>-->
+                            <a class="add_task_subtitle font400">Sales</a>
+                            <span class="category_circle_color color_sales"></span>
+                        </div>
+                        <div class="contacts_choose_cont row-center">
+                            <a class="add_task_subtitle font400">Backoffice</a>
+                            <span class="category_circle_color color_backoffice"></span>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -138,7 +130,7 @@
                 <img src="assets/img/checkCreateT.svg" class="">
             </button>
         </div>
-    </div>
+    
 </body>
 
 </html>

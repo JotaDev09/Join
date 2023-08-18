@@ -64,18 +64,26 @@
     z-index: 6;
     top: 132px;
     right: 38px;
-    cursor: pointer;
 }
 
 .header_popup {
+    display: flex;
+    flex-direction: column !important;
     padding: 8px;
     gap: 20px;
     display: none;
-    width: 107px;
+    width: 135px;
     height: 29px;
+    cursor: pointer;
 }
 
 .header_logout_text {
+    font-size: 19px;
+    color: #4589FF;
+}
+
+.header_logout_text_resp {
+    display: none;
     font-size: 19px;
     color: #4589FF;
 }
@@ -156,14 +164,14 @@
 
 .slide_left {
     transform:
-        translateX(-600px);
+        translateX(0px);
     transition-duration: 0.3s;
     animation-name: slide-left;
 }
 
 .slide_right {
     transform:
-        translateX(0px);
+        translateX(600px);
     transition-duration: 0.3s;
     animation-name: slide-left;
 }
@@ -215,4 +223,52 @@
 .new_contact_pop_ups {
     display: flex;
     justify-content: center;
+}
+
+@media (width < 700px) {
+
+    .send_mail {
+        width: 300px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+    }
+
+    .send_mail img {
+        width: 27px;
+        height: 27px;
+    }
+
+    .font_pop_up {
+        font-size: 18px;
+    }
+
+    .confirm_password {
+        width: 230px;
+    }
+
+    .confirm_password a {
+        width: 210px;
+        height: 28px;
+    }
+
+}
+
+@media(width < 600px) {
+    .header_popup_logout {
+        width: 155px;
+        height: 176px;
+        top: 88px
+    }
+
+    .header_logout_text_resp {
+        display: flex;
+        font-size: 19px;
+        color: #4589FF;
+    }
+
+    .header_popup {
+        align-items: end !important;
+        height: 176px;
+    }
 }

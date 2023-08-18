@@ -5,9 +5,8 @@ async function initBoard() {
   setupSearchEventListener();
   await Promise.all([loadUsers(), loadTasksFromServer()]);
 }
-
+// getContactsPU(),
 //loadCategoriesFromServer(),
-//getContacts(),
 //loadSubTasks()
 
 function loadTasksFromServer() {
@@ -136,7 +135,7 @@ async function refreshFromBackend() {
   try {
     const updatedUserData = await backend.getItem("currentUser");
     if (updatedUserData) {
-      localStorage.setItem("currentUser", JSON.stringify(updatedUserData));
+      backend.setItem("currentUser", JSON.stringify(updatedUserData));
       loadTasksColumns(updatedUserData.tasks);
     }
   } catch (error) {
@@ -186,6 +185,71 @@ function createTaskPU() {
     .classList.add("background_white_transp");
 }
 
+// function getContactsPU() {
+//   const currentUser = loadUserData();
+//   const sortedContacts = sortContactsByInitialLetter(currentUser.contacts);
+
+//   let html = "";
+//   for (let letter in sortedContacts) {
+//     const contactsByLetter = sortedContacts[letter];
+//     if (contactsByLetter.length > 0) {
+//       html += generateContactsHtml(contactsByLetter);
+//     }
+//   }
+
+//   const contactsListPU = document.getElementById("contactsListPU");
+//   contactsListPU.innerHTML = html + generateInviteNewContactHtml();
+// }
+
+// /**
+//  * expand Contacts Menu in AddTask
+//  */
+// function expandMenuPU() {
+//   if (selecContacts) {
+//     document.getElementById("contactsListPU").classList.add("d-none");
+//     document.getElementById("assignedContactcontPU").style =
+//       "height: 51px; overflox: inherit";
+//     selecContacts = false;
+//   } else {
+//     document.getElementById("contactsListPU").classList.remove("d-none");
+//     document.getElementById("assignedContactcontPU").style =
+//       "height: 204px; overflow: auto";
+//     selecContacts = true;
+//   }
+// }
+
+/**
+ * Create a new Task Pop-Up
+ */
+async function createATaskPU() {
+  if (checkInfoPU()) {
+  } else {
+    addInfoNewTask();
+    await loadTasksFromServer();
+    tasks = JSON.parse(await backend.getItem("tasks")) || [];
+    tasks.push(task);
+    await backend.setItem("tasks", JSON.stringify(tasks));
+    //clearTaskPU();
+  }
+}
+
+function checkInfoPU() {
+  let info = false;
+  if (document.getElementById("inputTitleTaskPU").value === "") {
+    document.getElementById("titleRequiredPU").style.display = "flex";
+    info = true;
+  }
+  if (document.getElementById("inputCalendarAddTaskPU").value === "") {
+    document.getElementById("dateRequiredPU").style.display = "flex";
+    info = true;
+  }
+  if (document.getElementById("addTaskDescriptionPU").value === "") {
+    document.getElementById("descriptionRequiredPU").style.display = "flex";
+    info = true;
+  }
+  return info;
+}
+
 /**
  * close the pop-up create Task
  */
@@ -195,8 +259,8 @@ function closePopUpCreate() {
   document
     .getElementById("addTaskPopUpContainer")
     .classList.remove("background_white_transp");
-  clearTask();
-  resetColors;
+  //clearTask();
+  //resetColors;
 }
 
 /**

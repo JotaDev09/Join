@@ -602,38 +602,6 @@ function clearTask() {
 }
 
 /**
- * Create a new Task Pop-Up
- */
-async function createATaskPU() {
-  if (checkInfoPU()) {
-  } else {
-    addInfoNewTask();
-    await loadTasksFromServer();
-    tasks = JSON.parse(await backend.getItem("tasks")) || [];
-    tasks.push(task);
-    await backend.setItem("tasks", JSON.stringify(tasks));
-    //clearTaskPU();
-  }
-}
-
-function checkInfoPU() {
-  let info = false;
-  if (document.getElementById("inputTitleTaskPU").value === "") {
-    document.getElementById("titleRequiredPU").style.display = "flex";
-    info = true;
-  }
-  if (document.getElementById("inputCalendarAddTaskPU").value === "") {
-    document.getElementById("dateRequiredPU").style.display = "flex";
-    info = true;
-  }
-  if (document.getElementById("addTaskDescriptionPU").value === "") {
-    document.getElementById("descriptionRequiredPU").style.display = "flex";
-    info = true;
-  }
-  return info;
-}
-
-/**
  * the function change the colors of the prio buttons Pop Up
  *
  * @param {button} - take the info from prio buttons
