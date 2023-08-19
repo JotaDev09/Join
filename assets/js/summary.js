@@ -6,6 +6,7 @@ const columnDoneElements = document.getElementById("summaryDoneCount");
 async function initSummary() {
   includeHTML();
   greetUser();
+  showSummary();
   await Promise.all([
     loadUsers(),
     loadUserData(),
@@ -86,4 +87,11 @@ function greetUserName() {
   currentUserId = users ? users.id : null;
   console.log(currentUserId);
   console.log(loadUserData);
+}
+
+function showSummary() {
+  setTimeout(() => {
+    document.getElementById("containerSummary").classList.add("d-none");
+    document.getElementById("summaryBoard").style = "display: flex !important";
+  }, 2000);
 }
