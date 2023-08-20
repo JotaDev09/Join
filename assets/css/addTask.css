@@ -5,17 +5,21 @@ body {
 
 /*Add Task container*/
 .add_task_container {
-    width: -webkit-fill-available;
+    height: 100vh;
+    overflow: hidden;
     padding-left: 232px;
 }
 
 .add_task_cont {
-    gap: 25px;
+    gap: 24px;
     position: absolute;
-    width: 561px;
-    height: 1056px;
+    width: 488px;
+    height: -webkit-fill-available;
     left: 320px;
     top: 176px;
+    bottom: 0;
+    padding-bottom: 20px;
+    overflow-y: auto;
 }
 
 .add_task_title {
@@ -44,7 +48,7 @@ body {
 .add_task_contacts_cont {
     gap: 8px;
     width: 422px;
-    height: 51px;
+    height: 79px;
 }
 
 .add_task_contacts {
@@ -179,7 +183,7 @@ body {
 .add_task_dueDate_cont {
     gap: 8px;
     width: 422px;
-    height: 102px;
+    height: 99px;
 }
 
 .add_task_titles {
@@ -220,7 +224,7 @@ body {
 
 .add_task_category_Cont {
     width: 422px;
-    height: 51px;
+    height: 79px;
 }
 
 .add_task_category_cont {
@@ -297,9 +301,14 @@ body {
 
 /*Add Task assign priority*/
 .add_task_prio_cont {
+    width: 422px;
+    height: 82px;
+}
+
+.add_task_prio_cont_buttons {
     gap: 10px;
     width: 422px;
-    height: 51px;
+    height: 82px;
 }
 
 .add_task_prio_buttons {
@@ -370,7 +379,7 @@ body {
 .add_task_subtasks_cont {
     gap: 14px;
     width: 422px;
-    height: 109px;
+    height: 79px;
     border: none;
 }
 
@@ -434,7 +443,8 @@ body {
     height: 61px;
     position: absolute;
     right: 30px;
-    top: 908px;
+    bottom: 0;
+    padding-bottom: 20px;
 }
 
 .add_task_buttons_clear {

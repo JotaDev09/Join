@@ -42,7 +42,42 @@
                 </div>
                 <a class="field_required" id="titleRequired">This field is required</a>
             </div>
+            <div class="add_task_description_cont column-flex-start">
+                <a class="add_task_titles font400">Description</a>
+                <textarea class="add_task_descript_input row-flexstart font400" placeholder="Enter a Description"
+                    id="addTaskDescription" onclick="writeDescription()"></textarea>
+                <a class="field_required" id="descriptionRequired">This field is required</a>
+            </div>
+            <div class="add_task_dueDate_cont column-flex-start">
+                <a class="add_task_titles font400">Due date</a>
+                <div class="add_task_Duedate_input row-center">
+                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
+                        onclick="writeDate()">
+                </div>
+                <a class="field_required" id="dateRequired">This field is required</a>
+            </div>
+            <div class="add_task_prio_cont column-flex-start">
+                <a class="add_task_titles font400">Priority</a>
+                <div class="add_task_prio_cont_buttons row-center-center">
+                    <div class="add_task_prio_buttons row-center-center urgent_hover" id="addTaskPrioUrgent"
+                        onclick="choosePrio(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioUrgentA">Urgent</a>
+                        <img class="prio_buttons_img" id="addTaskPrioUrgentImg" src="assets/img/PrioAlta.svg">
+                    </div>
+                    <div class="add_task_prio_buttons row-center-center urgent_medium" id="addTaskPrioMedium"
+                        onclick="choosePrio(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioMediumA">Medium</a>
+                        <img class="prio_buttons_img" id="addTaskPrioMediumImg" src="assets/img/PrioMedia.svg">
+                    </div>
+                    <div class="add_task_prio_buttons row-center-center urgent_low" id="addTaskPrioLow"
+                        onclick="choosePrio(this)">
+                        <a class="prio_buttons_text font400" id="addTaskPrioLowA">Low</a>
+                        <img class="prio_buttons_img" id="addTaskPrioLowImg" src="assets/img/PrioBaja.svg">
+                    </div>
+                </div>
+            </div>
             <div class="add_task_contacts_cont column-flex-start" id="assignedContactcont">
+                <a class="add_task_titles font400">Assigned to</a>
                 <div class="add_task_contacts column-flex-start">
                     <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
                         <a class="add_task_subtitle font400" id="assignedContacts">Select contacts to assign</a>
@@ -64,15 +99,8 @@
                     <img src="assets/img/blueCheck.svg" onclick="createNewContactTask()">
                 </div>
             </div>
-            <div class="add_task_dueDate_cont column-flex-start">
-                <a class="add_task_titles font400">Due date</a>
-                <div class="add_task_Duedate_input row-center">
-                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
-                        onclick="writeDate()">
-                </div>
-                <a class="field_required" id="dateRequired">This field is required</a>
-            </div>
             <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
+                <a class="add_task_titles font400">Category</a>
                 <div class="add_task_select_cat column-flex-start">
                     <div class="add_task_selectCat row-center" onclick="expandCategory()" id="selecCategory">
                         <a class="add_task_subtitle font400">Select task category</a>
@@ -83,41 +111,10 @@
                             <a class="add_task_subtitle font400">New category</a>
                         </div>
                         <div class="new_category_container" id="newCategoryContainer"></div>
-                        <!--    <div class="contacts_choose_cont row-center">
-                <a class="add_task_subtitle font400">Sales</a>
-                <span class="category_circle_color color_sales"></span>
-            </div>
-            <div class="contacts_choose_cont row-center">
-                <a class="add_task_subtitle font400">Backoffice</a>
-                <span class="category_circle_color color_backoffice"></span>
-            </div>-->
                     </div>
                 </div>
             </div>
             <div class="new_contact_container column-flex-start d-none" id="newCategoryCont">
-            </div>
-            <div class="add_task_prio_cont row-center-center">
-                <div class="add_task_prio_buttons row-center-center urgent_hover" id="addTaskPrioUrgent"
-                    onclick="choosePrio(this)">
-                    <a class="prio_buttons_text font400" id="addTaskPrioUrgentA">Urgent</a>
-                    <img class="prio_buttons_img" id="addTaskPrioUrgentImg" src="assets/img/PrioAlta.svg">
-                </div>
-                <div class="add_task_prio_buttons row-center-center urgent_medium" id="addTaskPrioMedium"
-                    onclick="choosePrio(this)">
-                    <a class="prio_buttons_text font400" id="addTaskPrioMediumA">Medium</a>
-                    <img class="prio_buttons_img" id="addTaskPrioMediumImg" src="assets/img/PrioMedia.svg">
-                </div>
-                <div class="add_task_prio_buttons row-center-center urgent_low" id="addTaskPrioLow"
-                    onclick="choosePrio(this)">
-                    <a class="prio_buttons_text font400" id="addTaskPrioLowA">Low</a>
-                    <img class="prio_buttons_img" id="addTaskPrioLowImg" src="assets/img/PrioBaja.svg">
-                </div>
-            </div>
-            <div class="add_task_description_cont column-flex-start">
-                <a class="add_task_titles font400">Description</a>
-                <textarea class="add_task_descript_input row-flexstart font400" placeholder="Enter a Description"
-                    id="addTaskDescription" onclick="writeDescription()"></textarea>
-                <a class="field_required" id="descriptionRequired">This field is required</a>
             </div>
             <div class="add_task_subtasks_cont column-flex-start">
                 <a class="add_task_titles font400">Subtasks</a>
@@ -126,8 +123,8 @@
                         id="addTaskSubTask">
                     <img src="assets/img/plusBlue.svg" class="plus_blue_img" onclick="subTaskGenerate()">
                 </div>
-                <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
             </div>
+            <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
         </div>
         <div class="add_task_buttons_bottom row-center-center">
             <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">

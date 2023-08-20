@@ -102,7 +102,7 @@ function expandMenu() {
   if (selecContacts) {
     document.getElementById("contactsList").classList.add("d-none");
     document.getElementById("assignedContactcont").style =
-      "height: 51px; overflox: inherit";
+      "height: 79px; overflox: inherit";
     selecContacts = false;
   } else {
     document.getElementById("contactsList").classList.remove("d-none");
@@ -199,7 +199,7 @@ function expandCategory() {
   if (selecCategory) {
     document.getElementById("categoryList").classList.add("d-none");
     document.getElementById("selecCategoryCont").style =
-      "height: 70px; overflox: inherit";
+      "height: 79px; overflox: inherit";
     selecCategory = false;
   } else {
     document.getElementById("categoryList").classList.remove("d-none");
@@ -234,7 +234,7 @@ function cancelNewCategory() {
   document.getElementById("newCategoryCont").classList.add("d-none");
   document.getElementById("categoryList").classList.add("d-none");
   document.getElementById("selecCategoryCont").style =
-    "height: 70px; overflox: inherit";
+    "height: 79px; overflox: inherit";
   selecCategory = false;
 }
 
@@ -581,11 +581,11 @@ function clearTask() {
   document.getElementById("addTaskDescription").value = "";
   document.getElementById("contactsList").classList.add("d-none");
   document.getElementById("assignedContactcont").style =
-    "height: 51px; overflox: inherit";
+    "height: 79px; overflox: inherit";
   resetColors();
   document.getElementById("categoryList").classList.add("d-none");
   document.getElementById("selecCategoryCont").style =
-    "height: 70px; overflox: inherit";
+    "height: 79px; overflox: inherit";
   selecCategory = false;
   const checkboxes = document.querySelectorAll(".add_task_contacts_check");
   checkboxes.forEach((checkbox) => {

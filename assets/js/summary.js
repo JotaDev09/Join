@@ -90,8 +90,12 @@ function greetUserName() {
 }
 
 function showSummary() {
-  setTimeout(() => {
-    document.getElementById("containerSummary").classList.add("d-none");
-    document.getElementById("summaryBoard").style = "display: flex !important";
-  }, 2000);
+  if (window.matchMedia("(max-width: 650px)").matches) {
+    setTimeout(() => {
+      document.getElementById("containerSummary").classList.add("d-none");
+      document.getElementById("summaryBoard").style =
+        "display: flex !important";
+    }, 2000);
+  } else {
+  }
 }

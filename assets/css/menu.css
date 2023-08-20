@@ -4,8 +4,6 @@ body {
 
 /*menu principal*/
 .menu_principal {
-    padding: 66px 20px;
-    gap: 205px;
     position: absolute;
     width: 232px;
     height: -webkit-fill-available;
@@ -18,7 +16,7 @@ body {
 }
 
 .menu_links {
-    padding-top: 30px;
+    padding-top: 80px;
     gap: 15px;
     top: 66px;
     left: 23px;
@@ -27,12 +25,13 @@ body {
 }
 
 .menu_legal {
-    padding: 243px 0px 0px;
+    position: absolute;
+    padding: 20px;
     gap: 15px;
-    top: 530px;
-    left: 36px;
+    bottom: 0px;
+    left: 23px;
     width: 160px;
-    height: 289px;
+    height: 135px;
 }
 
 .menu_all {
@@ -55,8 +54,18 @@ body {
 }
 
 .icon_addTask {
-    width: 30px;
+    width: 27px;
     height: 30px;
+}
+
+.addTask_background {
+    padding: 8px 30px 8px 28px;
+    gap: 18px !important;
+}
+
+.contacts_background {
+    padding: 8px 30px 8px 25px;
+    gap: 18px !important;
 }
 
 .icon_contacts {
@@ -74,7 +83,15 @@ body {
 .menu_legal_cont {
     padding: 8px;
     gap: 20px;
-    width: 160px;
+    width: 105px;
+    height: 46px;
+    cursor: pointer;
+}
+
+.menu_privacy_cont {
+    padding: 8px;
+    gap: 20px;
+    width: 105px;
     height: 46px;
     cursor: pointer;
 }
@@ -132,7 +149,7 @@ body {
 
     .menu_all {
         width: 76px;
-        height: 76px;
+        height: 46px;
         flex-direction: column;
         gap: 4px;
         padding: 15px 0;
@@ -141,5 +158,9 @@ body {
     .text_menu {
         display: flex;
         justify-content: center;
+    }
+
+    .icon_addTask {
+        width: 25px;
     }
 }
