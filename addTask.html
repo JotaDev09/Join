@@ -78,7 +78,7 @@
             </div>
             <div class="add_task_contacts_cont column-flex-start" id="assignedContactcont">
                 <a class="add_task_titles font400">Assigned to</a>
-                <div class="add_task_contacts column-flex-start">
+                <div class="add_task_contacts column-flex-start" id="containerContacts">
                     <div class="contacts_img_cont row-center" onclick="expandMenu()" id="selecContacts">
                         <a class="add_task_subtitle font400" id="assignedContacts">Select contacts to assign</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
@@ -101,7 +101,7 @@
             </div>
             <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
                 <a class="add_task_titles font400">Category</a>
-                <div class="add_task_select_cat column-flex-start">
+                <div class="add_task_select_cat column-flex-start" id="categoryContacts">
                     <div class="add_task_selectCat row-center" onclick="expandCategory()" id="selecCategory">
                         <a class="add_task_subtitle font400">Select task category</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
@@ -125,6 +125,15 @@
                 </div>
             </div>
             <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
+            <div class="add_task_buttons_bottom_resp row-center-center" id="adddTaskButtonsResp">
+                <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
+                    <a class="add_task_clear_text font400">Clear X</a>
+                </button>
+                <button class="add_task_buttons_create row-center-center" onclick="createATask()">
+                    <a class="add_task_create_text font400">Create Task</a>
+                    <img src="assets/img/checkCreateT.svg" class="">
+                </button>
+            </div>
         </div>
         <div class="add_task_buttons_bottom row-center-center">
             <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">

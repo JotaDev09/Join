@@ -103,12 +103,34 @@ function expandMenu() {
     document.getElementById("contactsList").classList.add("d-none");
     document.getElementById("assignedContactcont").style =
       "height: 79px; overflox: inherit";
+    document.getElementById("containerContacts").style =
+      "height: 51px; overflox: initial";
     selecContacts = false;
   } else {
     document.getElementById("contactsList").classList.remove("d-none");
     document.getElementById("assignedContactcont").style =
-      "height: 204px; overflow: auto";
+      "height: 204px; overflow: initial";
+    document.getElementById("containerContacts").style =
+      "height: 150px; overflow: scroll";
     selecContacts = true;
+  }
+}
+
+function expandCategory() {
+  if (selecCategory) {
+    document.getElementById("categoryList").classList.add("d-none");
+    document.getElementById("selecCategoryCont").style =
+      "height: 79px; overflox: inherit";
+    document.getElementById("categoryContacts").style =
+      "height: 51px; overflox: inherit";
+    selecCategory = false;
+  } else {
+    document.getElementById("categoryList").classList.remove("d-none");
+    document.getElementById("selecCategoryCont").style =
+      "height: 204px; overflow: initial";
+    document.getElementById("categoryContacts").style =
+      "height: 150px; overflow: scroll";
+    selecCategory = true;
   }
 }
 
@@ -195,19 +217,6 @@ function cancelNewContactTask() {
 /**
  * expand Category Menu in AddTask
  */
-function expandCategory() {
-  if (selecCategory) {
-    document.getElementById("categoryList").classList.add("d-none");
-    document.getElementById("selecCategoryCont").style =
-      "height: 79px; overflox: inherit";
-    selecCategory = false;
-  } else {
-    document.getElementById("categoryList").classList.remove("d-none");
-    document.getElementById("selecCategoryCont").style =
-      "height: 204px; overflow: auto";
-    selecCategory = true;
-  }
-}
 
 /**
  * write a new Category in AddTask

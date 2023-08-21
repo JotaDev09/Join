@@ -83,6 +83,10 @@ body {
     background: #D2E3FF;
 }
 
+.contacts_hidden_cont {
+    overflow-y: visible;
+}
+
 .new_contact_cont {
     padding: 18px 21px;
     gap: 10px;
@@ -254,6 +258,10 @@ body {
     background-color: #D2E3FF;
 }
 
+.category_hidden_cont {
+    overflow-y: visible;
+}
+
 .category_circle_color {
     box-sizing: border-box;
     width: 20px;
@@ -385,7 +393,7 @@ body {
 
 .subtasks_cont_input_img {
     width: 422px;
-    height: 52px;
+    height: 54px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
 }
@@ -447,6 +455,15 @@ body {
     padding-bottom: 20px;
 }
 
+.add_task_buttons_bottom_resp {
+    display: none !important;
+    justify-content: flex-end !important;
+    gap: 25px;
+    width: 100%;
+    height: 61px;
+    padding-bottom: 80px;
+}
+
 .add_task_buttons_clear {
     padding: 18px 10px;
     gap: 10px;
@@ -506,4 +523,81 @@ body {
     height: 16px;
     font-size: 13px;
     color: #FF8190;
+}
+
+@media (width < 1200px) {
+    .add_task_container {
+        padding-left: 190px;
+    }
+
+    .add_task_cont {
+        left: 220px;
+        width: 445px;
+    }
+
+    .add_task_buttons_bottom {
+        gap: 15px;
+        width: 320px;
+        right: 15px;
+    }
+
+    .add_task_buttons_clear {
+        padding: 18px 8px;
+        width: 120px;
+    }
+
+    .add_task_clear_text {
+        font-size: 21px;
+    }
+
+    .add_task_buttons_create {
+        width: 170px;
+    }
+
+    .add_task_create_text {
+        width: 126px;
+        font-size: 21px;
+    }
+}
+
+@media (width < 1000px) {
+    .add_task_buttons_bottom_resp {
+        display: flex !important;
+    }
+
+    .add_task_buttons_bottom {
+        display: none !important;
+    }
+}
+
+@media (width < 850px) {
+    .add_task_container {
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .add_task_cont {
+        padding-bottom: 80px;
+        left: 0;
+        position: relative;
+        padding-bottom: 200px;
+    }
+}
+
+@media (width < 600px) {
+    .add_task_cont {
+        top: 100px;
+        padding-bottom: 120px;
+        width: 430px;
+    }
+
+    .add_task_buttons_clear {
+        display: none !important;
+    }
+
+    .add_task_buttons_bottom_resp {
+        justify-content: center !important;
+    }
 }

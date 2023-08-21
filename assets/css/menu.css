@@ -117,11 +117,30 @@ body {
     .menu_principal {
         width: 190px;
     }
+
+    .menu_legal {
+        left: 0;
+        width: 148px;
+    }
 }
 
 @media (width < 1000px) {
     .menu_principal {
         width: 150px;
+    }
+
+    .menu_links {
+        width: 148px;
+    }
+
+    .menu_all {
+        padding: 8px;
+        width: 134px;
+    }
+
+    .menu_legal {
+        padding: 8px;
+        width: 132px;
     }
 }
 
@@ -151,7 +170,7 @@ body {
         width: 76px;
         height: 46px;
         flex-direction: column;
-        gap: 4px;
+        gap: 4px !important;
         padding: 15px 0;
     }
 
