@@ -148,7 +148,7 @@ body {
     .menu_principal {
         width: -webkit-fill-available;
         height: 76px;
-        flex-direction: inherit;
+        flex-direction: inherit !important;
         padding: 0 16px;
         top: initial;
         bottom: 0;
@@ -162,14 +162,14 @@ body {
         padding-top: 0;
         width: -webkit-fill-available;
         height: 76px;
-        flex-direction: initial;
-        justify-content: space-between;
+        flex-direction: initial !important;
+        justify-content: space-between !important;
     }
 
     .menu_all {
         width: 76px;
         height: 46px;
-        flex-direction: column;
+        flex-direction: column !important;
         gap: 4px !important;
         padding: 15px 0;
     }

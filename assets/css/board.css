@@ -3,17 +3,19 @@ body {
 }
 
 .board_container {
-    padding-left: 232px;
+    width: 100%;
+    height: 100vh;
+    padding-left: 250px;
 }
 
 .board_head {
     gap: 474px;
-    position: absolute;
-    width: -webkit-fill-available;
+    position: relative;
+    width: 500px;
     height: 51px;
-    left: 302px;
-    top: 193px;
+    top: 50px;
     z-index: 2;
+    padding-left: 10px;
 }
 
 /*Find task */
@@ -41,7 +43,7 @@ body {
 
 .find_task_input {
     gap: 13px;
-    width: 100px;
+    width: 170px;
     height: 19px;
     border: none;
     outline: none;
@@ -85,6 +87,13 @@ body {
 }
 
 /*columns container */
+.board_columns_container {
+    gap: 26px;
+    position: relative;
+    width: 1078px;
+    top: 113px;
+}
+
 .board_columns {
     padding: 236px 10px 11px;
     gap: 46px;
@@ -116,16 +125,9 @@ body {
     cursor: pointer;
 }
 
-.board_columns_container {
-    gap: 26px;
-    position: absolute;
-    width: 1078px;
-    left: 299px;
-    top: 283px;
-}
 
 .board_columns_column {
-    gap: 35px;
+    gap: 25px;
     width: 250px;
 }
 
@@ -133,9 +135,12 @@ body {
     width: 250px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     height: 590px;
     overflow: scroll;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .drag-area-highlight {
@@ -256,4 +261,131 @@ body {
 .minitask_prio {
     width: 17px;
     height: 12px;
+}
+
+@media (width < 1400px) {
+
+    .board_columns_container {
+        justify-content: center !important;
+        width: 550px;
+        gap: 35px;
+        flex-wrap: wrap;
+    }
+
+    .board_columns_column {
+        width: 250px;
+    }
+
+    .board_column_tasks {
+        width: 230px;
+        gap: 20px
+    }
+
+    .column_for_tasks {
+        width: 250px;
+        height: 250px;
+    }
+
+    .column_tasks_text {
+        font-size: 21px;
+    }
+
+    .minitask_container {
+        width: 200px;
+    }
+
+    .minitask {
+        width: 210px;
+    }
+}
+
+
+@media (width < 1200px) {
+    .board_container {
+        padding-left: 200px;
+    }
+}
+
+@media (width < 1000px) {
+    .board_container {
+        padding-left: 155px;
+    }
+}
+
+@media (width < 850px) {
+    .board_container {
+        padding-left: 0;
+        align-items: center !important;
+    }
+
+    .board_head {
+        left: 0;
+    }
+
+    .board_columns_container {
+        left: 0;
+    }
+}
+
+@media (width < 600px) {
+    .board_head {
+        top: 10px;
+    }
+
+    .board_columns_container {
+        top: 35px;
+    }
+}
+
+@media (width < 550px) {
+    .board_head {
+        top: 110px;
+        width: 100% !important;
+        padding-left: 0;
+    }
+
+    .board_container {
+        overflow: hidden;
+    }
+
+    .board_columns_container {
+        top: 150px;
+        width: 300px;
+        overflow-y: scroll;
+    }
+
+    .board_head_findTask {
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    .board_head_findT {
+        width: 364px;
+    }
+
+    .find_task_head {
+        width: 360px;
+    }
+
+    .find_task_input {
+        width: 300px;
+    }
+
+    .addTask_button {
+        display: none !important;
+    }
+}
+
+@media (width < 400px) {
+    .board_head_findT {
+        width: initial;
+    }
+
+    .find_task_head {
+        width: initial;
+    }
+
+    .find_task_input {
+        width: initial;
+    }
 }

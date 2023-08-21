@@ -179,10 +179,13 @@ function filterTasksBySearchTerm(searchTerm) {
  */
 function createTaskPU() {
   document.getElementById("createTaskPopUp").classList.remove("slide_right");
-  document.getElementById("createTaskPopUp").classList.add("slide_left");
+  document.getElementById("addTaskPopUpContainer").style = "display: flex";
   document
     .getElementById("addTaskPopUpContainer")
     .classList.add("background_white_transp");
+  setTimeout(() => {
+    document.getElementById("createTaskPopUp").classList.add("slide_left");
+  }, 100);
 }
 
 // function getContactsPU() {
@@ -256,11 +259,13 @@ function checkInfoPU() {
 function closePopUpCreate() {
   document.getElementById("createTaskPopUp").classList.add("slide_right");
   document.getElementById("createTaskPopUp").classList.remove("slide_left");
-  document
-    .getElementById("addTaskPopUpContainer")
-    .classList.remove("background_white_transp");
+  setTimeout(() => {
+    document
+      .getElementById("addTaskPopUpContainer")
+      .classList.remove("background_white_transp");
+    document.getElementById("addTaskPopUpContainer").style = "display: none";
+  }, 100);
   //clearTask();
-  //resetColors;
 }
 
 /**

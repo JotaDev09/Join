@@ -90,6 +90,10 @@
 
 /* Add Task Pop-up */
 
+.add_task_pu_container {
+    display: none;
+}
+
 .add_task_popUp_container {
     z-index: 9;
     position: absolute;
@@ -163,9 +167,9 @@
 }
 
 .slide_left {
+    transition-duration: 0.3s;
     transform:
         translateX(0px);
-    transition-duration: 0.3s;
     animation-name: slide-left;
 }
 
