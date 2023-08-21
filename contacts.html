@@ -33,13 +33,18 @@
     <div w3-include-html="assets/templates/addTaskPopUp.html"></div>
 
     <div class="contacts_container" id="contactsContainer">
-        <div class="contacts_column_container">
+        <div class="contacts_column_container" id="contactsColumn">
             <div class="contacts_column_cont column-center" id="contactsColumn"></div>
         </div>
-        <div class="contacts_right column-flex-start">
-            <div class="contacts_display_contact column-flex-start" id="bigContactCard">
-
+        <div class="contacts_right column-flex-start" id="containerBigCard">
+            <div class="contact_card_title" id="bigCardTitle">
+                <a class="contacts_subtitle_text font400">Contact Information</a>
+                <img src="assets/img/blue_arrow.svg" class="blue_arrow_contacts" onclick="closeShowContact()">
             </div>
+            <div class="contacts_display_contact column-flex-start" id="bigContactCard">
+            </div>
+        </div>
+        <div class="container_new_contact">
             <div class="contacts_button_cont row-center-center" onclick="openNewContact()">
                 <a class="contact_newContact font400">New contact</a>
                 <img src="assets/img/newContact.png">

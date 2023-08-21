@@ -143,19 +143,30 @@ function getInitials(name, email) {
 
 function showContact(contactId) {
   const currentUser = loadUserData();
-  if (!currentUser) {
-    console.log("User not logged in.");
-    return;
-  }
 
   const contact = currentUser.contacts.find((c) => c.id === contactId);
 
   if (contact) {
     const bigCardContact = renderBigCardContact(contact);
     document.getElementById("bigContactCard").innerHTML = bigCardContact;
+    document.getElementById("bigCardTitle").style = "display: flex";
   } else {
     console.log("Contact not found.");
   }
+
+  contactsResponsive();
+}
+
+function contactsResponsive() {
+  if (window.matchMedia("(max-width: 1200px)").matches) {
+    document.getElementById("containerBigCard").style =
+      "display: flex !important";
+  }
+}
+
+function closeShowContact() {
+  document.getElementById("containerBigCard").style =
+    "display: none !important;";
 }
 
 function renderBigCardContact(contact) {
@@ -175,17 +186,16 @@ function renderBigCardContact(contact) {
   }</a>
         </div>
         <div class="contacts_name_cont column-flex-start">
-            <div class="contacts_name column-flex-start">
-                <a class="contactsName font400" id="editName">${contactName}</a>
-            </div>
-            <div class="contacts_addTask_cont row-center-center" onclick="createTaskPU()">
-                <img src="assets/img/plusBlue.svg" class="contacts_plusBlue">
-                <a class="contacts_addTask_text font400">Add Task</a>
-            </div>
+          <div class="contacts_name column-flex-start">
+            <a class="contactsName font400" id="editName">${contactName}</a>
+          </div>
+          <div class="contacts_addTask_cont row-center-center" onclick="createTaskPU()">
+            <img src="assets/img/plusBlue.svg" class="contacts_plusBlue">
+            <a class="contacts_addTask_text font400">Add Task</a>
+          </div>
         </div>
     </div>
     <div class="contacts_subtitle_cont row-center">
-        <a class="contacts_subtitle_text font400">Contact Information</a>
         <div class="contacts_editContact_cont row-center-flexend" onclick="openEditContact()">
             <img src="assets/img/bluePencil.svg" class="contacts_bluePencil">
             <a class="contacts_editContact_text font400">Edit Contact</a>
