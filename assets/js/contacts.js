@@ -1,4 +1,5 @@
 let contacts = [];
+let currentDisplayedContact = null;
 
 /**
  * necessary functions in Contacts
@@ -143,10 +144,10 @@ function getInitials(name, email) {
 
 function showContact(contactId) {
   const currentUser = loadUserData();
-
   const contact = currentUser.contacts.find((c) => c.id === contactId);
 
   if (contact) {
+    currentDisplayedContact = contact; // Set the current displayed contact
     const bigCardContact = renderBigCardContact(contact);
     document.getElementById("bigContactCard").innerHTML = bigCardContact;
     document.getElementById("bigCardTitle").style = "display: flex";
@@ -174,6 +175,20 @@ function renderBigCardContact(contact) {
   const contactEmail = contact.email;
   const contactPhone = contact.phone;
   const contactColor = contact.color;
+
+  document.getElementById("editContactName").value = contactName;
+  document.getElementById("editContactEmail").value = contactEmail;
+  document.getElementById("editContactPhone").value = contactPhone;
+  const contactCircle = document.getElementById("circleContact");
+  contactCircle.style.backgroundColor = contactColor;
+  const circleInitials = document.getElementById("circleInitials");
+  const initials =
+    contactName.charAt(0).toUpperCase() +
+    (contactName.includes(" ")
+      ? contactName.split(" ")[1].charAt(0).toUpperCase()
+      : "");
+  circleInitials.textContent = initials;
+
   return /*html*/ `
     <div class="contacts_display_name row-center">
         <div class="contacts_init_circle row-center-center" style="background-color: ${contactColor}">
@@ -305,126 +320,6 @@ function getRandomColor() {
   return color;
 }
 
-function editContact(contactId) {
-  const currentUser = loadUserData();
-  if (!currentUser) {
-    console.log("User not logged in.");
-    return;
-  }
-  const editContact = currentUser.contacts.find((c) => c.id === contactId);
-  console.log(currentUser.contacts);
-
-  if (editContact) {
-    console.log(editContact);
-    const editCard = renderEditCardContact(editContact);
-    document.getElementById("editContactPopUp").innerHTML = editCard;
-  } else {
-    console.log("Contact not found.");
-  }
-
-  // let requiredNameE = document.getElementById("editFieldRequiredName");
-  // let requiredEmailE = document.getElementById("editFieldRequiredEmail");
-  // let requiredPhoneE = document.getElementById("editFieldRequiredPhone");
-
-  // if (editName.value === "") {
-  //   requiredNameE.classList.remove("d-none");
-  // } else if (editEmail.value === "") {
-  //   requiredEmailE.classList.remove("d-none");
-  // } else if (editPhone === "") {
-  //   requiredPhoneE.classList.remove("d-none");
-  // } else {
-  //   closeEditContact();
-  // }
-}
-
-function renderEditCardContact(editContact) {
-  const editName = editContact.name;
-  const editEmail = editContact.email;
-  const editPhone = editContact.phone;
-  return /*html*/ `
- <div class="newContact_popUp_container slide-left" id="editContactPop">
-        <form
-          class="newContact_popUp_cont column-center"
-          onsubmit="saveEditContact(); return false"
-        >
-          <div class="new_contact_top column-center">
-            <img
-              src="assets/img/crossWhite.svg"
-              class="new_contact_close"
-              onclick="closeEditContact()"
-            />
-            <img src="assets/img/JoinWhite.svg" class="new_contact_logo" />
-            <a class="new_contact_title font400">Edit contact</a>
-          </div>
-          <div class="new_contact_bottom column-center">
-            <div class="new_contact_bottom1">
-              <div class="new_contact_circle row-center-center">
-                <img
-                  src="assets/img/userGrau.svg"
-                  class="new_contact_circle_user"
-                />
-              </div>
-            </div>
-            <div class="new_contact_bottom2 column-flex-start">
-              <div class="new_contact_info_user column-flex-start">
-                <div class="new_contact_info row-center">
-                  <input
-                    type="text"
-                    class="newContact_input font400 row-spacebet-center"
-                    id="editContactName"
-                    value="${editName}"
-                  />
-                  <img src="assets/img/userSmall.svg" />
-                </div>
-                <a
-                  class="new_contact_required d-none"
-                  id="editFieldRequiredName"
-                  >This field is required</a
-                >
-              </div>
-              <div class="new_contact_info_user column-flex-start">
-                <div class="new_contact_info row-center">
-                  <input
-                    type="email"
-                    class="newContact_input font400 row-spacebet-center"
-                    id="editContactEmail"
-                    value="${editEmail}"
-                  />
-                  <img src="assets/img/briefSmall.svg" />
-                </div>
-                <a
-                  class="new_contact_required d-none"
-                  id="EditFieldRequiredEmail"
-                  >This field is required</a
-                >
-              </div>
-              <div class="new_contact_info_user column-flex-start">
-                <div class="new_contact_info row-center">
-                  <input
-                    type="number"
-                    class="newContact_input font400 row-spacebet-center"
-                    id="editContactPhone"
-                    value="${editPhone}"
-                  />
-                  <img src="assets/img/phoneSmall.svg" />
-                </div>
-                <a
-                  class="new_contact_required d-none"
-                  id="editFieldRequiredPhone"
-                  >This field is required</a
-                >
-              </div>
-            </div>
-            <div class="new_contact_bottom3 row-center-center">
-              <button class="edit_contact_botton_create row-center-center">
-                <a class="new_contact_button font400">Save</a>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-`;
-}
 /**
  * open new contact pop-up
  */
@@ -476,12 +371,63 @@ function hiddeContactPopUp() {
  * open edit contact pop-up
  */
 function openEditContact() {
-  editContact();
+  //editContact();
   document.getElementById("editContactPop").classList.add("slide-right");
   document.getElementById("editContactPop").classList.remove("slide-left");
   document
     .getElementById("editContactPopUp")
     .classList.add("background_white_transp");
+}
+
+function editOldContact() {
+  // Get the edited values from input fields
+  const editedName = document.getElementById("editContactName").value;
+  const editedEmail = document.getElementById("editContactEmail").value;
+  const editedPhone = document.getElementById("editContactPhone").value;
+
+  // Check if a contact is currently displayed
+  if (currentDisplayedContact) {
+    // Update the contact's properties with the edited values
+    currentDisplayedContact.name = editedName;
+    currentDisplayedContact.email = editedEmail;
+    currentDisplayedContact.phone = editedPhone;
+
+    // Save the updated user data
+    const currentUser = loadUserData();
+
+    // Find the index of the edited contact in the currentUser.contacts array
+    const editedContactIndex = currentUser.contacts.findIndex(
+      (c) => c.id === currentDisplayedContact.id
+    );
+
+    if (editedContactIndex !== -1) {
+      // Update the contact in the array
+      currentUser.contacts[editedContactIndex] = currentDisplayedContact;
+
+      // Save the updated user data
+      saveUserData(currentUser);
+
+      // Optionally, update the data in the backend (if applicable)
+      const userIndex = users.findIndex((user) => user.id === currentUser.id);
+      if (userIndex !== -1) {
+        // Update the user's data in the users array
+        users[userIndex] = currentUser;
+
+        // Update the users data in the backend (assuming you have a backend)
+        backend.setItem("users", JSON.stringify(users));
+      }
+
+      const bigCardContact = renderBigCardContact(currentDisplayedContact);
+      document.getElementById("bigContactCard").innerHTML = bigCardContact;
+
+      // Close the editing card
+      closeEditContact();
+    } else {
+      console.log("Contact not found.");
+    }
+  } else {
+    console.log("Contact not found.");
+  }
 }
 
 /**
@@ -493,6 +439,48 @@ function closeEditContact() {
   document
     .getElementById("editContactPopUp")
     .classList.remove("background_white_transp");
+}
+
+function deleteContact() {
+  // Get the current user's data
+
+  // Get the ID of the contact being edited
+
+  if (currentDisplayedContact) {
+    const currentUser = loadUserData();
+
+    const contactIndex = currentUser.contacts.findIndex(
+      (c) => c.id === currentDisplayedContact.id
+    );
+    // Find the index of the contact to delete in the currentUser.contacts array
+
+    if (contactIndex !== -1) {
+      // Remove the contact from the array
+      currentUser.contacts.splice(contactIndex, 1);
+
+      // Save the updated user data
+      saveUserData(currentUser);
+
+      // Optionally, update the data in the backend (if applicable)
+      const userIndex = users.findIndex((user) => user.id === currentUser.id);
+      if (userIndex !== -1) {
+        // Update the user's data in the users array
+        users[userIndex] = currentUser;
+
+        // Update the users data in the backend (assuming you have a backend)
+        backend.setItem("users", JSON.stringify(users));
+      }
+
+      // Close the "Edit Contact" pop-up
+      closeEditContact();
+      closeShowContact();
+    }
+
+    loadContacts();
+    // Reload the contacts to reflect the changes in the UI
+  } else {
+    console.log("Contact not found.");
+  }
 }
 
 /**

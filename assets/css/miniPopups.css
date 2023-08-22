@@ -297,9 +297,9 @@
     }
 
     .new_contact_bottom2 {
+        padding-left: 80px;
+        padding-right: 80px;
         width: -webkit-fill-available;
-        padding-left: 10px;
-        padding-right: 10px;
     }
 
     .new_contact_bottom3 {
@@ -388,5 +388,29 @@
     .new_contact_botton_create {
         width: 185px;
         height: 40px;
+    }
+
+    .edit_contact_botton_create {
+        width: 80px;
+        height: 40px;
+    }
+
+    .new_contact_bottom2 {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media (width < 400px) {
+    .new_contact_bottom2 {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (width < 350px) {
+    .new_contact_bottom2 {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
