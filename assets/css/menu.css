@@ -183,3 +183,40 @@ body {
         width: 25px;
     }
 }
+
+@media (width < 450px) {
+    .menu_all {
+        width: 56px;
+        padding: 10px 0;
+    }
+
+    .text_menu {
+        font-size: 13px;
+        width: 60px;
+    }
+
+    .icon_summary {
+        width: 20px;
+        height: 20px;
+    }
+
+    .icon_addTask {
+        width: 22px;
+    }
+
+    .board_background {
+        padding-top: 15px !important;
+        gap: 5px !important
+    }
+
+    .addTask_background {
+        padding-top: 13px !important;
+        gap: 5px !important
+    }
+
+    .summary_background {
+        padding-top: 15px !important;
+        gap: 5px !important
+    }
+
+}

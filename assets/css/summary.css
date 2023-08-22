@@ -702,3 +702,113 @@
         width: 185px;
     }
 }
+
+@media (width < 400px) {
+    .container_summary {
+        width: 290px;
+    }
+
+    .summary_morning {
+        width: 285px;
+        font-size: 40px;
+    }
+
+    .summary_user {
+        font-size: 54px;
+    }
+
+    .summary_board {
+        width: 290px;
+        height: -webkit-fill-available;
+        overflow: scroll;
+        top: 60px;
+        padding-top: 250px;
+        padding-bottom: 100px;
+    }
+
+    .summary_board_top {
+        width: 290px;
+    }
+
+    .summary_top_left {
+        width: 275px;
+        gap: 10px;
+    }
+
+    .summary_left_urgent {
+        width: 90px;
+    }
+
+    .summary_urgent_up {
+        gap: 10px;
+        width: 90px;
+    }
+
+    .urgent_clock_img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .urgent_number {
+        font-size: 35px;
+    }
+
+    .summary_urgent_text {
+        font-size: 14px;
+        width: 94px;
+    }
+
+    .summary_top_left:hover .summary_urgent_text {
+        font-size: 15px;
+    }
+
+    .summary_top_left:hover .urgent_number {
+        font-size: 36px;
+    }
+
+    .summary_top_left:hover {
+        width: 285px;
+    }
+
+    .summary_left_date {
+        width: 160px;
+    }
+
+    .summary_top_right {
+        width: 275px;
+    }
+
+    .summary_top_right:hover {
+        width: 285px;
+    }
+
+    .summary_date {
+        width: 160px;
+        font-size: 19px;
+    }
+
+    .summary_top_left:hover .summary_date {
+        font-size: 20px;
+    }
+
+    .summary_upcoming {
+        width: 160px;
+        font-size: 16px;
+    }
+
+    .summary_top_left:hover .summary_upcoming {
+        font-size: 17px;
+    }
+
+    .summary_board_bottom {
+        width: 290px;
+    }
+
+    .summary_bottom_cont {
+        width: 175px;
+    }
+
+    .summary_bottom_cont:hover {
+        width: 185px;
+    }
+}

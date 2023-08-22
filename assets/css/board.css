@@ -388,4 +388,8 @@ body {
     .find_task_input {
         width: initial;
     }
+
+    .board_columns_container {
+        padding-bottom: 250px
+    }
 }

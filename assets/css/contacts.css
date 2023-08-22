@@ -447,6 +447,12 @@ body {
 }
 
 @media (width < 600px) {
+
+    .contacts_column_container {
+        width: -webkit-fill-available;
+        padding-left: 0;
+    }
+
     .contacts_container {
         padding-top: 100px;
     }
@@ -471,31 +477,31 @@ body {
     }
 
     .contacts_display_contact {
-        width: 400px;
+        width: -webkit-fill-available;
     }
 
     .contacts_display_name {
         gap: 10px;
-        width: 395px;
+        width: -webkit-fill-available;
     }
 
     .contacts_name_cont {
-        width: 370px;
+        width: -webkit-fill-available;
     }
 
     .contactsName {
-        font-size: 35px;
+        font-size: 25px;
     }
 
     .contacts_name_cont {
-        width: 340px;
-        height: 75px;
+        width: -webkit-fill-available;
+        height: 58px;
         gap: 10px;
     }
 
     .contacts_name {
-        width: 340px;
-        height: 50px;
+        width: -webkit-fill-available;
+        height: 30px;
     }
 
     .contacts_init_circle {
@@ -508,6 +514,10 @@ body {
     }
 
     .contacts_subtitle_cont {
-        width: 320.85px;
+        width: -webkit-fill-available;
+    }
+
+    .contacts_subtitle_text {
+        font-size: 20px;
     }
 }

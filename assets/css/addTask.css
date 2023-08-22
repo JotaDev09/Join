@@ -38,6 +38,7 @@ body {
 }
 
 .add_task_input {
+    width: 350px;
     font-size: 40px;
     color: #D1D1D1;
     border: none;
@@ -599,5 +600,185 @@ body {
 
     .add_task_buttons_bottom_resp {
         justify-content: center !important;
+    }
+}
+
+@media (width < 450px) {
+    .add_task_cont {
+        width: 295px;
+    }
+
+    .add_task_title {
+        width: 295px;
+        height: 48px;
+    }
+
+    .add_task_title_cont {
+        width: 260px;
+        height: 34px;
+        padding: 7px 16px;
+    }
+
+    .add_task_input {
+        width: 255px;
+        font-size: 28px;
+    }
+
+    .add_task_titles {
+        font-size: 16px;
+    }
+
+    .add_task_description_cont {
+        width: 295px;
+    }
+
+    .add_task_descript_input {
+        width: 260px;
+        height: 88px;
+        padding: 18px 16px;
+    }
+
+    .add_task_dueDate_cont {
+        width: 295px;
+    }
+
+    .add_task_Duedate_input {
+        padding: 0px 21px;
+        width: 250px;
+        height: 48px;
+    }
+
+    .Duedate_input {
+        width: 250px;
+    }
+
+    .add_task_prio_cont {
+        width: 295px;
+    }
+
+    .add_task_prio_cont_buttons {
+        width: 295px;
+        height: 48px;
+    }
+
+    .add_task_prio_buttons {
+        width: 90px;
+        height: 48px;
+        gap: 7px;
+    }
+
+    .prio_buttons_text {
+        width: fit-content;
+        height: 19px;
+        font-size: 16px;
+    }
+
+    .prio_buttons_img {
+        width: 20px;
+        height: 7px;
+    }
+
+    .add_task_contacts_cont {
+        width: 295px;
+    }
+
+    .add_task_contacts {
+        width: 295px;
+    }
+
+    .contacts_img_cont {
+        padding: 12px 16px;
+        width: 260px;
+    }
+
+    .add_task_subtitle {
+        width: 200px;
+        font-size: 16px;
+    }
+
+    .add_task_contacts_list {
+        width: 270px
+    }
+
+    .add_task_contact_name {
+        width: 240px;
+        font-size: 16px;
+    }
+
+    .contacts_choose_cont {
+        padding: 10px;
+        width: 276px;
+    }
+
+    .add_task_new_contact {
+        width: 26px;
+        height: 26px;
+    }
+
+    .new_contact_cont {
+        padding: 12px 16px;
+        width: 260px;
+    }
+
+    .new_contact_input {
+        width: 200px;
+        font-size: 16px;
+    }
+
+    .new_contact_input_icons {
+        gap: 5px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .add_task_category_cont {
+        width: 290px;
+    }
+
+    .add_task_select_cat {
+        width: 290px;
+    }
+
+    .add_task_selectCat {
+        padding: 12px 16px;
+        width: 260px;
+    }
+
+    .new_category_colors {
+        padding: 12px 16px;
+        gap: 7px;
+        width: 260px;
+    }
+
+    .add_task_subtasks_cont {
+        width: 290px;
+    }
+
+    .subtasks_cont_input_img {
+        width: 290px;
+    }
+
+    .add_task_subtasks_input {
+        padding-left: 12px;
+        width: 260px;
+        font-size: 16px;
+    }
+
+    .subTaskContainer {
+        width: 290px;
+    }
+
+    .add_task_buttons_create {
+        gap: 5px;
+        padding: 7px;
+        width: 148px;
+        height: 48px;
+    }
+
+    .add_task_create_text {
+        display: flex;
+        align-items: center;
+        width: 126px;
+        font-size: 19px;
     }
 }
