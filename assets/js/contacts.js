@@ -2,18 +2,21 @@ let contacts = [];
 let currentDisplayedContact = null;
 
 /**
- * necessary functions in Contacts
+ * Functions required to load contacts site.
  */
 async function initContacts() {
   includeHTML();
   await Promise.all([loadContacts(), loadUserData(), loadUsers()]);
 }
 
+/**
+ * Function retrieves contacts from the server and sends them for sorting by their initial letter
+ */
 async function loadContacts() {
   const currentUser = loadUserData();
 
   const contactsColumn = document.getElementById("contactsColumn");
-  contactsColumn.innerHTML = ""; // Clear the existing contacts
+  contactsColumn.innerHTML = "";
 
   const sortedContacts = sortContactsByInitialLetter(currentUser.contacts);
 
@@ -26,14 +29,13 @@ async function loadContacts() {
   }
 }
 /**
- * the function sort the contacts by initial letter
+ * The function sorts the contacts by their initial letter.
  *
  * @param {contacts} - take the info from the array contacts
  */
 function sortContactsByInitialLetter(contacts) {
   const sortedContacts = {};
 
-  // Initialize all initial letters and "Unnamed" category
   for (let i = 65; i <= 90; i++) {
     const letter = String.fromCharCode(i);
     sortedContacts[letter] = [];
@@ -58,9 +60,8 @@ function sortContactsByInitialLetter(contacts) {
 }
 
 /**
- * the function create the contact by initial letter and the template for the contact list
+ * The function creates contacts based on their initial letter and generates a template for the contact list.
  *
- * @param {contacts} - take the info of the contacts
  * @param {contactsByLetter} - take the contacts by inital leter
  */
 function createContactsByLetterHTML(contactsByLetter) {
@@ -83,46 +84,18 @@ function createContactsByLetterHTML(contactsByLetter) {
   for (let initial in groupedContacts) {
     if (Array.isArray(groupedContacts[initial])) {
       const displayName = initial === "#" ? "Unnamed Contact" : initial;
-      html += `
-          <div class="contacts_alphabet column-center-center">
-            <a class="contacts_alphabet_leters font400" id="initialsSmallCard">${displayName}</a>
-          </div>
-          <div class="contacts_separated_line column-flex-start">
-            <span class="contacts_grau_line"></span>
-          </div>
-          <div class="contacts_list_container">
-            ${groupedContacts[initial]
-              .map(
-                (contact) => `
-              <div class="contacts_list row-center" onclick="showContact('${
-                contact.id
-              }')" data-id="${contact.id}">
-                <div class="">
-                  <div class="contacts_circle">
-                    <a class="contacts_circle_in row-center-center font400 contact-initial-background" style="background-color: ${
-                      contact.color
-                    };">${getInitials(contact.name)}</a> 
-                  </div>
-                </div>
-                <div class="contact_container_info column-flex-start">
-                  <a class="contact_name_info font400" id="smallContactName">${
-                    contact.name
-                  }</a> 
-                  <a class="contact_mail_info font400" id="smallContactPhone">${
-                    contact.email
-                  }</a> 
-                </div>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-        `;
+      html += renderColumnContacts(displayName, groupedContacts[initial]);
     }
   }
   return html;
 }
 
+/**
+ * The function generates initials based on either the name or the email.
+ *
+ * @param {name} - take the name of contacts
+ * @param {emial} - take the name of contacts
+ */
 function getInitials(name, email) {
   if (name) {
     const words = name.split(" ");
@@ -139,25 +112,33 @@ function getInitials(name, email) {
     }
   }
 
-  return ""; // Return an empty string if both name and email are falsy
+  return "";
 }
 
+/**
+ * The function displays a specific contact when the user clicks on it.
+ *
+ * @param {contacId} - take the id of one specific contact
+ */
 function showContact(contactId) {
   const currentUser = loadUserData();
   const contact = currentUser.contacts.find((c) => c.id === contactId);
 
   if (contact) {
-    currentDisplayedContact = contact; // Set the current displayed contact
+    currentDisplayedContact = contact;
     const bigCardContact = renderBigCardContact(contact);
     document.getElementById("bigContactCard").innerHTML = bigCardContact;
     document.getElementById("bigCardTitle").style = "display: flex";
   } else {
     console.log("Contact not found.");
   }
-
   contactsResponsive();
 }
 
+/**
+ * The function displays a specific contact when the user clicks on it in responsive mode
+ *
+ */
 function contactsResponsive() {
   if (window.matchMedia("(max-width: 1200px)").matches) {
     document.getElementById("containerBigCard").style =
@@ -165,11 +146,20 @@ function contactsResponsive() {
   }
 }
 
+/**
+ * The function closes a specific contact when the user clicks on it.
+ *
+ */
 function closeShowContact() {
   document.getElementById("containerBigCard").style =
     "display: none !important;";
 }
 
+/**
+ * The function renders a big card of one specific contact when the user clicks on it.
+ *
+ * @param {contac} - take the info of one specific contact
+ */
 function renderBigCardContact(contact) {
   const contactName = contact.name;
   const contactEmail = contact.email;
@@ -189,47 +179,17 @@ function renderBigCardContact(contact) {
       : "");
   circleInitials.textContent = initials;
 
-  return /*html*/ `
-    <div class="contacts_display_name row-center">
-        <div class="contacts_init_circle row-center-center" style="background-color: ${contactColor}">
-        <a class="contacts_initials font400">${contactName
-          .charAt(0)
-          .toUpperCase()}${
-    contactName.includes(" ")
-      ? contactName.split(" ")[1].charAt(0).toUpperCase()
-      : ""
-  }</a>
-        </div>
-        <div class="contacts_name_cont column-flex-start">
-          <div class="contacts_name column-flex-start">
-            <a class="contactsName font400" id="editName">${contactName}</a>
-          </div>
-          <div class="contacts_addTask_cont row-center-center" onclick="createTaskPU()">
-            <img src="assets/img/plusBlue.svg" class="contacts_plusBlue">
-            <a class="contacts_addTask_text font400">Add Task</a>
-          </div>
-        </div>
-    </div>
-    <div class="contacts_subtitle_cont row-center">
-        <div class="contacts_editContact_cont row-center-flexend" onclick="openEditContact()">
-            <img src="assets/img/bluePencil.svg" class="contacts_bluePencil">
-            <a class="contacts_editContact_text font400">Edit Contact</a>
-        </div>
-    </div>
-    <div class="contacts_info_cont column-flex-start">
-        <div class="contacts_info column-flex-start">
-            <a class="contacts_info_subt font400">Email</a>
-            <a type="number" class="contacts_info_info font400">${contactEmail}</a>
-        </div>
-        <div class="contacts_info column-flex-start">
-            <a class="contacts_info_subt font400">Movil</a>
-            <a type="number" class="contacts_info_info font400">${contactPhone}</a>
-        </div>
-    </div>`;
+  const html = renderBigCard(
+    contactName,
+    contactEmail,
+    contactPhone,
+    contactColor
+  );
+  return html;
 }
 
 /**
- * info required of a new contact
+ * The function takes the nformation required for adding a new contact and shows advise in case of blank
  */
 function requiredNewContact() {
   let newName = document.getElementById("newContactName");
@@ -251,16 +211,16 @@ function requiredNewContact() {
 }
 
 /**
- * create a new contact
+ * The function creates a new contact.
  */
 async function createNewContact() {
   let nameContact = document.getElementById("newContactName");
   let emailContact = document.getElementById("newContactEmail");
   let phoneContact = document.getElementById("newContactPhone");
 
-  const currentUser = loadUserData(); // Load current user's data
+  const currentUser = loadUserData();
   if (!currentUser.contacts) {
-    currentUser.contacts = []; // Initialize contacts array if not exists
+    currentUser.contacts = [];
   }
 
   let newContact = {
@@ -275,9 +235,8 @@ async function createNewContact() {
   saveUserData(currentUser);
   const userIndex = users.findIndex((user) => user.id === currentUser.id);
   if (userIndex !== -1) {
-    // Update the user's data in the users array
     users[userIndex] = currentUser;
-    await backend.setItem("users", JSON.stringify(users)); // Update the users data in the backend
+    await backend.setItem("users", JSON.stringify(users));
   }
 
   addContactToHTML();
@@ -286,15 +245,10 @@ async function createNewContact() {
 }
 
 /**
- * add the new contact to the HTML
+ * The function adds the new contact to the HTML
  */
 function addContactToHTML() {
   const currentUser = loadUserData();
-  if (!currentUser) {
-    console.log("nope");
-    // User is not logged in, handle this case appropriately
-    return;
-  }
   const contactsColumn = document.getElementById("contactsColumn");
   const sortedContacts = sortContactsByInitialLetter(currentUser.contacts);
 
@@ -309,7 +263,7 @@ function addContactToHTML() {
 }
 
 /**
- * function to create random colors for the contacts
+ * The function generates a random color for the new contact.
  */
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
@@ -321,7 +275,7 @@ function getRandomColor() {
 }
 
 /**
- * open new contact pop-up
+ * The function opens the new contact pop-up
  */
 function openNewContact() {
   document.getElementById("newContactPop").classList.remove("slide-left");
@@ -333,7 +287,7 @@ function openNewContact() {
 }
 
 /**
- * close new contact pop-up
+ * The function closes the new contact pop-up
  */
 function closeNewContact() {
   document.getElementById("newContactPop").classList.add("slide-left");
@@ -348,7 +302,7 @@ function closeNewContact() {
 }
 
 /**
- * show contact created pop-up
+ * The function opens the show contact pop-up
  */
 function createContactPopup() {
   document.getElementById("contactCreated").style =
@@ -357,7 +311,7 @@ function createContactPopup() {
 }
 
 /**
- * hidde contact created pop-up
+ * The function hiddes the new contact pop-up
  */
 function hiddeContactPopUp() {
   document
@@ -368,10 +322,9 @@ function hiddeContactPopUp() {
 }
 
 /**
- * open edit contact pop-up
+ * The function opens the edit contact pop-up
  */
 function openEditContact() {
-  //editContact();
   document.getElementById("editContactPop").classList.add("slide-right");
   document.getElementById("editContactPop").classList.remove("slide-left");
   document
@@ -379,59 +332,45 @@ function openEditContact() {
     .classList.add("background_white_transp");
 }
 
+/**
+ * The function edits a specific contact when the user clicks on it.
+ *
+ */
 function editOldContact() {
-  // Get the edited values from input fields
   const editedName = document.getElementById("editContactName").value;
   const editedEmail = document.getElementById("editContactEmail").value;
   const editedPhone = document.getElementById("editContactPhone").value;
 
-  // Check if a contact is currently displayed
   if (currentDisplayedContact) {
-    // Update the contact's properties with the edited values
     currentDisplayedContact.name = editedName;
     currentDisplayedContact.email = editedEmail;
     currentDisplayedContact.phone = editedPhone;
 
-    // Save the updated user data
     const currentUser = loadUserData();
-
-    // Find the index of the edited contact in the currentUser.contacts array
     const editedContactIndex = currentUser.contacts.findIndex(
       (c) => c.id === currentDisplayedContact.id
     );
 
     if (editedContactIndex !== -1) {
-      // Update the contact in the array
       currentUser.contacts[editedContactIndex] = currentDisplayedContact;
-
-      // Save the updated user data
       saveUserData(currentUser);
 
-      // Optionally, update the data in the backend (if applicable)
       const userIndex = users.findIndex((user) => user.id === currentUser.id);
       if (userIndex !== -1) {
-        // Update the user's data in the users array
         users[userIndex] = currentUser;
-
-        // Update the users data in the backend (assuming you have a backend)
         backend.setItem("users", JSON.stringify(users));
       }
 
       const bigCardContact = renderBigCardContact(currentDisplayedContact);
       document.getElementById("bigContactCard").innerHTML = bigCardContact;
 
-      // Close the editing card
       closeEditContact();
-    } else {
-      console.log("Contact not found.");
     }
-  } else {
-    console.log("Contact not found.");
   }
 }
 
 /**
- * close edit contact pop-up
+ * The function closes the edit contact pop-up
  */
 function closeEditContact() {
   document.getElementById("editContactPop").classList.add("slide-left");
@@ -441,50 +380,36 @@ function closeEditContact() {
     .classList.remove("background_white_transp");
 }
 
+/**
+ * The function deletes a specific contact when the user clicks on it.
+ *
+ */
 function deleteContact() {
-  // Get the current user's data
-
-  // Get the ID of the contact being edited
-
   if (currentDisplayedContact) {
     const currentUser = loadUserData();
-
     const contactIndex = currentUser.contacts.findIndex(
       (c) => c.id === currentDisplayedContact.id
     );
-    // Find the index of the contact to delete in the currentUser.contacts array
 
     if (contactIndex !== -1) {
-      // Remove the contact from the array
       currentUser.contacts.splice(contactIndex, 1);
-
-      // Save the updated user data
       saveUserData(currentUser);
 
-      // Optionally, update the data in the backend (if applicable)
       const userIndex = users.findIndex((user) => user.id === currentUser.id);
       if (userIndex !== -1) {
-        // Update the user's data in the users array
         users[userIndex] = currentUser;
-
-        // Update the users data in the backend (assuming you have a backend)
         backend.setItem("users", JSON.stringify(users));
       }
 
-      // Close the "Edit Contact" pop-up
       closeEditContact();
       closeShowContact();
     }
-
     loadContacts();
-    // Reload the contacts to reflect the changes in the UI
-  } else {
-    console.log("Contact not found.");
   }
 }
 
 /**
- * empty new contact pop-up
+ * The function clears the information in the new contact pop-up
  */
 function cancelNewContact() {
   document.getElementById("newContactName").value = "";
@@ -492,6 +417,9 @@ function cancelNewContact() {
   document.getElementById("newContactPhone").value = "";
 }
 
+/**
+ * The function capitalizes the first letter when the user enters input
+ */
 function capitalLetter() {
   const newContactNameInput = document.getElementById("newContactName");
 
