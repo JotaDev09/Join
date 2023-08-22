@@ -705,16 +705,16 @@
 
 @media (width < 400px) {
     .container_summary {
-        width: 290px;
+        width: -webkit-fill-available;
     }
 
     .summary_morning {
-        width: 285px;
-        font-size: 40px;
+        width: -webkit-fill-available;
+        font-size: 37px;
     }
 
     .summary_user {
-        font-size: 54px;
+        font-size: 50px;
     }
 
     .summary_board {

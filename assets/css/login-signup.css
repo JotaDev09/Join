@@ -696,3 +696,120 @@ body {
     }
 
 }
+
+@media (width < 450px) {
+    .login {
+        width: -webkit-fill-available
+    }
+
+    .login_container {
+        width: -webkit-fill-available
+    }
+
+    .login_title {
+        width: -webkit-fill-available;
+    }
+
+    .user_container {
+        width: -webkit-fill-available;
+    }
+
+    .user_mail {
+        width: -webkit-fill-available;
+    }
+
+    .user_password {
+        width: -webkit-fill-available;
+    }
+
+    .inputs {
+        width: -webkit-fill-available !important;
+    }
+
+    .login_input_img {
+        right: 35px;
+    }
+
+    .login_remember {
+        width: -webkit-fill-available;
+    }
+
+    .login_not_user {
+        display: flex;
+        justify-content: center;
+        width: -webkit-fill-available;
+        gap: 15px;
+    }
+
+    .not_user {
+        font-size: 14px;
+    }
+
+    .login_signup {
+        padding: 5px;
+        width: 80px;
+        height: 30px;
+    }
+
+    .login_signup_text {
+        font-size: 16px;
+    }
+
+    .forgot_passw_container {
+        width: -webkit-fill-available;
+    }
+
+
+    .forgot_title {
+        padding-left: 40px;
+        padding-right: 40px;
+        width: -webkit-fill-available;
+    }
+
+    .login_text {
+        font-size: 35px;
+    }
+
+    .blue_arrow {
+        width: 30px;
+        height: 30px;
+        left: 10px;
+    }
+
+    .forgot_text_parraf {
+        width: -webkit-fill-available;
+        font-size: 17px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .reset_passw_container {
+        width: -webkit-fill-available;
+    }
+
+    .reset_text_parraf {
+        width: -webkit-fill-available;
+        font-size: 17px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .forgot_passwords {
+        width: -webkit-fill-available;
+    }
+
+    .input_mail {
+        width: -webkit-fill-available;
+    }
+
+    .input_user {
+        width: -webkit-fill-available;
+    }
+
+    .input_password {
+        width: -webkit-fill-available;
+    }
+
+
+
+}

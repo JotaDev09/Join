@@ -4,6 +4,7 @@ async function initBoard() {
   includeHTML();
   setupSearchEventListener();
   await Promise.all([loadUsers(), loadTasksFromServer()]);
+  await refreshFromBackend();
 }
 // getContactsPU(),
 //loadCategoriesFromServer(),
@@ -114,20 +115,45 @@ function allowDrop(ev) {
 }
 
 async function moveTo(column) {
-  const currentUser = loadUserData();
-  const taskIndex = currentUser.tasks.findIndex(
-    (task) => task.id === currentDraggedtask
-  );
+  try {
+    const currentUser = loadUserData();
+    const taskIndex = currentUser.tasks.findIndex(
+      (task) => task.id === currentDraggedtask
+    );
 
-  if (taskIndex !== -1) {
-    currentUser.tasks[taskIndex].columns = column;
-
-    try {
-      await backend.setItem("currentUser", currentUser);
-      await refreshFromBackend(); // Retrieve updated data from the backend
-    } catch (error) {
-      console.error("Error updating backend:", error);
+    if (taskIndex !== -1) {
+      // Actualiza la columna de la tarea local
+      currentUser.tasks[taskIndex].columns = column;
+      // Guarda la tarea actualizada en el backend
+      await backend.setItem(currentDraggedtask, currentUser.tasks[taskIndex]);
+      // Actualiza la UI con la nueva columna
+      loadTasksColumns(currentUser.tasks);
     }
+  } catch (error) {
+    console.error("Error moving task:", error);
+  }
+}
+
+async function moveTo(column) {
+  try {
+    const currentUser = loadUserData();
+    const taskIndex = currentUser.tasks.findIndex(
+      (task) => task.id === currentDraggedtask
+    );
+
+    if (taskIndex !== -1) {
+      // Actualiza la columna de la tarea local
+      currentUser.tasks[taskIndex].columns = column;
+
+      // Actualiza todas las tareas en el backend
+      await backend.setItem("currentUser", currentUser);
+
+      // Actualiza la UI con las tareas actualizadas
+      loadTasksColumns(currentUser.tasks);
+      await refreshFromBackend();
+    }
+  } catch (error) {
+    console.error("Error moving task:", error);
   }
 }
 
@@ -135,8 +161,13 @@ async function refreshFromBackend() {
   try {
     const updatedUserData = await backend.getItem("currentUser");
     if (updatedUserData) {
-      backend.setItem("currentUser", JSON.stringify(updatedUserData));
-      loadTasksColumns(updatedUserData.tasks);
+      const currentUser = loadUserData();
+      // Actualiza solo las tareas locales con los datos del backend
+      currentUser.tasks = updatedUserData.tasks;
+      // Actualiza el estado local
+      saveUserData(currentUser);
+      // Actualiza la UI con las tareas actualizadas
+      loadTasksColumns(currentUser.tasks);
     }
   } catch (error) {
     console.error("Error fetching updated data:", error);
@@ -178,48 +209,19 @@ function filterTasksBySearchTerm(searchTerm) {
  * open the pop-up create Task
  */
 function createTaskPU() {
-  document.getElementById("createTaskPopUp").classList.remove("slide_right");
-  document.getElementById("addTaskPopUpContainer").style = "display: flex";
-  document
-    .getElementById("addTaskPopUpContainer")
-    .classList.add("background_white_transp");
-  setTimeout(() => {
-    document.getElementById("createTaskPopUp").classList.add("slide_left");
-  }, 100);
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    window.location.href = "addTask.html";
+  } else {
+    document.getElementById("createTaskPopUp").classList.remove("slide_right");
+    document.getElementById("addTaskPopUpContainer").style = "display: flex";
+    document
+      .getElementById("addTaskPopUpContainer")
+      .classList.add("background_white_transp");
+    setTimeout(() => {
+      document.getElementById("createTaskPopUp").classList.add("slide_left");
+    }, 100);
+  }
 }
-
-// function getContactsPU() {
-//   const currentUser = loadUserData();
-//   const sortedContacts = sortContactsByInitialLetter(currentUser.contacts);
-
-//   let html = "";
-//   for (let letter in sortedContacts) {
-//     const contactsByLetter = sortedContacts[letter];
-//     if (contactsByLetter.length > 0) {
-//       html += generateContactsHtml(contactsByLetter);
-//     }
-//   }
-
-//   const contactsListPU = document.getElementById("contactsListPU");
-//   contactsListPU.innerHTML = html + generateInviteNewContactHtml();
-// }
-
-// /**
-//  * expand Contacts Menu in AddTask
-//  */
-// function expandMenuPU() {
-//   if (selecContacts) {
-//     document.getElementById("contactsListPU").classList.add("d-none");
-//     document.getElementById("assignedContactcontPU").style =
-//       "height: 51px; overflox: inherit";
-//     selecContacts = false;
-//   } else {
-//     document.getElementById("contactsListPU").classList.remove("d-none");
-//     document.getElementById("assignedContactcontPU").style =
-//       "height: 204px; overflow: auto";
-//     selecContacts = true;
-//   }
-// }
 
 /**
  * Create a new Task Pop-Up

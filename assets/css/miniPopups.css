@@ -7,7 +7,7 @@
 
 /* style pop-ups */
 .pop_up_style {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     padding: 0;
     background: #4589FF;
@@ -274,5 +274,119 @@
     .header_popup {
         align-items: end !important;
         height: 176px;
+    }
+
+}
+
+@media (width < 518px) {
+
+    .newContact_popUp_container {
+        width: -webkit-fill-available;
+    }
+
+    .newContact_popUp_cont {
+        width: -webkit-fill-available;
+    }
+
+    .new_contact_top {
+        width: -webkit-fill-available;
+    }
+
+    .new_contact_bottom {
+        width: -webkit-fill-available;
+    }
+
+    .new_contact_bottom2 {
+        width: -webkit-fill-available;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .new_contact_bottom3 {
+        width: -webkit-fill-available;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .new_contact_info_user {
+        width: -webkit-fill-available;
+    }
+
+    .new_contact_info {
+        width: -webkit-fill-available;
+    }
+
+    .newContact_input {
+        width: -webkit-fill-available;
+    }
+
+    .new_contact_bottons {
+        width: -webkit-fill-available;
+        gap: 15px;
+    }
+
+}
+
+@media (width < 500px) {
+    .send_mail {
+        width: 200px;
+    }
+
+    .font_pop_up {
+        font-size: 15px;
+    }
+
+    .send_mail {
+        width: 200px;
+    }
+
+    .send_mail a {
+        width: 200px;
+    }
+
+    .confirm_password {
+        height: 53px;
+    }
+
+    .confirm_password a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .new_contact_title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: -webkit-fill-available;
+        font-size: 35px;
+    }
+
+    .new_contact_subtitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: -webkit-fill-available;
+        font-size: 19px;
+    }
+
+
+    .new_contact_botton_cancel {
+        width: 80px;
+        height: 40px;
+    }
+
+    .new_contact_cancel {
+        font-size: 15px;
+    }
+
+    .new_contact_button {
+        font-size: 15px;
+    }
+
+    .new_contact_botton_create {
+        width: 185px;
+        height: 40px;
     }
 }
