@@ -22,6 +22,10 @@ body {
     overflow-y: auto;
 }
 
+.add_task_popUp_close_PU {
+    display: none;
+}
+
 .add_task_title {
     gap: 3px;
     width: 422px;
@@ -145,7 +149,7 @@ body {
 
 .add_task_subtitle {
     width: 216px;
-    height: 23px;
+    height: 17px;
     font-size: 19px;
     color: #000000;
 }
@@ -441,6 +445,7 @@ body {
 }
 
 .subTaskContainer {
+    padding-bottom: 20px;
     gap: 5px;
     width: 300px;
 }

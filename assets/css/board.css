@@ -5,7 +5,7 @@ body {
 .board_container {
     width: 100%;
     height: 100vh;
-    padding-left: 250px;
+
 }
 
 .board_head {
@@ -16,6 +16,11 @@ body {
     top: 50px;
     z-index: 2;
     padding-left: 10px;
+    padding-left: 250px;
+}
+
+.add_task_popUp_close_PU {
+    display: flex !important;
 }
 
 /*Find task */
@@ -92,6 +97,7 @@ body {
     position: relative;
     width: 1078px;
     top: 113px;
+    padding-left: 250px;
 }
 
 .board_columns {
@@ -270,6 +276,7 @@ body {
         width: 550px;
         gap: 35px;
         flex-wrap: wrap;
+        top: 100px;
     }
 
     .board_columns_column {
@@ -301,29 +308,36 @@ body {
 
 
 @media (width < 1200px) {
-    .board_container {
+    .board_head {
+        padding-left: 200px;
+    }
+
+    .board_columns_container {
         padding-left: 200px;
     }
 }
 
 @media (width < 1000px) {
-    .board_container {
+    .board_head {
+        padding-left: 155px;
+    }
+
+    .board_columns_container {
         padding-left: 155px;
     }
 }
 
 @media (width < 850px) {
-    .board_container {
-        padding-left: 0;
-        align-items: center !important;
-    }
-
     .board_head {
-        left: 0;
+        padding-left: 0;
     }
 
     .board_columns_container {
-        left: 0;
+        padding-left: 0;
+    }
+
+    .board_container {
+        align-items: center !important;
     }
 }
 
@@ -341,7 +355,6 @@ body {
     .board_head {
         top: 110px;
         width: 100% !important;
-        padding-left: 0;
     }
 
     .board_container {

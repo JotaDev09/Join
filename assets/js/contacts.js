@@ -28,6 +28,7 @@ async function loadContacts() {
     }
   }
 }
+
 /**
  * The function sorts the contacts by their initial letter.
  *

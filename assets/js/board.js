@@ -212,30 +212,41 @@ function createTaskPU() {
   if (window.matchMedia("(max-width: 600px)").matches) {
     window.location.href = "addTask.html";
   } else {
-    document.getElementById("createTaskPopUp").classList.remove("slide_right");
+    document.getElementById("createTaskPopUp").innerHTML = "";
+    document
+      .getElementById("createTaskPopUpSlide")
+      .classList.remove("slide_right");
     document.getElementById("addTaskPopUpContainer").style = "display: flex";
     document
       .getElementById("addTaskPopUpContainer")
       .classList.add("background_white_transp");
     setTimeout(() => {
-      document.getElementById("createTaskPopUp").classList.add("slide_left");
+      document
+        .getElementById("createTaskPopUpSlide")
+        .classList.add("slide_left");
+      loadAddTaskPU();
+
+      loadCategoriesFromServer();
+      getContacts();
+      loadSubTasks();
     }, 100);
   }
+}
+
+function loadAddTaskPU() {
+  const addTaskSection = document.getElementById("createTaskPopUp");
+  let html = "";
+  html += addTaskContainer();
+  addTaskSection.innerHTML += html;
+  return html;
 }
 
 /**
  * Create a new Task Pop-Up
  */
 async function createATaskPU() {
-  if (checkInfoPU()) {
-  } else {
-    addInfoNewTask();
-    await loadTasksFromServer();
-    tasks = JSON.parse(await backend.getItem("tasks")) || [];
-    tasks.push(task);
-    await backend.setItem("tasks", JSON.stringify(tasks));
-    //clearTaskPU();
-  }
+  createATask();
+  closePopUpCreate();
 }
 
 function checkInfoPU() {
@@ -259,8 +270,10 @@ function checkInfoPU() {
  * close the pop-up create Task
  */
 function closePopUpCreate() {
-  document.getElementById("createTaskPopUp").classList.add("slide_right");
-  document.getElementById("createTaskPopUp").classList.remove("slide_left");
+  document.getElementById("createTaskPopUpSlide").classList.add("slide_right");
+  document
+    .getElementById("createTaskPopUpSlide")
+    .classList.remove("slide_left");
   setTimeout(() => {
     document
       .getElementById("addTaskPopUpContainer")

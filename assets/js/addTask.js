@@ -21,6 +21,7 @@ let colorsCategory = [
  */
 async function initAddTask() {
   includeHTML();
+  loadAddTaskHTML();
   await Promise.all([
     loadUsers(),
     loadCategoriesFromServer(),
@@ -28,6 +29,14 @@ async function initAddTask() {
     getContacts(),
     loadSubTasks(),
   ]);
+}
+
+function loadAddTaskHTML() {
+  const addTaskSection = document.getElementById("addTaskContainer");
+  let html = "";
+  html += addTaskContainer();
+  addTaskSection.innerHTML += html;
+  return html;
 }
 
 /**
@@ -504,12 +513,16 @@ async function createATask() {
   if (checkInfo()) {
   } else {
     let titleTask = document.getElementById("inputTitleTask");
-    let contactsTask = getCheckedContacts();
+    let contactsTask = getCheckedContacts() || { check: false, name: "" };
     let dueDateTask = document.getElementById("inputCalendarAddTask");
-    let categoryTask = selectedCategory;
-    let prioTask = selectedButtonId;
+    let categoryTask = selectedCategory || {
+      name: "default",
+      status: true,
+      color: "#000000",
+    };
+    let prioTask = selectedButtonId || "low";
     let descriptionTask = document.getElementById("addTaskDescription");
-    let subtaskTask = selectedSubTasks;
+    let subtaskTask = selectedSubTasks || " ";
 
     const currentUser = loadUserData();
     if (!currentUser.tasks) {
@@ -600,10 +613,12 @@ function clearTask() {
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
-  selectedCategory.status = false;
-  document
-    .getElementById("selectCategoryForTask")
-    .classList.remove("add_task_selected");
+  if (selectedCategory) {
+    selectedCategory.status = false;
+    document
+      .getElementById("selectCategoryForTask")
+      .classList.remove("add_task_selected");
+  }
   const checkSubTask = document.querySelectorAll(".subtasks_checkbox");
   checkSubTask.forEach((checkbox) => {
     checkbox.checked = false;
