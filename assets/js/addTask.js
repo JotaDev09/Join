@@ -184,23 +184,29 @@ async function createNewContactTask() {
 function getCheckedContacts() {
   const checkedContacts = [];
   const checkboxes = document.querySelectorAll(".add_task_contacts_check");
+  const currentUser = loadUserData();
 
   checkboxes.forEach((checkbox) => {
     if (checkbox.checked) {
       const contactId = checkbox.getAttribute("data-contact-id");
-      const currentUser = loadUserData();
 
       if (currentUser && currentUser.contacts) {
-        const checkedContact = currentUser.contacts.find(
+        const checkedContactIndex = currentUser.contacts.findIndex(
           (contact) => contact.id === contactId
         );
 
-        if (checkedContact) {
-          checkedContacts.push(checkedContact);
+        if (checkedContactIndex !== -1) {
+          // Actualizar el estado 'check' del contacto a true
+          currentUser.contacts[checkedContactIndex].check = true;
+          checkedContacts.push(currentUser.contacts[checkedContactIndex]);
         }
       }
     }
   });
+
+  // Guardar el objeto de usuario actualizado si es necesario
+  // Esto dependerá de cómo almacenes y gestiones los datos del usuario
+  // Por ejemplo, puedes usar una función para guardar el usuario actualizado en tu base de datos.
 
   return checkedContacts;
 }
@@ -304,7 +310,7 @@ async function createNewCategoryTask() {
   }
   let newCategory = {
     name: category,
-    status: false,
+    check: false,
     color: newCategoryColor,
   };
   currentUser.categories.push(newCategory);
@@ -340,9 +346,9 @@ function renderCategory(categories) {
       `;
     categoryDiv.addEventListener("click", () => {
       if (selectedCategory) {
-        selectedCategory.status = false;
+        selectedCategory.check = false;
       }
-      category.status = true;
+      category.check = true;
       selectedCategory = category;
       categories.forEach((cat) => {
         const catDiv = document.getElementById("selectCategoryForTask");
@@ -452,8 +458,10 @@ async function subTaskGenerate() {
     currentUser.subTasks = [];
   }
   let newSubTask = {
+    id: uuidv4(),
     title: taskSubTask,
-    status: false,
+    check: false,
+    completed: false,
   };
   currentUser.subTasks.push(newSubTask);
   saveUserData(currentUser);
@@ -478,18 +486,19 @@ function loadSubTasks() {
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
+      checkbox.id = "subTask${index}";
       checkbox.classList.add("subtasks_checkbox");
       checkbox.addEventListener("change", () => {
         if (checkbox.checked) {
           selectedSubTasks.push(subTask);
-          subTask.status = true;
+          subTask.check = true;
         } else {
           const subTaskIndex = selectedSubTasks.findIndex(
             (item) => item.title === subTask.title
           );
           if (subTaskIndex !== -1) {
             selectedSubTasks.splice(subTaskIndex, 1);
-            subTask.status = false;
+            subTask.check = false;
           }
         }
       });
@@ -517,7 +526,7 @@ async function createATask() {
     let dueDateTask = document.getElementById("inputCalendarAddTask");
     let categoryTask = selectedCategory || {
       name: "default",
-      status: true,
+      check: true,
       color: "#000000",
     };
     let prioTask = selectedButtonId || "low";
@@ -614,7 +623,7 @@ function clearTask() {
     checkbox.checked = false;
   });
   if (selectedCategory) {
-    selectedCategory.status = false;
+    selectedCategory.check = false;
     document
       .getElementById("selectCategoryForTask")
       .classList.remove("add_task_selected");

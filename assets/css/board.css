@@ -1,6 +1,10 @@
 body {
     margin: 0;
+    overflow: hidden;
 }
+
+
+
 
 .board_container {
     width: 100%;
@@ -161,6 +165,7 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .minitask {
@@ -188,7 +193,7 @@ body {
 }
 
 .minitask_description_cont {
-    gap: 20px;
+    gap: 8px;
     width: 207px;
     height: 67px;
 }
@@ -206,6 +211,7 @@ body {
     height: 38px;
     font-size: 16px;
     color: #A8A8A8;
+    overflow: hidden;
 }
 
 .minitask_subtask {
@@ -268,6 +274,38 @@ body {
     width: 17px;
     height: 12px;
 }
+
+.edit_task_container {
+    width: 523px;
+    height: 768px;
+    background: #FFFFFF;
+    overflow: scroll;
+    padding: 50px;
+    isolation: isolate;
+    position: relative;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+
+}
+
+.edit_task_container::-webkit-scrollbar {
+    width: 0.2em;
+}
+
+.edit_task_container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.edit_task_container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border: none;
+}
+
+.edit_task_contain {
+    gap: 25px;
+}
+
+
 
 @media (width < 1400px) {
 

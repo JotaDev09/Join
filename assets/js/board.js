@@ -14,6 +14,7 @@ function loadTasksFromServer() {
   const currentUser = loadUserData();
   if (currentUser.tasks.length > 0) {
     loadTasksColumns(currentUser.tasks);
+    console.log(currentUser);
   }
 }
 
@@ -23,7 +24,8 @@ function loadTasksColumns(tasks) {
 
   for (let index = 0; index < todo.length; index++) {
     const task = todo[index];
-    document.getElementById("todoColumn").innerHTML += generateTodoHTML(task);
+    document.getElementById("todoColumn").innerHTML +=
+      generateColumnsHTML(task);
   }
 
   let progress = tasks.filter((t) => t["columns"] == "progress");
@@ -32,7 +34,7 @@ function loadTasksColumns(tasks) {
   for (let index = 0; index < progress.length; index++) {
     const task = progress[index];
     document.getElementById("InProgressColumn").innerHTML +=
-      generateTodoHTML(task);
+      generateColumnsHTML(task);
   }
 
   let feedback = tasks.filter((t) => t["columns"] == "feedback");
@@ -41,7 +43,7 @@ function loadTasksColumns(tasks) {
   for (let index = 0; index < feedback.length; index++) {
     const task = feedback[index];
     document.getElementById("feedbackColumn").innerHTML +=
-      generateTodoHTML(task);
+      generateColumnsHTML(task);
   }
 
   let done = tasks.filter((t) => t["columns"] == "done");
@@ -49,7 +51,8 @@ function loadTasksColumns(tasks) {
 
   for (let index = 0; index < done.length; index++) {
     const task = done[index];
-    document.getElementById("DoneColumn").innerHTML += generateTodoHTML(task);
+    document.getElementById("DoneColumn").innerHTML +=
+      generateColumnsHTML(task);
   }
 }
 
@@ -57,7 +60,7 @@ function startDragging(id) {
   currentDraggedtask = id;
 }
 
-function generateTodoHTML(task) {
+function generateColumnsHTML(task) {
   const contactHtml = task.contacts
     .map(
       (contact, index) => `
@@ -65,7 +68,7 @@ function generateTodoHTML(task) {
       contact.color
     }; left:${index * 20}px;">
         <a class="minitask_contact_text row-center-center font400">${getInitials(
-          contact.name
+          contact.name || contact.email
         )}</a>
     </div>
   `
@@ -84,17 +87,25 @@ function generateTodoHTML(task) {
   `;
   const progressText = `${completedSubtasks}/${subtaskCount} Done`;
 
-  const priorityImagePath = prioInBoard(task.prio);
+  const priorityImagePath = prioInBoardImg(task.prio);
 
   return `
-    <div class="minitask_container column-center-center" draggable="true" ondragstart="startDragging('${task.id}')">
+  <div class="minitask_container column-center-center" draggable="true" ondragstart="startDragging('${
+    task.id
+  }')" onclick="openTask(this)" data-task='${JSON.stringify(task)}'>
         <div class="minitask column-flex-start">
-            <div class="minitask_title_cont column-flex-start" style="background:${task.category.color}">
-                <a class="minitask_title font400">${task["category"]["name"]}</a>
+            <div class="minitask_title_cont column-flex-start" style="background:${
+              task.category.color
+            }">
+                <a class="minitask_title font400">${
+                  task["category"]["name"]
+                }</a>
             </div>
             <div class="minitask_description_cont column-flex-start">
                 <a class="minitask_descr_title font400">${task["title"]}</a>
-                <a class="minitask_descr_text font400">${task["description"]}</a>
+                <a class="minitask_descr_text font400">${
+                  task["description"]
+                }</a>
             </div>
             <div class="minitask_subtask row-center-center">
                 <div class="minitask_sub_bar" style="width: ${progressBarStyle}%;"></div>
@@ -108,6 +119,238 @@ function generateTodoHTML(task) {
             </div>
         </div>
     </div>`;
+}
+
+function openTask(element) {
+  const viewTaskSection = document.getElementById("ViewTaskContainer");
+  viewTaskSection.style = "display: flex !important";
+  const taskData = JSON.parse(element.getAttribute("data-task"));
+  let html = "";
+  html += viewTask(taskData);
+  viewTaskSection.innerHTML = html;
+  getCheckSubtasks(taskData);
+  return html;
+}
+// Agrega un evento de escucha a los checkboxes
+
+// Función para actualizar la información en el backend
+async function updateBackendData(userData) {
+  try {
+    await backend.setItem("currentUser", userData);
+    console.log("Datos actualizados en el backend");
+  } catch (error) {
+    console.error("Error al actualizar datos en el backend:", error);
+  }
+}
+
+// Llama a la función para inicializar el checkbox
+
+function viewTask(taskData) {
+  const priorityImagePath = prioInBoardImg(taskData.prio);
+  const namePrio = prioInBoard(taskData.prio);
+
+  const viewTaskInitials = taskData.contacts
+    .map(
+      (contact, index) => `
+      <div class="view_task_contacts_container">
+        <div class="view_task_contact_circle center-center" style="background:${
+          contact.color
+        }">
+          <a class="view_task_contact_initials font400 row-center-center">${getInitials(
+            contact.name || contact.email
+          )}</a>
+        </div>
+        <a class="view_task_contact_name font400">${
+          contact.name || contact.email
+        }</a>
+      </div>
+  `
+    )
+    .join("");
+
+  const viewTaskSubTask = taskData.subTask
+    ? taskData.subTask
+        .map(
+          (subtask, index) => `
+            <div class="viewTask_sub_cont">
+            <input type="checkbox" data-task-id="${subtask.id}" id="subTask${index}";>
+              <a class="view_task_subTasks_name font400"> ${subtask.title}</a>
+            </div>
+          `
+        )
+        .join("")
+    : "";
+
+  return `
+  <div class="view_task_task column-flex-start">
+  <img class="view_task_popUp_close" src="assets/img/closePopCreate.svg" onclick="closeViewTask()">
+  <div class="view_task_category center-center" style="background:${
+    taskData.category.color
+  }">
+      <a class="view_task_category_text font400" >${taskData.category.name}</a>
+  </div>
+  <div class="view_task_category_title column-flex-start">
+      <a class="view_task_category_a font400">${taskData.title}</a>
+  </div>
+  <a class="view_task_description font400">${taskData.description}</a>
+  <div class="view_task_due_date row-flexstart">
+      <a class="view_task_subtitle font400">Due date:</a>
+      <a class="view_task_date font400">${taskData.dueDate}</a>
+  </div>
+  <div class="view_task_priority row-center">
+      <a class="view_task_subtitle font400">Priority:</a>
+      <div class="view_task_prio_cont row-center-center">
+          <a class="view_task_prio font400">${namePrio}</a>
+          <img src="${priorityImagePath}" class="view_task_prio_img">
+      </div>
+  </div>
+  <div class="view_task_contacts_cont column-flex-start">
+  <a class="view_task_subtitle font400">Assigned To:</a>
+      <div class="view_task_contact column-flex-start">${viewTaskInitials}
+      </div>
+  </div>
+  <div class="view_task_subTasks_cont column-flex-start">
+    <a class="view_task_subtitle font400">Subtasks</a>
+    <div class="view_task_subTasks column-center-center">${viewTaskSubTask}</div>
+  </div>
+  <div class="view_task_edit center-center">
+  <div class="view_task_editTask center-center" data-task='${JSON.stringify(
+    taskData
+  )}' onclick="deleteTask(this)">
+      <img src="assets/img/delete.svg" class="view_task">
+      <a class="delete_task font400">Delete</a>
+    </div>
+    <img src="assets/img/Vector 3.svg" class="view_task_edit_line">
+    <div class="view_task_editTask center-center" data-task='${JSON.stringify(
+      taskData
+    )}' onclick="editTask(this)">
+      <img src="assets/img/edit.svg" class="view_task">
+      <a class="delete_task font400">Edit</a>
+    </div>
+  </div>
+</div>
+`;
+}
+
+function editTask(element) {
+  closeViewTask();
+  const editTaskSection = document.getElementById("ViewTaskContainer");
+  editTaskSection.style = "display: flex !important";
+  const taskData = JSON.parse(element.getAttribute("data-task"));
+  let html = "";
+  html += editTaskContainer(taskData);
+  editTaskSection.innerHTML = html;
+  loadCategoriesFromServer();
+  getContacts();
+  getCheckContacts(taskData);
+  loadSubTasks();
+  getCheckSubtasks(taskData);
+  const buttonEdit = taskData.prio;
+  if (buttonEdit) {
+    selectedButtons(buttonEdit);
+  }
+
+  return html;
+}
+
+function getCheckContacts(taskData) {
+  const contactsTask = taskData.contacts;
+
+  // Itera a través de los contactos
+  for (let i = 0; i < contactsTask.length; i++) {
+    const contact = contactsTask[i];
+    const checkbox = document.getElementById(`checkContact${i}`);
+
+    // Verifica si el contacto tiene check: true y marca el checkbox si es el caso
+    if (contact.check === true) {
+      checkbox.checked = true;
+    }
+  }
+}
+
+function getCheckSubtasks(taskData) {
+  const taskSubTasks = taskData.subTask;
+
+  for (let i = 0; i < taskSubTasks.length; i++) {
+    const subTask = taskSubTasks[i];
+    const checkbox = document.getElementById(`subTask${i}`);
+    //const checkbox = document.getElementById(`addTaskSubTask${i}`);
+
+    if (subTask.check === true) {
+      checkbox.checked = true;
+    }
+  }
+}
+
+function deleteTask(clickedElement) {
+  const taskData = JSON.parse(clickedElement.getAttribute("data-task"));
+  if (taskData) {
+    const currentUser = loadUserData();
+    const taskIndex = currentUser.tasks.findIndex((t) => t.id === taskData.id);
+
+    if (taskIndex !== -1) {
+      currentUser.tasks.splice(taskIndex, 1);
+      saveUserData(currentUser);
+
+      const userIndex = users.findIndex((user) => user.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex] = currentUser;
+        backend.setItem("users", JSON.stringify(users));
+      }
+      closeViewTask();
+    }
+    loadTasksFromServer();
+  }
+}
+
+function closePopUpEdit() {
+  closeViewTask();
+}
+
+function checkSubtask() {
+  document.addEventListener("change", async (event) => {
+    console.log("Checkbox clicked");
+    const checkbox = event.target;
+    // Verifica si el elemento clickeado es un checkbox
+    if (checkbox.type === "checkbox") {
+      // Obtiene el ID de la tarea desde algún atributo (por ejemplo, data-task-id)
+      const taskId = checkbox.getAttribute("data-task-id");
+      console.log(taskId);
+
+      // Obtiene el usuario actual y las tareas
+      const currentUser = loadUserData();
+      const tasks = currentUser.tasks || [];
+      console.log(tasks);
+
+      // Encuentra la tarea correspondiente por su ID
+      const task = tasks.find((t) => t.id === taskId);
+      console.log(task);
+
+      // Verifica que se haya encontrado la tarea y que tenga subtasks
+      if (task && task.subTask) {
+        // Encuentra la subtask correspondiente en la tarea por su título
+        const subtask = task.subTask.find(
+          (sub) => sub.title === checkbox.nextSibling.textContent.trim()
+        );
+        console.log(subtask);
+
+        // Verifica que se haya encontrado la subtask
+        if (subtask) {
+          // Cambia el valor de completed en la subtask
+          subtask.completed = checkbox.checked;
+          console.log(subtask.completed);
+
+          // Actualiza el estado local
+          console.log(subtask);
+          console.log(currentUser);
+          saveUserData(currentUser);
+
+          // Actualiza la información en el backend
+          await updateBackendData(currentUser);
+        }
+      }
+    }
+  });
 }
 
 function allowDrop(ev) {
@@ -174,7 +417,7 @@ async function refreshFromBackend() {
   }
 }
 
-function prioInBoard(prio) {
+function prioInBoardImg(prio) {
   let imagePath = "";
 
   if (prio === "addTaskPrioUrgent") {
@@ -186,6 +429,20 @@ function prioInBoard(prio) {
   }
 
   return imagePath;
+}
+
+function prioInBoard(prio) {
+  let namePrio = "";
+
+  if (prio === "addTaskPrioUrgent") {
+    namePrio = "Urgent";
+  } else if (prio === "addTaskPrioMedium") {
+    namePrio = "Medium";
+  } else if (prio === "addTaskPrioLow") {
+    namePrio = "Medium";
+  }
+
+  return namePrio;
 }
 
 function setupSearchEventListener() {
@@ -239,6 +496,11 @@ function loadAddTaskPU() {
   html += addTaskContainer();
   addTaskSection.innerHTML += html;
   return html;
+}
+
+function closeViewTask() {
+  const viewTaskSection = document.getElementById("ViewTaskContainer");
+  viewTaskSection.style = "display: none !important";
 }
 
 /**
