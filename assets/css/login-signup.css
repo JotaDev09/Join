@@ -441,6 +441,154 @@ body {
     cursor: pointer;
 }
 
+@media (height < 800px) {
+    .login {
+        justify-content: center;
+    }
+
+    .sign_up_cont {
+        justify-content: center;
+    }
+
+    .login_container {
+        top: initial;
+    }
+
+    .login_logo_join_blue {
+        top: 37px;
+        left: 38px;
+        width: 66px;
+        height: 80px;
+    }
+
+    .login_logo_blue_img {
+        width: 64px;
+        height: 78px;
+    }
+}
+
+@media (height < 700px) {
+
+    .login_not_user {
+        justify-content: end !important;
+    }
+
+    .not_user {
+        display: none;
+    }
+
+    .not_user {
+        font-size: 18px;
+    }
+
+
+    .login_container {
+        top: initial;
+        width: 500px;
+    }
+
+    .user_container {
+        align-items: center !important;
+    }
+
+    .user_mail {
+        align-items: center !important;
+        width: 330px;
+    }
+
+    .user_password {
+        align-items: center !important;
+        width: 330px;
+    }
+
+    .login_checkbox {
+        width: 14px;
+        height: 14px;
+    }
+
+    .login_remember_me {
+        gap: 8px;
+    }
+
+    .login_rememberMe {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    .login_forgot_password {
+        font-size: 15px;
+    }
+
+    .login_button_cont {
+        width: 122px;
+        height: 40px;
+    }
+
+    .login_button {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+    }
+
+    .guest_login_button_cont {
+        width: 175px;
+        height: 40px;
+    }
+
+    .guest_login_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .forgot_passw_container {
+        width: 500px;
+    }
+
+    .forgot_title {
+        width: 450px;
+    }
+
+    .login_text {
+        font-size: 47px;
+    }
+
+    .forgot_text_parraf {
+        font-size: 18px;
+    }
+
+    .forgot_button_cont {
+        width: 220px;
+    }
+
+    .reset_passw_container {
+        width: 500px;
+    }
+
+    .reset_text_parraf {
+        font-size: 18px;
+    }
+
+    .input_mail {
+        font-size: 16px;
+    }
+
+    .input_password {
+        font-size: 16px;
+    }
+
+    .reset_button_cont {
+        width: 150px;
+    }
+
+    .sign_button {
+        font-size: 16px;
+    }
+
+}
+
 @media (width < 700px) {
 
     .login {
@@ -449,8 +597,11 @@ body {
 
     .login_not_user {
         width: 272px;
-        top: 782px;
+        height: -webkit-fill-available;
         right: initial;
+        bottom: 10px;
+        display: flex;
+        align-items: end !important;
     }
 
     .not_user {
