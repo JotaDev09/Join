@@ -202,7 +202,7 @@ function addTaskContainer() {
   `;
 }
 
-function editTaskContainer(taskData) {
+function editTaskContainer(taskData, index) {
   return `
     <div class="edit_task_container ">
       <div class="edit_task_contain column-center-center">
@@ -259,9 +259,7 @@ function editTaskContainer(taskData) {
                         <a class="add_task_subtitle font400" id="assignedContacts">Select contacts to assign</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                     </div>
-                    <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList">
-                        
-                    </div>
+                    <div class="contacts_hidden_cont column-flex-start d-none" id="contactsList"></div>
                 </div>
             </div>
             <div class="new_contact_cont row-center d-none" id="newContactCont">
@@ -273,21 +271,6 @@ function editTaskContainer(taskData) {
                     <img src="assets/img/cancelBlue.svg" onclick="cancelNewContactTask()">
                     <img src="assets/img/grauLineSmall.svg">
                     <img src="assets/img/blueCheck.svg" onclick="createNewContactTask()">
-                </div>
-            </div>
-            <div class="add_task_category_cont column-flex-start" id="selecCategoryCont">
-                <a class="add_task_titles font400">Category</a>
-                <div class="add_task_select_cat column-flex-start" id="categoryContacts">
-                    <div class="add_task_selectCat row-center" onclick="expandCategory()" id="selecCategory">
-                        <a class="add_task_subtitle font400">Select task category</a>
-                        <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
-                    </div>
-                    <div class="category_hidden_cont column-flex-start d-none" id="categoryList">
-                        <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
-                            <a class="add_task_subtitle font400">New category</a>
-                        </div>
-                        <div class="new_category_container" id="newCategoryContainer"></div>
-                    </div>
                 </div>
             </div>
             <div class="new_contact_container column-flex-start d-none" id="newCategoryCont">

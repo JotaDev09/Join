@@ -189,3 +189,80 @@ body {
 .delete_task {
     font-size: 16px;
 }
+
+@media (width < 650px) {
+    .view_task_task {
+        width: -webkit-fill-available;
+        height: fit-content;
+    }
+
+    .view_task_category {
+        padding: 2px 30px;
+        width: 100px;
+        height: 30px;
+    }
+
+    .view_task_category_text {
+        font-size: 20px;
+    }
+
+    .view_task_category_title {
+        width: -webkit-fill-available;
+    }
+
+    .view_task_category_a {
+        width: -webkit-fill-available;
+        font-size: 40px;
+    }
+
+    .view_task_description {
+        width: -webkit-fill-available;
+        font-size: 16px;
+    }
+
+    .view_task_subtitle {
+        font-size: 18px;
+    }
+
+    .view_task_date {
+        font-size: 16px;
+    }
+
+    .view_task_prio {
+        font-size: 16px;
+        height: initial;
+    }
+
+    .view_task_prio_img {
+        width: 15px
+    }
+
+    .view_task_contacts_cont {
+        width: -webkit-fill-available;
+    }
+
+    .view_task_contacts_container {
+        width: -webkit-fill-available;
+        height: 30px;
+    }
+
+    .view_task_contact_name {
+        width: -webkit-fill-available;
+        font-size: 16px;
+    }
+
+    .view_task_contact_circle {
+        width: 40px;
+        height: 32px;
+    }
+
+    .view_task_contact_initials {
+        width: initial;
+        height: initial;
+        font-size: 10px;
+    }
+
+    .view_task_edit {
+        bottom: 10px;
+    }
+}

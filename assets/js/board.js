@@ -128,7 +128,7 @@ function openTask(element) {
   let html = "";
   html += viewTask(taskData);
   viewTaskSection.innerHTML = html;
-  getCheckSubtasks(taskData);
+  checkSubtask(taskData);
   return html;
 }
 // Agrega un evento de escucha a los checkboxes
