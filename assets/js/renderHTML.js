@@ -202,28 +202,51 @@ function addTaskContainer() {
   `;
 }
 
-function editTaskContainer(taskData, index) {
-  const subTasksEdit = taskData.subTask
-    ? taskData.subTask
-        .map(
-          (subtask, index) => `
-            <div class="viewTask_sub_cont">
-            <input type="checkbox" data-task-id="${
-              subtask.id
-            }" id="taskCheckbox-${subtask.id}" ${
-            subtask.completed ? "checked" : ""
-          }>
-              <label for="taskCheckbox-${
-                subtask.id
-              }" class="view_task_subTasks_name font400"> ${
-            subtask.title
-          }</label>
-            </div>
-          `
-        )
-        .join("")
-    : "";
+/**
+ * the function generates the columns with the tasks
+ * * @param {task} - take the tasks from the backend
+ */
+function generateColumnsHTML(task) {
+  const contactHtml = task.contacts
+    .map((contact, index) => generateContactHTML(contact, index))
+    .join("");
 
+  const subtaskCount = task.subTask.length; // Total number of subtasks
+  const completedSubtasks = task.subTask.filter(
+    (subtask) => subtask.completed
+  ).length;
+
+  const priorityImagePath = prioInBoardImg(task.prio);
+
+  return `
+    <div class="minitask_container column-center-center" draggable="true" ondragstart="startDragging('${
+      task.id
+    }')" onclick="openTask(this)" data-task='${JSON.stringify(task)}'>
+      <div class="minitask column-flex-start">
+        <div class="minitask_title_cont column-flex-start" style="background:${
+          task.category.color
+        }">
+          <a class="minitask_title font400">${task["category"]["name"]}</a>
+        </div>
+        <div class="minitask_description_cont column-flex-start">
+          <a class="minitask_descr_title font400">${task["title"]}</a>
+          <a class="minitask_descr_text font400">${task["description"]}</a>
+        </div>
+        <div class="minitask_subtask row-center-center">
+          ${generateProgressBarHTML(completedSubtasks, subtaskCount)}
+        </div>
+        <div class="minitask_buttom_cont row-center-center">
+          <div class="minitask_contacts_cont row-center">${contactHtml}</div>
+          <div class="minitask_prio_cont row-center-center">
+            <img src="${priorityImagePath}" class="minitask_prio" id="boardPrioIcon">
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function editTaskContainer(taskData, index) {
   return `
     <div class="edit_task_container ">
       <div class="edit_task_contain column-center-center">
@@ -314,4 +337,61 @@ function editTaskContainer(taskData, index) {
        </div>
        </div>
   `;
+}
+
+function viewTask(taskData) {
+  const priorityImagePath = prioInBoardImg(taskData.prio);
+  const namePrio = prioInBoard(taskData.prio);
+  const viewTaskInitials = viewInitials(taskData);
+  const viewTaskSubTask = viewSubTask(taskData);
+
+  return `
+  <div class="view_task_task column-flex-start">
+  <img class="view_task_popUp_close" src="assets/img/closePopCreate.svg" onclick="closeViewTask()">
+  <div class="view_task_category center-center" style="background:${
+    taskData.category.color
+  }">
+      <a class="view_task_category_text font400" >${taskData.category.name}</a>
+  </div>
+  <div class="view_task_category_title column-flex-start">
+      <a class="view_task_category_a font400">${taskData.title}</a>
+  </div>
+  <a class="view_task_description font400">${taskData.description}</a>
+  <div class="view_task_due_date row-flexstart">
+      <a class="view_task_subtitle font400">Due date:</a>
+      <a class="view_task_date font400">${taskData.dueDate}</a>
+  </div>
+  <div class="view_task_priority row-center">
+      <a class="view_task_subtitle font400">Priority:</a>
+      <div class="view_task_prio_cont row-center-center">
+          <a class="view_task_prio font400">${namePrio}</a>
+          <img src="${priorityImagePath}" class="view_task_prio_img">
+      </div>
+  </div>
+  <div class="view_task_contacts_cont column-flex-start">
+  <a class="view_task_subtitle font400">Assigned To:</a>
+      <div class="view_task_contact column-flex-start">${viewTaskInitials}
+      </div>
+  </div>
+  <div class="view_task_subTasks_cont column-flex-start">
+    <a class="view_task_subtitle font400">Subtasks</a>
+    <div class="view_task_subTasks column-flex-start">${viewTaskSubTask}</div>
+  </div>
+  <div class="view_task_edit center-center">
+  <div class="view_task_editTask center-center" data-task='${JSON.stringify(
+    taskData
+  )}' onclick="deleteTask(this)">
+      <img src="assets/img/delete.svg" class="view_task">
+      <a class="delete_task font400">Delete</a>
+    </div>
+    <img src="assets/img/Vector 3.svg" class="view_task_edit_line">
+    <div class="view_task_editTask center-center" data-task='${JSON.stringify(
+      taskData
+    )}' onclick="editTask(this)">
+      <img src="assets/img/edit.svg" class="view_task">
+      <a class="delete_task font400">Edit</a>
+    </div>
+  </div>
+</div>
+`;
 }

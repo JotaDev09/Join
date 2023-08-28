@@ -453,10 +453,9 @@ body {
 /*Add Task buttons bottom*/
 .add_task_buttons_bottom {
     gap: 25px;
-    width: 341px;
+    width: -webkit-fill-available;
     height: 61px;
-    position: absolute;
-    right: 30px;
+    padding-right: 30px;
     bottom: 0;
     padding-bottom: 20px;
 }

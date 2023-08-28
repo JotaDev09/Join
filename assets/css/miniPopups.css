@@ -109,9 +109,8 @@
 
 .add_task_popUp_cont {
     padding-top: 10px;
-    left: 36px;
+    padding-left: 36px;
     gap: 20px;
-    position: absolute;
     width: 480px;
 }
 

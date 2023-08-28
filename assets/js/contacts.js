@@ -130,8 +130,6 @@ function showContact(contactId) {
     const bigCardContact = renderBigCardContact(contact);
     document.getElementById("bigContactCard").innerHTML = bigCardContact;
     document.getElementById("bigCardTitle").style = "display: flex";
-  } else {
-    console.log("Contact not found.");
   }
   contactsResponsive();
 }

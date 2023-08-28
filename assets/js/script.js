@@ -31,6 +31,9 @@ function showLogin() {
   }, 1500);
 }
 
+/**
+ * The function shows the password
+ */
 function showPassword() {
   const passwordInput = document.getElementById("newUserPassword");
   const passwordIcon = document.getElementById("password_icon");
@@ -45,11 +48,11 @@ function showPassword() {
 }
 
 /**
- * login as user
+ * the function saves the user data in the local storage
  */
 async function logInUser() {
   await downloadFromServer();
-  users = JSON.parse(backend.getItem("users")) || []; // Assuming the server response has a "users" property
+  users = JSON.parse(backend.getItem("users")) || [];
   const email = document.getElementById("newUserEmail").value;
   const password = document.getElementById("newUserPassword").value;
   const actualUser = users.find(
@@ -57,7 +60,7 @@ async function logInUser() {
   );
 
   if (actualUser) {
-    saveUserData(actualUser); // Save user data to local storage
+    saveUserData(actualUser);
     loginCorrect(actualUser);
   } else {
     let existingEmail = users.find((u) => u.email === email);
@@ -67,7 +70,7 @@ async function logInUser() {
 }
 
 /**
- * login as guest
+ * the function greets the guest
  */
 function greetGuest() {
   let actualUser;
@@ -79,9 +82,13 @@ function greetGuest() {
   window.location.href = "summary.html";
 }
 
+/**
+ * The function logs in the user
+ *
+ * @param {actualUser} actualUser
+ */
 async function loginCorrect(actualUser) {
   currentUserId = actualUser.id;
-  console.log("Logged in user ID:", currentUserId);
   localStorage.setItem("actualUser", JSON.stringify(actualUser));
   await backend.setItem("users", JSON.stringify(users));
   window.location.href = "summary.html";

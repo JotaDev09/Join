@@ -31,6 +31,9 @@ async function initAddTask() {
   ]);
 }
 
+/**
+ * the function loads the formular for add a new task
+ */
 function loadAddTaskHTML() {
   const addTaskSection = document.getElementById("addTaskContainer");
   let html = "";
@@ -125,6 +128,9 @@ function expandMenu() {
   }
 }
 
+/**
+ * the function expands de menu of the categories
+ */
 function expandCategory() {
   if (selecCategory) {
     document.getElementById("categoryList").classList.add("d-none");
@@ -178,7 +184,7 @@ async function createNewContactTask() {
 }
 
 /**
- * the function checks if the contacts are checked
+ * the function checks if the contacts are checked in a new task
  *
  */
 function getCheckedContacts() {
@@ -196,18 +202,12 @@ function getCheckedContacts() {
         );
 
         if (checkedContactIndex !== -1) {
-          // Actualizar el estado 'check' del contacto a true
           currentUser.contacts[checkedContactIndex].check = true;
           checkedContacts.push(currentUser.contacts[checkedContactIndex]);
         }
       }
     }
   });
-
-  // Guardar el objeto de usuario actualizado si es necesario
-  // Esto dependerá de cómo almacenes y gestiones los datos del usuario
-  // Por ejemplo, puedes usar una función para guardar el usuario actualizado en tu base de datos.
-
   return checkedContacts;
 }
 
@@ -228,10 +228,6 @@ function cancelNewContactTask() {
   document.getElementById("addTaskNewContact").classList.add("d-none");
   document.getElementById("newContactCont").classList.add("d-none");
 }
-
-/**
- * expand Category Menu in AddTask
- */
 
 /**
  * write a new Category in AddTask
@@ -299,15 +295,13 @@ function selectCategoryColor(color) {
 }
 
 /**
- * the function creates the new task with his color
+ * the function creates the new category with his color
  */
 async function createNewCategoryTask() {
   const category = document.getElementById("addTaskNewCategory").value;
   const newCategoryColor = selectedCategoryColor;
   const currentUser = loadUserData();
-  if (!currentUser.categories) {
-    currentUser.categories = [];
-  }
+
   let newCategory = {
     name: category,
     check: false,
@@ -328,7 +322,7 @@ async function createNewCategoryTask() {
 }
 
 /**
- * the function render in the html the new task with his color
+ * the function renders in the html the new category with his color
  */
 function renderCategory(categories) {
   const categoryContainer = document.getElementById("newCategoryContainer");
@@ -362,7 +356,7 @@ function renderCategory(categories) {
 }
 
 /**
- * the function change the colors of the prio buttons
+ * the function changes the colors of the prio buttons
  *
  * @param {button} - take the info from prio buttons
  */
@@ -441,7 +435,7 @@ function selectedButtons(buttonId) {
 }
 
 /**
- * the function reset the colors with the clearTask
+ * the function resets the colors with the clearTask
  */
 function resetColors() {
   deselectedButtons(selectedButtonId);
@@ -449,14 +443,12 @@ function resetColors() {
 }
 
 /**
- * create a new subtask
+ * the function creates a new subtask
  */
 async function subTaskGenerate() {
   const taskSubTask = document.getElementById("addTaskSubTask").value;
   const currentUser = loadUserData();
-  if (!currentUser.subTasks) {
-    currentUser.subTasks = [];
-  }
+
   let newSubTask = {
     id: uuidv4(),
     title: taskSubTask,
@@ -474,6 +466,9 @@ async function subTaskGenerate() {
   loadSubTasks(newSubTask);
 }
 
+/**
+ * the function generates the html with the new subtask
+ */
 async function subTaskGenerateEdit() {
   const taskSubTask = document.getElementById("addTaskSubTaskEdit").value;
   const currentUser = loadUserData();
@@ -492,47 +487,13 @@ async function subTaskGenerateEdit() {
     await backend.setItem("users", JSON.stringify(users));
   }
   document.getElementById("addTaskSubTaskEdit").value = "";
-  loadSubTasksEdit(newSubTask);
+  loadSubTasks(newSubTask);
 }
 
-function loadSubTasksEdit() {
-  const currentUser = loadUserData();
-  const subTaskContainer = document.getElementById("subTaskContainerEdit");
-  subTaskContainer.innerHTML = "";
+/**
+ * the function loads the subtasks in the html
+ */
 
-  currentUser.subTasks.forEach((subTask, index) => {
-    const subTaskDiv = document.createElement("div");
-    subTaskDiv.classList.add("subtasks_cont_check", "row-center");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "subTask${index}";
-    checkbox.classList.add("subtasks_checkbox");
-    checkbox.addEventListener("change", () => {
-      if (checkbox.checked) {
-        selectedSubTasks.push(subTask);
-        subTask.check = true;
-      } else {
-        const subTaskIndex = selectedSubTasks.findIndex(
-          (item) => item.title === subTask.title
-        );
-        if (subTaskIndex !== -1) {
-          selectedSubTasks.splice(subTaskIndex, 1);
-          subTask.check = false;
-        }
-      }
-    });
-
-    const subTaskText = document.createElement("a");
-    subTaskText.classList.add("subtask_text", "font400");
-    subTaskText.textContent = subTask.title;
-
-    subTaskDiv.appendChild(checkbox);
-    subTaskDiv.appendChild(subTaskText);
-
-    subTaskContainer.appendChild(subTaskDiv);
-  });
-}
 function loadSubTasks() {
   const currentUser = loadUserData();
   const subTaskContainer = document.getElementById("subTaskContainer");
@@ -575,7 +536,7 @@ function loadSubTasks() {
 }
 
 /**
- * Create a new Task
+ * the function creates a new Task
  */
 async function createATask() {
   if (checkInfo()) {

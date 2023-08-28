@@ -97,7 +97,6 @@ function showLoginSite() {
 function sendMailPassword() {
   const emailInput = document.getElementById("emailForNewPassword");
   const userEmail = emailInput.value;
-  console.log("userEmail:", userEmail);
 
   const user = users.find((u) => u.email === userEmail);
 

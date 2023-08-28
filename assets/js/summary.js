@@ -3,6 +3,9 @@ const columnProgressElements = document.getElementById("summaryProgressCount");
 const columnFeedbacksElements = document.getElementById("summaryFeedbackCount");
 const columnDoneElements = document.getElementById("summaryDoneCount");
 
+/**
+ * The function loads the summary page
+ */
 async function initSummary() {
   includeHTML();
   greetUser();
@@ -15,6 +18,9 @@ async function initSummary() {
   ]);
 }
 
+/**
+ * The function loads the users
+ */
 function loadUserData() {
   return JSON.parse(localStorage.getItem("currentUser"));
 }
@@ -27,13 +33,29 @@ function greetUser() {
   greetUserName();
 }
 
+/**
+ * The function counts the tasks with priority
+ *
+ * @param {priority} - take the priority
+ * @param {tasks} -take the tasks
+ */
 function countTasksWithPriority(priority, tasks) {
   return tasks.filter((task) => task.prio === priority).length;
 }
+
+/**
+ * The function counts the tasks in the columns
+ *
+ * @param {column} - take the column
+ * @param {tasks} - take the tasks
+ */
 function countTasksInColumns(column, tasks) {
   return tasks.filter((task) => task.columns === column).length;
 }
 
+/**
+ * The function updates the priority count
+ */
 function updatePriorityCount() {
   const currentUser = loadUserData();
   const urgentTaskCount = countTasksWithPriority(
@@ -44,6 +66,10 @@ function updatePriorityCount() {
   urgentTaskCountElement.textContent = urgentTaskCount;
 }
 
+/**
+ * The function updates the todo column
+ *
+ */
 function updateTodoCount() {
   const currentUser = loadUserData();
   const todoColumn = countTasksInColumns("todo", currentUser.tasks);
@@ -65,7 +91,10 @@ function updateTodoCount() {
   }
 }
 
-//greeting according with the time
+/**
+ * The function greets the user according to the day time
+ *
+ */
 function greetAccordingToDayTime() {
   var currentTime = new Date().getHours();
   if (currentTime < 12) {
@@ -77,6 +106,9 @@ function greetAccordingToDayTime() {
   }
 }
 
+/**
+ * The function greets the user according to the name
+ */
 function greetUserName() {
   let users = JSON.parse(localStorage.getItem("actualUser"));
   if (users) {
@@ -85,10 +117,11 @@ function greetUserName() {
     document.getElementById("summaryUser").innerHTML = "Guest";
   }
   currentUserId = users ? users.id : null;
-  console.log(currentUserId);
-  console.log(loadUserData);
 }
 
+/**
+ * The function shows the summary board
+ */
 function showSummary() {
   if (window.matchMedia("(max-width: 650px)").matches) {
     setTimeout(() => {
