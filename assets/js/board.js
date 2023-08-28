@@ -1,20 +1,17 @@
 let currentDraggedtask;
+let currentDisplayedTask = [];
 
 async function initBoard() {
   includeHTML();
   setupSearchEventListener();
-  await Promise.all([loadUsers(), loadTasksFromServer()]);
-  await refreshFromBackend();
+  await Promise.all([loadUsers(), loadTasksFromServer(), refreshFromBackend()]);
 }
-// getContactsPU(),
-//loadCategoriesFromServer(),
-//loadSubTasks()
 
 function loadTasksFromServer() {
   const currentUser = loadUserData();
+  console.log(currentUser);
   if (currentUser.tasks.length > 0) {
     loadTasksColumns(currentUser.tasks);
-    console.log(currentUser);
   }
 }
 
@@ -58,6 +55,57 @@ function loadTasksColumns(tasks) {
 
 function startDragging(id) {
   currentDraggedtask = id;
+}
+
+// Agrega un controlador de eventos para los clics en los checkboxes de subtask
+async function checkSubtask(taskData) {
+  // Agrega un controlador de eventos para cambios en los checkboxes de subtask
+  document.addEventListener("change", async function (event) {
+    if (event.target && event.target.type === "checkbox") {
+      const subtaskId = event.target.getAttribute("data-task-id");
+
+      if (subtaskId) {
+        // Encuentra la subtask en el array de subtasks por su id
+        const subtask = taskData.subTask.find((sub) => sub.id === subtaskId);
+
+        if (subtask) {
+          // Cambia el estado completed de la subtask
+          subtask.completed = event.target.checked;
+
+          // Recalcula el progreso de la tarea
+          const completedSubtasks = taskData.subTask.filter(
+            (sub) => sub.completed
+          ).length;
+          const subtaskCount = taskData.subTask.length;
+          const progressPercentage = (completedSubtasks / subtaskCount) * 100;
+
+          // Actualiza la barra de progreso en la interfaz
+          const progressBarStyle = `
+          --progress: ${progressPercentage}%;
+          background: linear-gradient(to right, #0038FF 0%, #0038FF calc(${progressPercentage}% - 4px), #F4F4F4 calc(${progressPercentage}% - 4px), #F4F4F4 100%);
+        `;
+          const progressText = `${completedSubtasks}/${subtaskCount} Done`;
+          const progressBar = document.querySelector(".minitask_sub_bar");
+          progressBar.style.width = progressBarStyle;
+          progressBar.nextSibling.textContent = progressText;
+
+          // Guarda la actualización de la subtask dentro de task en el backend
+          const currentUser = loadUserData();
+          const taskIndex = currentUser.tasks.findIndex(
+            (t) => t.id === taskData.id
+          );
+          if (taskIndex !== -1) {
+            currentUser.tasks[taskIndex] = taskData;
+            saveUserData(currentUser);
+            backend.setItem("currentUser", currentUser);
+          }
+
+          refreshFromBackend();
+          loadTasksFromServer();
+        }
+      }
+    }
+  });
 }
 
 function generateColumnsHTML(task) {
@@ -125,23 +173,14 @@ function openTask(element) {
   const viewTaskSection = document.getElementById("ViewTaskContainer");
   viewTaskSection.style = "display: flex !important";
   const taskData = JSON.parse(element.getAttribute("data-task"));
+  currentDisplayedTask = taskData;
   let html = "";
   html += viewTask(taskData);
-  viewTaskSection.innerHTML = html;
   checkSubtask(taskData);
+  viewTaskSection.innerHTML = html;
   return html;
 }
 // Agrega un evento de escucha a los checkboxes
-
-// Función para actualizar la información en el backend
-async function updateBackendData(userData) {
-  try {
-    await backend.setItem("currentUser", userData);
-    console.log("Datos actualizados en el backend");
-  } catch (error) {
-    console.error("Error al actualizar datos en el backend:", error);
-  }
-}
 
 // Llama a la función para inicializar el checkbox
 
@@ -173,8 +212,16 @@ function viewTask(taskData) {
         .map(
           (subtask, index) => `
             <div class="viewTask_sub_cont">
-            <input type="checkbox" data-task-id="${subtask.id}" id="subTask${index}";>
-              <a class="view_task_subTasks_name font400"> ${subtask.title}</a>
+            <input type="checkbox" data-task-id="${
+              subtask.id
+            }" id="taskCheckbox-${subtask.id}" ${
+            subtask.completed ? "checked" : ""
+          }>
+              <label for="taskCheckbox-${
+                subtask.id
+              }" class="view_task_subTasks_name font400"> ${
+            subtask.title
+          }</label>
             </div>
           `
         )
@@ -211,7 +258,7 @@ function viewTask(taskData) {
   </div>
   <div class="view_task_subTasks_cont column-flex-start">
     <a class="view_task_subtitle font400">Subtasks</a>
-    <div class="view_task_subTasks column-center-center">${viewTaskSubTask}</div>
+    <div class="view_task_subTasks column-flex-start">${viewTaskSubTask}</div>
   </div>
   <div class="view_task_edit center-center">
   <div class="view_task_editTask center-center" data-task='${JSON.stringify(
@@ -240,11 +287,9 @@ function editTask(element) {
   let html = "";
   html += editTaskContainer(taskData);
   editTaskSection.innerHTML = html;
-  loadCategoriesFromServer();
   getContacts();
   getCheckContacts(taskData);
   loadSubTasks();
-  getCheckSubtasks(taskData);
   const buttonEdit = taskData.prio;
   if (buttonEdit) {
     selectedButtons(buttonEdit);
@@ -263,20 +308,6 @@ function getCheckContacts(taskData) {
 
     // Verifica si el contacto tiene check: true y marca el checkbox si es el caso
     if (contact.check === true) {
-      checkbox.checked = true;
-    }
-  }
-}
-
-function getCheckSubtasks(taskData) {
-  const taskSubTasks = taskData.subTask;
-
-  for (let i = 0; i < taskSubTasks.length; i++) {
-    const subTask = taskSubTasks[i];
-    const checkbox = document.getElementById(`subTask${i}`);
-    //const checkbox = document.getElementById(`addTaskSubTask${i}`);
-
-    if (subTask.check === true) {
       checkbox.checked = true;
     }
   }
@@ -307,74 +338,48 @@ function closePopUpEdit() {
   closeViewTask();
 }
 
-function checkSubtask() {
-  document.addEventListener("change", async (event) => {
-    console.log("Checkbox clicked");
-    const checkbox = event.target;
-    // Verifica si el elemento clickeado es un checkbox
-    if (checkbox.type === "checkbox") {
-      // Obtiene el ID de la tarea desde algún atributo (por ejemplo, data-task-id)
-      const taskId = checkbox.getAttribute("data-task-id");
-      console.log(taskId);
+function okEditTask() {
+  const editTitle = document.getElementById("editTitleTask").value;
+  const editDescription = document.getElementById("editTaskDescription").value;
+  const editDueDate = document.getElementById("editCalendarTask");
+  const editPrio = selectedButtonId;
+  const editContactsTask = getCheckedContacts();
+  const editSubTask = selectedSubTasks;
 
-      // Obtiene el usuario actual y las tareas
-      const currentUser = loadUserData();
-      const tasks = currentUser.tasks || [];
-      console.log(tasks);
+  if (currentDisplayedTask) {
+    console.log("currentDisplayedTask", currentDisplayedTask);
+    currentDisplayedTask.title = editTitle;
+    currentDisplayedTask.description = editDescription;
+    currentDisplayedTask.dueDate = editDueDate.value;
+    currentDisplayedTask.prio = editPrio;
+    currentDisplayedTask.contacts = editContactsTask;
+    currentDisplayedTask.subTask = editSubTask;
 
-      // Encuentra la tarea correspondiente por su ID
-      const task = tasks.find((t) => t.id === taskId);
-      console.log(task);
+    const currentUser = loadUserData();
+    const taskIndex = currentUser.tasks.findIndex(
+      (t) => t.id === currentDisplayedTask.id
+    );
+    console.log(currentDisplayedTask.id);
+    console.log(taskIndex);
 
-      // Verifica que se haya encontrado la tarea y que tenga subtasks
-      if (task && task.subTask) {
-        // Encuentra la subtask correspondiente en la tarea por su título
-        const subtask = task.subTask.find(
-          (sub) => sub.title === checkbox.nextSibling.textContent.trim()
-        );
-        console.log(subtask);
+    if (taskIndex !== -1) {
+      currentUser.tasks[taskIndex] = currentDisplayedTask;
+      saveUserData(currentUser);
 
-        // Verifica que se haya encontrado la subtask
-        if (subtask) {
-          // Cambia el valor de completed en la subtask
-          subtask.completed = checkbox.checked;
-          console.log(subtask.completed);
-
-          // Actualiza el estado local
-          console.log(subtask);
-          console.log(currentUser);
-          saveUserData(currentUser);
-
-          // Actualiza la información en el backend
-          await updateBackendData(currentUser);
-        }
+      const userIndex = users.findIndex((user) => user.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex] = currentUser;
+        backend.setItem("currentUser", currentUser);
       }
+
+      closePopUpEdit();
     }
-  });
+    loadTasksFromServer();
+  }
 }
 
 function allowDrop(ev) {
   ev.preventDefault();
-}
-
-async function moveTo(column) {
-  try {
-    const currentUser = loadUserData();
-    const taskIndex = currentUser.tasks.findIndex(
-      (task) => task.id === currentDraggedtask
-    );
-
-    if (taskIndex !== -1) {
-      // Actualiza la columna de la tarea local
-      currentUser.tasks[taskIndex].columns = column;
-      // Guarda la tarea actualizada en el backend
-      await backend.setItem(currentDraggedtask, currentUser.tasks[taskIndex]);
-      // Actualiza la UI con la nueva columna
-      loadTasksColumns(currentUser.tasks);
-    }
-  } catch (error) {
-    console.error("Error moving task:", error);
-  }
 }
 
 async function moveTo(column) {

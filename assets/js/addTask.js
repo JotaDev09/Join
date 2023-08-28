@@ -474,6 +474,65 @@ async function subTaskGenerate() {
   loadSubTasks(newSubTask);
 }
 
+async function subTaskGenerateEdit() {
+  const taskSubTask = document.getElementById("addTaskSubTaskEdit").value;
+  const currentUser = loadUserData();
+
+  let newSubTask = {
+    id: uuidv4(),
+    title: taskSubTask,
+    check: false,
+    completed: false,
+  };
+  currentUser.subTasks.push(newSubTask);
+  saveUserData(currentUser);
+  const userIndex = users.findIndex((user) => user.id === currentUser.id);
+  if (userIndex !== -1) {
+    users[userIndex].subTasks = currentUser.subTasks;
+    await backend.setItem("users", JSON.stringify(users));
+  }
+  document.getElementById("addTaskSubTaskEdit").value = "";
+  loadSubTasksEdit(newSubTask);
+}
+
+function loadSubTasksEdit() {
+  const currentUser = loadUserData();
+  const subTaskContainer = document.getElementById("subTaskContainerEdit");
+  subTaskContainer.innerHTML = "";
+
+  currentUser.subTasks.forEach((subTask, index) => {
+    const subTaskDiv = document.createElement("div");
+    subTaskDiv.classList.add("subtasks_cont_check", "row-center");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "subTask${index}";
+    checkbox.classList.add("subtasks_checkbox");
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        selectedSubTasks.push(subTask);
+        subTask.check = true;
+      } else {
+        const subTaskIndex = selectedSubTasks.findIndex(
+          (item) => item.title === subTask.title
+        );
+        if (subTaskIndex !== -1) {
+          selectedSubTasks.splice(subTaskIndex, 1);
+          subTask.check = false;
+        }
+      }
+    });
+
+    const subTaskText = document.createElement("a");
+    subTaskText.classList.add("subtask_text", "font400");
+    subTaskText.textContent = subTask.title;
+
+    subTaskDiv.appendChild(checkbox);
+    subTaskDiv.appendChild(subTaskText);
+
+    subTaskContainer.appendChild(subTaskDiv);
+  });
+}
 function loadSubTasks() {
   const currentUser = loadUserData();
   const subTaskContainer = document.getElementById("subTaskContainer");

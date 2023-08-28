@@ -203,6 +203,27 @@ function addTaskContainer() {
 }
 
 function editTaskContainer(taskData, index) {
+  const subTasksEdit = taskData.subTask
+    ? taskData.subTask
+        .map(
+          (subtask, index) => `
+            <div class="viewTask_sub_cont">
+            <input type="checkbox" data-task-id="${
+              subtask.id
+            }" id="taskCheckbox-${subtask.id}" ${
+            subtask.completed ? "checked" : ""
+          }>
+              <label for="taskCheckbox-${
+                subtask.id
+              }" class="view_task_subTasks_name font400"> ${
+            subtask.title
+          }</label>
+            </div>
+          `
+        )
+        .join("")
+    : "";
+
   return `
     <div class="edit_task_container ">
       <div class="edit_task_contain column-center-center">
@@ -213,22 +234,22 @@ function editTaskContainer(taskData, index) {
           />
             <div class="add_task_title column-flex-start">
                 <div class="add_task_title_cont row-center">
-                    <input class="add_task_input font400" placeholder="${taskData.title}" id="inputTitleTask"
+                    <input class="add_task_input font400" value="${taskData.title}" id="editTitleTask"
                         onclick="writeTitle()"></input>
                 </div>
                 <a class="field_required" id="titleRequired">This field is required</a>
             </div>
             <div class="add_task_description_cont column-flex-start">
                 <a class="add_task_titles font400">Description</a>
-                <textarea class="add_task_descript_input row-flexstart font400" placeholder="${taskData.description}"
-                    id="addTaskDescription" onclick="writeDescription()"></textarea>
+                <textarea class="add_task_descript_input row-flexstart font400" placeholder=""
+                    id="editTaskDescription" onclick="writeDescription()">${taskData.description}</textarea>
                 <a class="field_required" id="descriptionRequired">This field is required</a>
             </div>
             <div class="add_task_dueDate_cont column-flex-start">
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
                 
-                <input class="Duedate_input font400" value="${taskData.dueDate}" type="date" id="inputCalendarAddTask" onclick="writeDate()">
+                <input class="Duedate_input font400" value="${taskData.dueDate}" type="date" id="editCalendarTask" onclick="writeDate()">
                 </div>
                 <a class="field_required" id="dateRequired">This field is required</a>
             </div>
@@ -236,17 +257,17 @@ function editTaskContainer(taskData, index) {
                 <a class="add_task_titles font400">Priority</a>
                 <div class="add_task_prio_cont_buttons row-center-center">
                     <div class="add_task_prio_buttons row-center-center urgent_hover " id="addTaskPrioUrgent"
-                        onclick="choosePrioEdit(this)">
+                        onclick="choosePrio(this)">
                         <a class="prio_buttons_text font400" id="addTaskPrioUrgentA">Urgent</a>
                         <img class="prio_buttons_img" id="addTaskPrioUrgentImg" src="assets/img/PrioAlta.svg">
                     </div>
                     <div class="add_task_prio_buttons row-center-center urgent_medium" id="addTaskPrioMedium"
-                        onclick="choosePrioEdit(this)">
+                        onclick="choosePrio(this)">
                         <a class="prio_buttons_text font400" id="addTaskPrioMediumA">Medium</a>
                         <img class="prio_buttons_img" id="addTaskPrioMediumImg" src="assets/img/PrioMedia.svg">
                     </div>
                     <div class="add_task_prio_buttons row-center-center urgent_low" id="addTaskPrioLow"
-                        onclick="choosePrioEdit(this)">
+                        onclick="choosePrio(this)">
                         <a class="prio_buttons_text font400" id="addTaskPrioLowA">Low</a>
                         <img class="prio_buttons_img" id="addTaskPrioLowImg" src="assets/img/PrioBaja.svg">
                     </div>
@@ -279,17 +300,14 @@ function editTaskContainer(taskData, index) {
                 <a class="add_task_titles font400">Subtasks</a>
                 <div class="subtasks_cont_input_img row-center">
                     <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask"
-                        id="addTaskSubTask${index}">
+                        id="addTaskSubTask">
                     <img src="assets/img/plusBlue.svg" class="plus_blue_img" onclick="subTaskGenerate()">
                 </div>
             </div>
             <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
-            <div class="add_task_buttons_bottom_resp row-center-center" id="adddTaskButtonsResp">
-                <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
-                    <a class="add_task_clear_text font400">Clear X</a>
-                </button>
-                <button class="add_task_buttons_create row-center-center" onclick="createATask()">
-                    <a class="add_task_create_text font400">Create Task</a>
+            <div class="add_task_buttons_bottom_ok row-center-center" id="addTaskButtonsok">
+                <button class="add_task_buttons_ok row-center-center" onclick="okEditTask()">
+                    <a class="add_task_create_text font400">Ok</a>
                     <img src="assets/img/checkCreateT.svg" class="">
                 </button>
             </div>
