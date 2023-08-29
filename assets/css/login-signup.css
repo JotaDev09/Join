@@ -591,17 +591,16 @@ body {
 
 @media (width < 700px) {
 
-    .login {
-        justify-content: center;
-    }
+    .login {}
 
     .login_not_user {
+        position: relative;
+        order: 3;
         width: 272px;
-        height: -webkit-fill-available;
+        height: fit-content;
         right: initial;
         bottom: 10px;
         display: flex;
-        align-items: end !important;
     }
 
     .not_user {
@@ -609,9 +608,11 @@ body {
     }
 
     .login_logo_join_blue {
+        position: relative;
+        order: 1;
         top: 37px;
         left: 38px;
-        width: 66px;
+        width: -webkit-fill-available;
         height: 80px;
     }
 
@@ -630,7 +631,9 @@ body {
     }
 
     .login_container {
-        top: 144px;
+        position: relative;
+        order: 2;
+        top: 55px;
         width: 500px;
     }
 
