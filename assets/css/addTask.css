@@ -23,7 +23,7 @@ body {
 }
 
 .add_task_popUp_close_PU {
-    display: none;
+    display: flex;
 }
 
 .add_task_title {
