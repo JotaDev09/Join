@@ -70,16 +70,43 @@ async function logInUser() {
 }
 
 /**
- * the function greets the guest
+ * the function creates the guest
  */
-function greetGuest() {
-  let actualUser;
-  actualUser = JSON.stringify(actualUser);
-  sessionStorage.setItem("sessionUser", actualUser);
-  document.getElementById("newUserEmail").value = ""; // to prevent login to be executed
-  document.getElementById("newUserPassword").value = ""; // to prevent login to be executed
-  localStorage.clear();
-  window.location.href = "summary.html";
+async function greetGuest() {
+  let guestUser = {
+    id: generateUniqueId(),
+    name: "Guest",
+    email: "guest@example.com",
+    password: "123456",
+    tasks: [],
+    contacts: [],
+    categories: [],
+    subTasks: [],
+  };
+
+  users.push(guestUser);
+  await backend.setItem("users", JSON.stringify(users));
+
+  logInGuest();
+}
+
+/**
+ * the function logs in the guest
+ */
+function logInGuest() {
+  const guestUser = {
+    id: generateUniqueId(),
+    name: "Guest",
+    email: "guest@example.com",
+    password: "123456",
+    tasks: [],
+    contacts: [],
+    categories: [],
+    subTasks: [],
+  };
+
+  saveUserData(guestUser);
+  loginCorrect(guestUser);
 }
 
 /**

@@ -1,15 +1,4 @@
-let users = [
-  {
-    id: "1q2w3e4r",
-    name: "Guest",
-    email: "",
-    password: "",
-    tasks: [],
-    contacts: [],
-    categories: [],
-    subTasks: [],
-  },
-];
+let users = [];
 let currentRecoveredUser = null;
 let currentUserId = null;
 
