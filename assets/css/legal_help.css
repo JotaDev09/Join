@@ -4,16 +4,17 @@ body {
 
 /* Legal notice window */
 .legal_container {
-    width: 100%;
-    height: 100vh;
-    padding-left: 232px;
+    width: -webkit-fill-available;
+    max-height: 100vh;
+    overflow: hidden;
+    padding-left: 252px;
 }
 
 .legal_help_blue_arrow {
     position: absolute;
     width: 37px;
     height: 37px;
-    left: 1258px;
+    right: 20px;
     top: 204px;
     cursor: pointer;
 }
@@ -21,59 +22,100 @@ body {
 .legal_title_cont {
     gap: 30px;
     position: absolute;
-    width: 377px;
+    width: fit-content;
     height: 73px;
-    left: 300px;
     top: 211px;
 }
 
+.legal_info_subtitle_1 {
+    color: #4589FF;
+    font-size: 33px;
+    font-weight: 700 !important;
+    line-height: 120% !important;
+}
+
 .legal_title {
-    width: 377px;
+    width: fit-content;
     height: 73px;
     font-weight: 700 !important;
     font-size: 61px;
-    color: #4589FF;
+    color: #000000;
 }
 
 .legal_info_cont {
-    gap: 35px;
+    gap: 24px;
     position: absolute;
-    width: 969px;
-    height: 325px;
-    left: 300px;
+    width: -webkit-fill-available;
     top: 332px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    max-height: -webkit-fill-available;
+    overflow-y: auto;
 }
 
 .legal_info_subcont {
-    gap: 10px;
-    width: 969px;
-    height: 145px;
+    width: -webkit-fill-available;
+    height: fit-content;
 }
 
 .legal_info_subtitle {
-    width: 346px;
-    height: 40px;
-    font-weight: 700 !important;
-    font-size: 33px;
+    font-size: 16px;
+    line-height: 120% !important;
     color: #005DFF;
 }
 
 .legal_info_text {
-    width: 969px;
-    height: 95px;
+    width: -webkit-fill-available;
     font-size: 16px;
     color: #000000;
 }
 
+.blue_etiquetes {
+    color: #4589FF;
+    font-size: 16px;
+    line-height: 120% !important;
+}
+
 /* Help window */
+.legal_info_subcont0 {
+    position: absolute;
+    top: 320px;
+    gap: 10px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    padding-right: 50px;
+}
+
+.legal_info_container {
+    gap: 20px;
+    position: absolute;
+    top: 400px;
+    padding-right: 50px;
+    max-height: -webkit-fill-available;
+    overflow-y: auto;
+}
+
+.legal_info_subcont1 {
+    gap: 10px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
 .help_info_subcont2 {
     gap: 10px;
-    width: 969px;
-    height: -webkit-fill-available
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+}
+
+.hep_info_subtitle {
+    color: #4589FF;
+    font-size: 33px;
+    font-weight: 700 !important;
+    line-height: 120% !important;
 }
 
 .help_info_text {
-    width: 969px;
+    width: -webkit-fill-available;
     height: -webkit-fill-available;
     font-size: 16px;
     color: #000000;
@@ -94,7 +136,88 @@ body {
 }
 
 .help_info_subtext {
-    width: 969px;
+    width: -webkit-fill-available;
     font-size: 16px;
     color: #000000;
+}
+
+@media (width < 1200px) {
+    .legal_container {
+        padding-left: 212px;
+    }
+}
+
+@media (width < 1000px) {
+    .legal_container {
+        padding-left: 190px;
+    }
+}
+
+@media (width < 850px) {
+    .legal_container {
+        padding-left: 30px;
+    }
+
+    .legal_info_cont {
+        padding-bottom: 90px;
+    }
+}
+
+@media (width < 600px) {
+    .legal_title_cont {
+        top: 150px;
+    }
+
+    .legal_help_blue_arrow {
+        top: 104px;
+    }
+
+    .legal_info_subcont0 {
+        top: 250px;
+    }
+
+    .legal_info_container {
+        top: 350px;
+    }
+
+    .legal_info_cont {
+        top: 272px;
+    }
+
+    .legal_title_cont {
+        width: -webkit-fill-available;
+    }
+
+    .legal_info_subtitle_1 {
+        font-size: 23px;
+    }
+
+    .legal_title {
+        width: -webkit-fill-available;
+        font-size: 47px;
+    }
+}
+
+@media (width < 570px) {
+    .legal_info_container {
+        top: 370px;
+    }
+}
+
+@media (width < 427px) {
+    .legal_info_container {
+        top: 390px;
+    }
+}
+
+@media (width < 370px) {
+    .legal_info_container {
+        top: 410px;
+    }
+}
+
+@media (width < 333px) {
+    .legal_info_container {
+        top: 430px;
+    }
 }

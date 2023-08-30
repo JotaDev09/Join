@@ -442,9 +442,7 @@ body {
 }
 
 @media (height < 800px) {
-    .login {
-        justify-content: center;
-    }
+
 
     .sign_up_cont {
         justify-content: center;
@@ -601,6 +599,7 @@ body {
         right: initial;
         bottom: 10px;
         display: flex;
+        padding-bottom: 20px;
     }
 
     .not_user {

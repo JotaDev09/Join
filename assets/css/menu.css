@@ -82,17 +82,17 @@ body {
 
 .menu_legal_cont {
     padding: 8px;
-    gap: 20px;
-    width: 105px;
-    height: 46px;
+    gap: 8px;
+    width: 112px;
+    height: 35px;
     cursor: pointer;
 }
 
 .menu_privacy_cont {
     padding: 8px;
-    gap: 20px;
-    width: 105px;
-    height: 46px;
+    gap: 8px;
+    width: 126px;
+    height: 35px;
     cursor: pointer;
 }
 

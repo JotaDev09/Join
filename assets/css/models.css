@@ -138,6 +138,10 @@
     animation-name: slide-left;
 }
 
+.gap10 {
+    gap: 10px;
+}
+
 @media (width < 700px) {
     .inputs {
         width: 330px;

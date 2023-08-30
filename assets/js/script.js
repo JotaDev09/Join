@@ -213,8 +213,20 @@ function openContacts() {
 /**
  *  open Legal notice window
  */
-function openlegal() {
+function openLegal() {
   window.location.href = "legalNotice.html";
+}
+
+function initPrivacy() {
+  document.querySelector("privacy_effect").style =
+    "border-radius: 10px; background: #4589FF;";
+}
+
+/**
+ *  open Privacy Policy notice window
+ */
+function openPrivacy() {
+  window.location.href = "privacy.html";
 }
 
 /**
