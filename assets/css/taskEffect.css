@@ -1,0 +1,22 @@
+.blue_select_add {
+    background-color: #D2E3FF;
+}
+
+@media (width < 850px) {
+
+    .blue_select_add {
+        background-color: transparent;
+    }
+
+    .blue_select_add a {
+        color: #4589FF !important;
+    }
+
+    .icon_addTask_blue {
+        display: flex !important;
+    }
+
+    .icon_addTask {
+        display: none;
+    }
+}

@@ -115,8 +115,8 @@ function addTaskContainer() {
             <div class="add_task_dueDate_cont column-flex-start">
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
-                    <input class="Duedate_input font400" placeholder="dd/mm/yyyy" type="date" id="inputCalendarAddTask"
-                        onclick="writeDate()">
+                <input class="Duedate_input font400" placeholder="YYYY-MM-DD" type="date" id="inputCalendarAddTask" onclick="writeDate()">
+
                 </div>
                 <a class="field_required" id="dateRequired">This field is required</a>
             </div>
@@ -167,11 +167,11 @@ function addTaskContainer() {
                 <a class="add_task_titles font400">Category</a>
                 <div class="add_task_select_cat column-flex-start" id="categoryContacts">
                     <div class="add_task_selectCat row-center" onclick="expandCategory()" id="selecCategory">
-                        <a class="add_task_subtitle font400">Select task category</a>
+                        <a class="add_task_subtitle font400" id="selectTaskCategory">Select task category</a>
                         <img src="assets/img/contactsArrow.svg" class="add_task_contacts_arrow">
                     </div>
                     <div class="category_hidden_cont column-flex-start d-none" id="categoryList">
-                        <div class="contacts_choose_cont row-center" onclick="createdNewCategory()">
+                        <div class="contacts_choose_cont row-center" id="contactsChooseCont" onclick="createdNewCategory()">
                             <a class="add_task_subtitle font400">New category</a>
                         </div>
                         <div class="new_category_container" id="newCategoryContainer"></div>
@@ -184,9 +184,10 @@ function addTaskContainer() {
                 <a class="add_task_titles font400">Subtasks</a>
                 <div class="subtasks_cont_input_img row-center">
                     <input class="add_task_subtasks_input row-center font400" placeholder="Add new subtask"
-                        id="addTaskSubTask">
+                        id="addTaskSubTask" onclick="subTaskRequired()">
                     <img src="assets/img/plusBlue.svg" class="plus_blue_img" onclick="subTaskGenerate()">
                 </div>
+                <a class="field_required" id="subTaskRequired">This field is required</a>
             </div>
             <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
             <div class="add_task_buttons_bottom_resp row-center-center" id="adddTaskButtonsResp">

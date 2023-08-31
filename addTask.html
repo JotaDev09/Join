@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/miniPopups.css">
     <link rel="stylesheet" href="assets/css/models.css">
     <link rel="stylesheet" href="assets/css/addTask.css">
+    <link rel="stylesheet" href="assets/css/taskEffect.css">
 
     <script src="assets/js/header.js"></script>
     <script src="assets/js/script.js"></script>
@@ -36,17 +37,18 @@
     <div w3-include-html="assets/templates/menu.html"></div>
     <div class="add_task_container">
         <div class="add_task_cont column-flex-start" id="addTaskContainer">
-        </div>
-        <div class="add_task_buttons_bottom row-center-center">
-            <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
-                <a class="add_task_clear_text font400">Clear X</a>
-            </button>
-            <button class="add_task_buttons_create row-center-center" onclick="createATask()">
-                <a class="add_task_create_text font400">Create Task</a>
-                <img src="assets/img/checkCreateT.svg" class="">
-            </button>
+            <div class="add_task_buttons_bottom row-center-center">
+                <button class="add_task_buttons_clear row-center-center" onclick="clearTask()">
+                    <a class="add_task_clear_text font400">Clear X</a>
+                </button>
+                <button class="add_task_buttons_create row-center-center" onclick="createATask()">
+                    <a class="add_task_create_text font400">Create Task</a>
+                    <img src="assets/img/checkCreateT.svg" class="">
+                </button>
+            </div>
         </div>
     </div>
+
 </body>
 
 </html>

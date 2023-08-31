@@ -30,12 +30,11 @@ body {
     gap: 15px;
     bottom: 0px;
     left: 23px;
-    width: 160px;
     height: 135px;
 }
 
 .menu_all {
-    padding: 8px 30px;
+    padding: 8px 20px;
     gap: 20px;
     width: 146px;
     height: 46px;
@@ -48,14 +47,32 @@ body {
     height: 24px;
 }
 
+.icon_summary_blue {
+    width: 24px;
+    height: 24px;
+    display: none;
+}
+
 .icon_board {
     width: 22px;
     height: 26px;
 }
 
+.icon_board_blue {
+    width: 22px;
+    height: 26px;
+    display: none;
+}
+
 .icon_addTask {
     width: 27px;
     height: 30px;
+}
+
+.icon_addTask_blue {
+    width: 27px;
+    height: 30px;
+    display: none;
 }
 
 .addTask_background {
@@ -71,6 +88,12 @@ body {
 .icon_contacts {
     width: 30px;
     height: 30px
+}
+
+.icon_contacts_blue {
+    width: 30px;
+    height: 30px;
+    display: none;
 }
 
 .text_menu {
@@ -91,7 +114,6 @@ body {
 .menu_privacy_cont {
     padding: 8px;
     gap: 8px;
-    width: 126px;
     height: 35px;
     cursor: pointer;
 }
@@ -105,7 +127,6 @@ body {
     width: 94px;
     height: 17px;
     font-size: 16px;
-    color: #42526E;
 }
 
 .background_blue {
@@ -182,6 +203,7 @@ body {
     .icon_addTask {
         width: 25px;
     }
+
 }
 
 @media (width < 450px) {

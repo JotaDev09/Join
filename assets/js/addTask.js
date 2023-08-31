@@ -28,6 +28,7 @@ async function initAddTask() {
     loadUserData(),
     getContacts(),
     loadSubTasks(),
+    actualdate(),
   ]);
 }
 
@@ -50,6 +51,11 @@ async function loadCategoriesFromServer() {
   if (currentUser.categories.length > 0) {
     renderCategory(currentUser.categories);
   }
+}
+
+function actualdate() {
+  let today = new Date().toISOString().split("T")[0];
+  document.getElementById("inputCalendarAddTask").min = today;
 }
 
 /**
@@ -113,10 +119,8 @@ function generateInviteNewContactHtml() {
 function expandMenu() {
   if (selecContacts) {
     document.getElementById("contactsList").classList.add("d-none");
-    document.getElementById("assignedContactcont").style =
-      "height: 79px; overflox: inherit";
-    document.getElementById("containerContacts").style =
-      "height: 51px; overflox: initial";
+    document.getElementById("assignedContactcont").style = "height: 79px;";
+    document.getElementById("containerContacts").style = "height: 51px;";
     selecContacts = false;
   } else {
     document.getElementById("contactsList").classList.remove("d-none");
@@ -134,10 +138,8 @@ function expandMenu() {
 function expandCategory() {
   if (selecCategory) {
     document.getElementById("categoryList").classList.add("d-none");
-    document.getElementById("selecCategoryCont").style =
-      "height: 79px; overflox: inherit";
-    document.getElementById("categoryContacts").style =
-      "height: 51px; overflox: inherit";
+    document.getElementById("selecCategoryCont").style = "height: 79px;";
+    document.getElementById("categoryContacts").style = "height: 51px;";
     selecCategory = false;
   } else {
     document.getElementById("categoryList").classList.remove("d-none");
@@ -291,7 +293,7 @@ function newCategoryColors(colorCategory) {
  * the function selects the color for the category
  */
 function selectCategoryColor(color) {
-  selectedCategoryColor = color; // Almacenar el color seleccionado en la variable global
+  selectedCategoryColor = color;
 }
 
 /**
@@ -303,6 +305,7 @@ async function createNewCategoryTask() {
   const currentUser = loadUserData();
 
   let newCategory = {
+    id: uuidv4(),
     name: category,
     check: false,
     color: newCategoryColor,
@@ -331,7 +334,7 @@ function renderCategory(categories) {
   categories.forEach((category, index) => {
     const categoryDiv = document.createElement("div");
     categoryDiv.className = "contacts_choose_cont row-center";
-    categoryDiv.id = "selectCategoryForTask";
+    categoryDiv.id = `selectCategoryForTask_${index}`;
     const categoryName = category && category.name;
     const categoryColor = category && category.color;
     categoryDiv.innerHTML = `
@@ -341,15 +344,20 @@ function renderCategory(categories) {
     categoryDiv.addEventListener("click", () => {
       if (selectedCategory) {
         selectedCategory.check = false;
+        const prevSelectedCategoryDiv = document.getElementById(
+          `selectCategoryForTask_${categories.indexOf(selectedCategory)}`
+        );
+        prevSelectedCategoryDiv.classList.remove("add_task_selected");
       }
       category.check = true;
       selectedCategory = category;
-      categories.forEach((cat) => {
-        const catDiv = document.getElementById("selectCategoryForTask");
-        catDiv.classList.remove("add_task_selected");
-      });
-
       categoryDiv.classList.add("add_task_selected");
+
+      const selectTaskCategoryDiv =
+        document.getElementById("selectTaskCategory");
+      selectTaskCategoryDiv.textContent = selectedCategory.name;
+
+      expandCategory();
     });
     categoryContainer.appendChild(categoryDiv);
   });
@@ -446,24 +454,28 @@ function resetColors() {
  * the function creates a new subtask
  */
 async function subTaskGenerate() {
-  const taskSubTask = document.getElementById("addTaskSubTask").value;
-  const currentUser = loadUserData();
+  if (document.getElementById("addTaskSubTask").value === "") {
+    document.getElementById("subTaskRequired").style.display = "flex";
+  } else {
+    const taskSubTask = document.getElementById("addTaskSubTask").value;
+    const currentUser = loadUserData();
 
-  let newSubTask = {
-    id: uuidv4(),
-    title: taskSubTask,
-    check: false,
-    completed: false,
-  };
-  currentUser.subTasks.push(newSubTask);
-  saveUserData(currentUser);
-  const userIndex = users.findIndex((user) => user.id === currentUser.id);
-  if (userIndex !== -1) {
-    users[userIndex].subTasks = currentUser.subTasks;
-    await backend.setItem("users", JSON.stringify(users));
+    let newSubTask = {
+      id: uuidv4(),
+      title: taskSubTask,
+      check: false,
+      completed: false,
+    };
+    currentUser.subTasks.push(newSubTask);
+    saveUserData(currentUser);
+    const userIndex = users.findIndex((user) => user.id === currentUser.id);
+    if (userIndex !== -1) {
+      users[userIndex].subTasks = currentUser.subTasks;
+      await backend.setItem("users", JSON.stringify(users));
+    }
+    document.getElementById("addTaskSubTask").value = "";
+    loadSubTasks(newSubTask);
   }
-  document.getElementById("addTaskSubTask").value = "";
-  loadSubTasks(newSubTask);
 }
 
 /**
@@ -621,6 +633,13 @@ function writeDate() {
  */
 function writeDescription() {
   document.getElementById("descriptionRequired").style.display = "none";
+}
+
+/**
+ * deletes the required information notice
+ */
+function subTaskRequired() {
+  document.getElementById("subTaskRequired").style.display = "none";
 }
 
 /**

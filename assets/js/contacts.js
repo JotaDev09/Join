@@ -237,9 +237,7 @@ async function createNewContact() {
     users[userIndex] = currentUser;
     await backend.setItem("users", JSON.stringify(users));
   }
-
   addContactToHTML();
-  closeNewContact();
   createContactPopup();
 }
 
@@ -305,8 +303,9 @@ function closeNewContact() {
  */
 function createContactPopup() {
   document.getElementById("contactCreated").style =
-    "transform: translateY(-557%); transition-duration: 0.5s";
-  popUpCreateContact = setInterval(hiddeContactPopUp, 1500);
+    "transform: translateY(-557%); transition-duration: 1s";
+  closeNewContact();
+  setInterval(hiddeContactPopUp, 1000);
 }
 
 /**
@@ -317,7 +316,7 @@ function hiddeContactPopUp() {
     .getElementById("newContactPopUp")
     .classList.remove("background_white_transp");
   document.getElementById("contactCreated").style =
-    "display: none !important; transform: translateY(110%); transition-duration: 0.1s";
+    "display: none !important; transform: translateY(110%); transition-duration: 2s";
 }
 
 /**
@@ -364,6 +363,7 @@ function editOldContact() {
       document.getElementById("bigContactCard").innerHTML = bigCardContact;
 
       closeEditContact();
+      addContactToHTML();
     }
   }
 }

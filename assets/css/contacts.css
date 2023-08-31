@@ -1,5 +1,10 @@
 body {
     margin: 0;
+    overflow-y: hidden;
+}
+
+.blue_select_con {
+    background-color: #D2E3FF;
 }
 
 .contacts_container {
@@ -17,6 +22,10 @@ body {
     background: #FFFFFF;
     box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
     overflow-x: scroll;
+}
+
+.add_task_popUp_close_PU {
+    display: flex !important;
 }
 
 .contacts_column_cont {
@@ -422,6 +431,23 @@ body {
         bottom: 100px;
     }
 
+    .blue_select_con {
+        background-color: transparent;
+    }
+
+    .blue_select_con a {
+        color: #4589FF !important;
+    }
+
+    .icon_contacts_blue {
+        width: 24px !important;
+        display: flex !important;
+    }
+
+    .icon_contacts {
+        display: none;
+    }
+
 }
 
 @media (width < 700px) {
@@ -506,11 +532,11 @@ body {
 
     .contacts_init_circle {
         width: 40px;
-        height: 40px;
+        height: 34px;
     }
 
     .contacts_initials {
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .contacts_subtitle_cont {

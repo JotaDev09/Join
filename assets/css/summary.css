@@ -3,18 +3,31 @@
     height: -webkit-fill-available;
 }
 
+.blue_select_summ {
+    background-color: #D2E3FF;
+}
 
 /*Summary welcome user*/
 .summary_general_cont {
     padding-left: 232px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .container_summary {
-    top: 257px;
     gap: 22px;
-    position: absolute;
-    width: 800px;
+    position: relative;
+    width: -webkit-fill-available;
     height: 77px;
+    padding-top: 170px;
+}
+
+.summary_head {
+    max-width: -webkit-fill-available;
 }
 
 .summary_morning {
@@ -25,7 +38,7 @@
 }
 
 .summary_user {
-    width: max-content;
+    width: fit-content;
     height: 77px;
     font-weight: 700 !important;
     font-size: 64px;
@@ -36,10 +49,10 @@
 
 .summary_board {
     gap: 35px;
-    position: absolute;
+    position: relative;
     width: 925px;
-    height: 445px;
-    top: 412px;
+    height: 460px;
+    overflow-y: auto;
 }
 
 .summary_board_top {
@@ -56,6 +69,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .summary_top_left:hover {
@@ -64,20 +78,24 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 0px 30px 30px 30px;
+    transition: 0.5s ease;
 
 }
 
 .summary_top_left:hover a {
     color: #4589FF;
     font-size: 28px;
+    transition: 0.5s ease;
 }
 
 .summary_top_left:hover .urgent_number {
     font-size: 58px;
+    transition: 0.5s ease;
 }
 
 .summary_top_left:hover .summary_date {
     font-size: 43px;
+    transition: 0.5s ease;
 }
 
 .summary_left_urgent {
@@ -119,6 +137,7 @@
 
 .summary_top_left:hover .summary_whiteLine {
     border: 3px solid #005DFF;
+    transition: 0.5s ease;
 }
 
 .summary_left_date {
@@ -157,6 +176,7 @@
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 0px 30px 30px 30px;
+    transition: 0.5s ease;
 }
 
 .summary_right_cont {
@@ -182,6 +202,7 @@
 .summary_top_right:hover .summary_cont_tasktodo {
     font-size: 28px;
     color: #005DFF;
+    transition: 0.5s ease;
 }
 
 .summary_task_img {
@@ -201,6 +222,7 @@
 .summary_top_right:hover .summary_task_number {
     font-size: 58px;
     color: #005DFF;
+    transition: 0.5s ease;
 }
 
 .summary_board_bottom {
@@ -224,6 +246,7 @@
     background: #005DFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 0px 30px 30px 30px;
+    transition: 0.5s ease;
 }
 
 .summary_cont_tasks {
@@ -254,6 +277,7 @@
 .summary_bottom_cont:hover .summary_progress_number {
     font-size: 58px;
     color: #FFFFFF;
+    transition: 0.5s ease;
 }
 
 .summary_tasks_text {
@@ -267,18 +291,10 @@
 .summary_bottom_cont:hover .summary_tasks_text {
     font-size: 28px;
     color: #FFFFFF;
+    transition: 0.5s ease;
 }
 
-@media (height < 900px) {
-    .container_summary {
-        top: 157px
-    }
-
-    .summary_board {
-        top: 250px !important;
-    }
-}
-
+@media (height < 900px) and (width < 650px) {}
 
 @media (width < 1300px) {
 
@@ -290,7 +306,6 @@
         width: 730px;
         height: 380px;
         gap: 20px;
-        top: 400px;
     }
 
     .summary_board_top {
@@ -371,14 +386,14 @@
     }
 
     .container_summary {
-        width: 620px
+        width: 620px;
+        align-items: center;
     }
 
     .summary_board {
         width: 620px;
         height: 380px;
         gap: 15px;
-        top: 400px;
     }
 
     .summary_board_top {
@@ -547,14 +562,32 @@
     .summary_general_cont {
         padding-left: 0;
     }
+
+    .blue_select_summ {
+        background-color: transparent;
+    }
+
+    .blue_select_summ a {
+        color: #4589FF !important;
+    }
+
+    .icon_summary {
+        display: none;
+    }
+
+    .icon_summary_blue {
+        display: flex !important;
+    }
 }
 
 @media (width < 650px) {
+
 
     .container_summary {
         width: 460px;
         height: 135px;
         justify-content: center;
+        align-items: center;
     }
 
     .summary_head {
@@ -563,10 +596,12 @@
     }
 
     .summary_board {
+        padding-top: 165px;
         display: none !important;
-        top: 150px;
         width: 490px;
-        height: fit-content;
+        height: -webkit-fill-available;
+        justify-content: flex-start !important;
+        padding-bottom: 120px;
     }
 
     .summary_morning {
@@ -616,6 +651,12 @@
     .summary_bottom_cont:hover {
         width: 238px;
         height: 162px;
+    }
+}
+
+@media (width < 600px) {
+    .summary_board {
+        padding-top: 120px;
     }
 }
 
@@ -731,9 +772,6 @@
     .summary_board {
         width: 290px;
         height: -webkit-fill-available;
-        overflow: scroll;
-        top: 60px;
-        padding-top: 250px;
         padding-bottom: 100px;
     }
 

@@ -1,6 +1,8 @@
 body {
     margin: 0;
+    overflow-y: hidden;
 }
+
 
 
 /*Add Task container*/
@@ -20,10 +22,11 @@ body {
     bottom: 0;
     padding-bottom: 20px;
     overflow-y: auto;
+
 }
 
 .add_task_popUp_close_PU {
-    display: flex;
+    display: none;
 }
 
 .add_task_title {
@@ -41,10 +44,14 @@ body {
     border-bottom: 1px solid #D1D1D1;
 }
 
+.add_task_title_cont:hover {
+    border-bottom: 1px solid #4589FF;
+}
+
 .add_task_input {
     width: 350px;
     font-size: 40px;
-    color: #D1D1D1;
+    color: black;
     border: none;
     outline: none;
 }
@@ -60,10 +67,11 @@ body {
     width: 422px;
     height: 51px;
     background: #FFFFFF;
+    overflow-x: hidden !important;
 }
 
 .contacts_img_cont {
-    padding: 18px 21px;
+    padding: 15px 21px;
     gap: 10px;
     isolation: isolate;
     width: 381px;
@@ -72,6 +80,10 @@ body {
     border-bottom: 1px solid #D1D1D1;
     justify-content: space-between;
     cursor: pointer;
+}
+
+.contacts_img_cont:hover {
+    border-bottom: 1px solid #4589FF;
 }
 
 .contacts_choose_cont {
@@ -211,11 +223,15 @@ body {
     border-bottom: 1px solid #D1D1D1;
 }
 
+.add_task_Duedate_input:hover {
+    border-bottom: 1px solid #4589FF;
+}
+
 .Duedate_input[type="date"] {
     width: 422px;
     height: 23px;
     font-size: 19px;
-    color: #D1D1D1;
+    color: black;
     border: none;
     outline: none;
     cursor: pointer;
@@ -227,6 +243,7 @@ body {
 
 .Duedate_input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
+    cursor: pointer;
 }
 
 /*Add Task assign category*/
@@ -245,10 +262,11 @@ body {
 .add_task_select_cat {
     width: 422px;
     height: 51px;
+    overflow-x: hidden !important;
 }
 
 .add_task_selectCat {
-    padding: 18px 21px;
+    padding: 11px 21px;
     gap: 10px;
     isolation: isolate;
     width: 381px;
@@ -259,12 +277,17 @@ body {
     cursor: pointer;
 }
 
+.add_task_selectCat:hover {
+    border-bottom: 1px solid #4589FF;
+}
+
 .add_task_selected {
     background-color: #D2E3FF;
 }
 
 .category_hidden_cont {
     overflow-y: visible;
+    overflow-x: hidden !important;
 }
 
 .category_circle_color {
@@ -322,6 +345,7 @@ body {
     gap: 10px;
     width: 422px;
     height: 82px;
+    padding-left: 2px;
 }
 
 .add_task_prio_buttons {
@@ -384,6 +408,10 @@ body {
     outline: none;
 }
 
+.add_task_descript_input:hover {
+    border: 1px solid #4589FF;
+}
+
 .add_task_descript_input::placeholder {
     font-size: 19px;
     color: #D1D1D1;
@@ -392,7 +420,7 @@ body {
 .add_task_subtasks_cont {
     gap: 14px;
     width: 422px;
-    height: 79px;
+    height: 121px;
     border: none;
 }
 
@@ -401,6 +429,10 @@ body {
     height: 54px;
     background: #FFFFFF;
     border-bottom: 1px solid #D1D1D1;
+}
+
+.subtasks_cont_input_img:hover {
+    border-bottom: 1px solid #4589FF;
 }
 
 /*Add Task assign subtask*/
@@ -455,9 +487,7 @@ body {
     gap: 25px;
     width: -webkit-fill-available;
     height: 61px;
-    padding-right: 30px;
-    bottom: 0;
-    padding-bottom: 20px;
+    order: 20;
 }
 
 .add_task_buttons_bottom_resp {
@@ -540,11 +570,7 @@ body {
         width: 445px;
     }
 
-    .add_task_buttons_bottom {
-        gap: 15px;
-        width: 320px;
-        right: 15px;
-    }
+
 
     .add_task_buttons_clear {
         padding: 18px 8px;

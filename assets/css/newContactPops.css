@@ -5,6 +5,7 @@
     width: 518px;
     height: -webkit-fill-available;
     overflow-y: scroll;
+    overflow-x: hidden;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 00px 30px 30px 30px;
@@ -114,7 +115,7 @@
     width: 320px;
     height: 30px;
     font-size: 19px;
-    color: #D1D1D1;
+    color: black;
     border: none;
     outline: none;
 }
@@ -214,4 +215,79 @@
     color: #FFF;
     text-align: center;
     font-size: 32px;
+}
+
+@media (height < 900px) {
+
+    .new_contact_top {
+        height: fit-content;
+    }
+
+    .new_contact_bottom {
+        height: fit-content;
+    }
+
+    .newContact_popUp_cont {
+        gap: 15px;
+    }
+
+    .new_contact_logo {
+        padding-top: 30px;
+    }
+
+    .new_contact_bottom2 {
+        gap: 15px;
+    }
+}
+
+@media (height < 800px) {
+    .new_contact_top {
+        gap: 7px;
+    }
+
+    .new_contact_logo {
+        padding-top: 15px;
+    }
+
+    .new_contact_title {
+        font-size: 32px;
+        height: inherit;
+    }
+
+    .new_contact_subtitle {
+        font-size: 17px;
+    }
+
+    .new_contact_bottom {
+        gap: 20px;
+    }
+
+    .new_contact_bottom1 {
+        width: 80px;
+        height: 80px;
+    }
+
+    .new_contact_circle {
+        width: 80px;
+        height: 80px;
+    }
+
+    .new_contact_circle img {
+        width: 40px;
+    }
+
+    .new_contact_bottom2 {
+        width: 80px;
+        height: fit-content;
+    }
+
+    .new_contact_bottom3 {
+        height: fit-content;
+    }
+}
+
+@media (width < 518px) {
+    .newContact_popUp_container {
+        border-radius: 30px !important;
+    }
 }
