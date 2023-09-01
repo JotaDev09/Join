@@ -100,7 +100,7 @@ body {
 .board_columns_container {
     gap: 26px;
     position: relative;
-    width: 1078px;
+    width: -webkit-fill-available;
     padding-left: 280px;
     overflow-y: auto;
 }
@@ -136,19 +136,18 @@ body {
     cursor: pointer;
 }
 
-
 .board_columns_column {
     gap: 25px;
     width: 250px;
 }
 
 .column_for_tasks {
-    width: 250px;
+    width: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    height: 590px;
+    height: -webkit-fill-available;
     overflow: scroll;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -161,7 +160,7 @@ body {
 .minitask_container {
     padding: 18px 19px;
     gap: 10px;
-    width: 210px;
+    width: 203px;
     height: 205px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
@@ -170,7 +169,7 @@ body {
 }
 
 .minitask {
-    gap: 20px;
+    gap: 15px;
     width: 213px;
     height: 205px;
 }
@@ -201,7 +200,7 @@ body {
 
 .minitask_descr_title {
     width: 200px;
-    height: 19px;
+    height: 35px;
     font-weight: 700 !important;
     font-size: 16px;
     color: #4589FF;
@@ -322,7 +321,6 @@ body {
 
     .board_columns_container {
         justify-content: center !important;
-        width: 550px;
         gap: 35px;
         flex-wrap: wrap;
     }
@@ -425,7 +423,6 @@ body {
     }
 
     .board_columns_container {
-        width: 300px;
         overflow-y: scroll;
     }
 

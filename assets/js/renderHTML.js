@@ -119,7 +119,6 @@ function addTaskContainer() {
                 <a class="add_task_titles font400">Due date</a>
                 <div class="add_task_Duedate_input row-center">
                 <input class="Duedate_input font400" placeholder="YYYY-MM-DD" type="date" id="inputCalendarAddTask" onclick="writeDate()">
-
                 </div>
                 <a class="field_required" id="dateRequired">This field is required</a>
             </div>

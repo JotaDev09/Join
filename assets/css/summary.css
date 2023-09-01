@@ -94,7 +94,8 @@
 }
 
 .summary_top_left:hover .summary_date {
-    font-size: 41px;
+    width: 362px;
+    font-size: 39px;
     transition: 0.5s ease;
 }
 
@@ -142,12 +143,12 @@
 
 .summary_left_date {
     gap: 13px;
-    width: 380px;
+    width: 305px;
     height: 81px;
 }
 
 .summary_date {
-    width: 380px;
+    width: 308px;
     height: 40px;
     font-weight: 700 !important;
     font-size: 33px;
@@ -294,8 +295,6 @@
     transition: 0.5s ease;
 }
 
-@media (height < 900px) and (width < 650px) {}
-
 @media (width < 1300px) {
 
     .container_summary {
@@ -334,7 +333,7 @@
     }
 
     .summary_top_left:hover .summary_date {
-        font-size: 38px;
+        font-size: 32px;
     }
 
     .summary_urgent_text {
@@ -391,7 +390,7 @@
     }
 
     .summary_board {
-        width: 620px;
+        width: 660px;
         height: 380px;
         gap: 15px;
     }
@@ -450,7 +449,6 @@
 
     .summary_date {
         font-size: 30px;
-        width: 270px;
     }
 
     .summary_top_left:hover .summary_date {

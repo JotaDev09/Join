@@ -448,13 +448,9 @@ body {
         justify-content: center;
     }
 
-    .login_container {
-        top: initial;
-    }
-
     .login_logo_join_blue {
         top: 37px;
-        left: 38px;
+        padding-left: 38px;
         width: 66px;
         height: 80px;
     }
@@ -469,10 +465,6 @@ body {
 
     .login_not_user {
         justify-content: end !important;
-    }
-
-    .not_user {
-        display: none;
     }
 
     .not_user {
@@ -589,8 +581,6 @@ body {
 
 @media (width < 700px) {
 
-    .login {}
-
     .login_not_user {
         position: relative;
         order: 3;
@@ -600,6 +590,7 @@ body {
         bottom: 10px;
         display: flex;
         padding-bottom: 20px;
+        padding-right: 20px;
     }
 
     .not_user {
@@ -610,9 +601,10 @@ body {
         position: relative;
         order: 1;
         top: 37px;
-        left: 38px;
+        padding-left: 38px;
         width: -webkit-fill-available;
         height: 80px;
+        left: 0;
     }
 
     .login_logo_blue_img {

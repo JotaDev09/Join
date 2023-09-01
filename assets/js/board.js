@@ -556,7 +556,6 @@ function closeViewTask() {
  */
 async function createATaskPU() {
   createATask();
-  loadTasksFromServer();
   closePopUpCreate();
 }
 
@@ -574,6 +573,7 @@ function closePopUpCreate() {
       .classList.remove("background_white_transp");
     document.getElementById("addTaskPopUpContainer").style = "display: none";
   }, 100);
+  loadTasksFromServer();
 }
 
 /**

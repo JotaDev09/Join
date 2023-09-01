@@ -3,6 +3,7 @@ let selecCategory = false;
 let selectedCategory = null;
 let selectedButtonId = "";
 let categoryList = [];
+let categories = [];
 let selectedSubTasks = [];
 let task = {};
 let selectedCategoryColor = "";
@@ -308,6 +309,23 @@ function selectedCategoryTask(categoryDiv, category, categories) {
   });
 }
 
+function resetCategories() {
+  if (selectedCategory) {
+    selectedCategory.check = false;
+    const prevSelectedCategoryDiv = document.getElementById(
+      `selectCategoryForTask_${categories.indexOf(selectedCategory)}`
+    );
+    if (prevSelectedCategoryDiv) {
+      prevSelectedCategoryDiv.classList.remove("add_task_selected");
+    }
+  }
+
+  // Limpiar cualquier otra lógica o cambios que debas realizar
+  // Agrega aquí cualquier otra lógica de reinicio necesaria
+
+  selectedCategory = null;
+}
+
 /**
  * the function changes the colors of the prio buttons
  *
@@ -458,7 +476,7 @@ function loadSubTasks() {
 
   if (currentUser.subTasks.length > 0) {
     currentUser.subTasks.forEach((subTask, index) => {
-      createSubTaskElement(subTask, index);
+      createSubTaskElement(subTask, index, currentUser);
     });
   }
 }
@@ -468,13 +486,13 @@ function loadSubTasks() {
  * @param {subTask} - take the info from the subtask
  * @param {index} - take the info from the index of the subtask
  */
-function createSubTaskElement(subTask, index) {
+function createSubTaskElement(subTask, index, currentUser) {
   const subTaskDiv = document.createElement("div");
   subTaskDiv.classList.add("subtasks_cont_check", "row-center");
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
-  checkbox.id = "subTask${index}";
+  checkbox.id = `subTask${index}`;
   checkbox.classList.add("subtasks_checkbox");
   checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
@@ -490,12 +508,35 @@ function createSubTaskElement(subTask, index) {
       }
     }
   });
+
   const subTaskText = document.createElement("a");
   subTaskText.classList.add("subtask_text", "font400");
   subTaskText.textContent = subTask.title;
 
+  const deleteST = document.createElement("img");
+  deleteST.src = "assets/img/delete.svg";
+  deleteST.classList.add("delete_subtask");
+
+  // Add an event listener to delete the subtask
+  deleteST.addEventListener("click", () => {
+    // Find the index of the subtask in currentUser.subTasks
+    const subTaskIndex = currentUser.subTasks.findIndex(
+      (item) => item.id === subTask.id
+    );
+
+    if (subTaskIndex !== -1) {
+      // Remove the subtask from currentUser.subTasks
+      currentUser.subTasks.splice(subTaskIndex, 1);
+
+      // Save the updated user data and refresh the subtasks list
+      saveUserData(currentUser);
+      loadSubTasks();
+    }
+  });
+
   subTaskDiv.appendChild(checkbox);
   subTaskDiv.appendChild(subTaskText);
+  subTaskDiv.appendChild(deleteST);
 
   subTaskContainer.appendChild(subTaskDiv);
 }
@@ -529,8 +570,6 @@ async function createATask() {
       subtaskTask,
       currentUser
     );
-
-    clearTask();
   }
 }
 
@@ -574,6 +613,8 @@ async function createNewTask(
     users[userIndex] = currentUser;
     await backend.setItem("users", JSON.stringify(users));
   }
+
+  clearTask();
 }
 
 /**
@@ -643,9 +684,7 @@ function clearTask() {
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
-  if (selectedCategory) {
-    selectedCategory.check = false;
-  }
+  resetCategories();
   const checkSubTask = document.querySelectorAll(".subtasks_checkbox");
   checkSubTask.forEach((checkbox) => {
     checkbox.checked = false;
