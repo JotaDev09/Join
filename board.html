@@ -61,7 +61,7 @@
             <div class="board_columns_column column-center">
                 <div class="board_column_tasks row-spacebet-center">
                     <a class="column_tasks_text font400">To do</a>
-                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU()">
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU('todo')">
                 </div>
                 <div class="column_for_tasks" id="todoColumn" ondrop="moveTo('todo')" ondragover="allowDrop(event)">
                 </div>
@@ -69,7 +69,7 @@
             <div class="board_columns_column column-center">
                 <div class="board_column_tasks row-spacebet-center">
                     <a class="column_tasks_text font400">In progress</a>
-                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU()">
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU('progress')">
                 </div>
                 <div class="column_for_tasks" id="InProgressColumn" ondrop="moveTo('progress')"
                     ondragover="allowDrop(event)"></div>
@@ -77,7 +77,7 @@
             <div class="board_columns_column column-center">
                 <div class="board_column_tasks row-spacebet-center">
                     <a class="column_tasks_text font400">Await feedback</a>
-                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU()">
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU('feedback')">
                 </div>
                 <div class="column_for_tasks" id="feedbackColumn" ondrop="moveTo('feedback')"
                     ondragover="allowDrop(event)"></div>
@@ -85,7 +85,7 @@
             <div class="board_columns_column column-center">
                 <div class="board_column_tasks row-spacebet-center">
                     <a class="column_tasks_text font400">Done</a>
-                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU()">
+                    <img src="assets/img/plusbutton.svg" class="column_task_plus" onclick="createTaskPU('done')">
                 </div>
                 <div class="column_for_tasks" id="DoneColumn" ondrop="moveTo('done')" ondragover="allowDrop(event)">
                 </div>

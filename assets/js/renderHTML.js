@@ -92,6 +92,9 @@ function renderBigCard(contactName, contactEmail, contactPhone, contactColor) {
       </div>`;
 }
 
+/*
+ * The function renders the add Task container
+ */
 function addTaskContainer() {
   return `
             <img
@@ -247,6 +250,77 @@ function generateColumnsHTML(task) {
   `;
 }
 
+/**
+ * the function generates the html with the info of the contact
+ *  *
+ * @param {contacts} - take the info from the contacts
+ */
+function generateContactsHtml(contacts) {
+  let html = "";
+
+  contacts.forEach((contact, index) => {
+    html += `
+      <div class="add_task_contacts_list row-center" id="contactContainer${index}">
+        <a class="add_task_contact_name font400" id="addUserTask${index}">${
+      contact.name || contact.email
+    }</a>
+    <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" data-contact-index="${index}" data-contact-id="${
+      contact.id
+    }" ${contact.check ? "checked" : ""} >
+      </div>
+    `;
+  });
+
+  return html;
+}
+
+/**
+ * the function generates the html to add a new contact from addTask
+ */
+function generateInviteNewContactHtml() {
+  return `
+    <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
+      <a class="add_task_subtitle font400">Invite new contact</a>
+      <img src="assets/img/newContactBlue.svg" class="add_task_new_contact" >
+    </div>
+  `;
+}
+
+/**
+ * the function generates the html with the new name of the category
+ */
+function newCategoryName() {
+  return `
+        <div class="new_contact_cont row-center">
+            <input class="new_contact_input row-center font400" id="addTaskNewCategory" 
+            placeholder="New category name"></input>
+            <div class="new_contact_input_icons row-center-center">
+                <img src="assets/img/cancelBlue.svg" onclick="cancelNewCategory()">
+                <img src="assets/img/grauLineSmall.svg">
+                <img src="assets/img/blueCheck.svg" onclick="createNewCategoryTask()">
+            </div>
+        </div>
+        <div class="new_category_colors row-center" id="colorsContainer"></div>
+    `;
+}
+
+/**
+ * the function generates the html with the new color for the new category
+ */
+function newCategoryColors(colorCategory) {
+  return `
+        <div class="new_category_select_color row-center">
+            <button class="new_category_circle" style="background:${colorCategory}" onclick="selectCategoryColor('${colorCategory}')"></button>
+        </div>
+    `;
+}
+
+/**
+ * The function generates the edit Task container
+ *
+ * @param {taskData} - take the info from the task
+ * @param {index} - take the index of the task
+ **/
 function editTaskContainer(taskData, index) {
   return `
     <div class="edit_task_container ">
@@ -329,7 +403,7 @@ function editTaskContainer(taskData, index) {
                 </div>
             </div>
             <div class="subTaskContainer column-flex-start" id="subTaskContainer"></div>
-            <div class="add_task_buttons_bottom_ok row-center-center" id="addTaskButtonsok">
+            <div class="add_task_buttons_bottom_ok center-flex-end" id="addTaskButtonsok">
                 <button class="add_task_buttons_ok row-center-center" onclick="okEditTask()">
                     <a class="add_task_create_text font400">Ok</a>
                     <img src="assets/img/checkCreateT.svg" class="">
@@ -340,6 +414,10 @@ function editTaskContainer(taskData, index) {
   `;
 }
 
+/**
+ * The function generates the view Task container
+ * @param {taskData} - take the info from the task
+ */
 function viewTask(taskData) {
   const priorityImagePath = prioInBoardImg(taskData.prio);
   const namePrio = prioInBoard(taskData.prio);
@@ -378,7 +456,7 @@ function viewTask(taskData) {
     <a class="view_task_subtitle font400">Subtasks</a>
     <div class="view_task_subTasks column-flex-start">${viewTaskSubTask}</div>
   </div>
-  <div class="view_task_edit center-center">
+  <div class="view_task_edit center-flex-end">
   <div class="view_task_editTask center-center" data-task='${JSON.stringify(
     taskData
   )}' onclick="deleteTask(this)">

@@ -24,6 +24,7 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
+    overflow-y: auto;
 }
 
 .view_task_popUp_close {
@@ -173,12 +174,11 @@ body {
 }
 
 .view_task_edit {
-    width: 158px;
+    display: flex;
+    width: -webkit-fill-available;
     height: 28px;
     gap: 8px;
-    position: absolute;
-    bottom: 48px;
-    right: 40px;
+    position: relative;
 }
 
 .view_task_editTask {
@@ -190,6 +190,9 @@ body {
     font-size: 16px;
 }
 
+.add_task_buttons_bottom_ok {
+    width: -webkit-fill-available;
+}
 
 .add_task_buttons_ok {
     width: 78px;
@@ -197,11 +200,10 @@ body {
     padding: 16px 10px;
     gap: 4px;
     border-radius: 10px;
-    background: var(--version-2-main-color, #4589FF);
+    background: #4589FF;
     cursor: pointer;
     border: none;
-    position: absolute;
-    right: 40px;
+    position: relative;
 }
 
 .add_task_buttons_ok img {
@@ -281,6 +283,8 @@ body {
     }
 
     .view_task_edit {
-        bottom: 10px;
+        justify-content: flex-end !important;
     }
+
+
 }

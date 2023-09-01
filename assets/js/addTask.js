@@ -53,6 +53,9 @@ async function loadCategoriesFromServer() {
   }
 }
 
+/**
+ * The function gets the actual date
+ */
 function actualdate() {
   let today = new Date().toISOString().split("T")[0];
   document.getElementById("inputCalendarAddTask").min = today;
@@ -75,42 +78,6 @@ function getContacts() {
 
   const contactsList = document.getElementById("contactsList");
   contactsList.innerHTML = html + generateInviteNewContactHtml();
-}
-
-/**
- * the function generates the html with the info of the contact
- *  *
- * @param {contacts} - take the info from the contacts
- */
-function generateContactsHtml(contacts) {
-  let html = "";
-
-  contacts.forEach((contact, index) => {
-    html += `
-      <div class="add_task_contacts_list row-center" id="contactContainer${index}">
-        <a class="add_task_contact_name font400" id="addUserTask${index}">${
-      contact.name || contact.email
-    }</a>
-    <input type="checkbox" class="add_task_contacts_check" id="checkContact${index}" data-contact-index="${index}" data-contact-id="${
-      contact.id
-    }" ${contact.check ? "checked" : ""} >
-      </div>
-    `;
-  });
-
-  return html;
-}
-
-/**
- * the function generates the html to add a new contact from addTask
- */
-function generateInviteNewContactHtml() {
-  return `
-    <div class="contacts_choose_cont row-center" onclick="assignedNewContact()">
-      <a class="add_task_subtitle font400">Invite new contact</a>
-      <img src="assets/img/newContactBlue.svg" class="add_task_new_contact" >
-    </div>
-  `;
 }
 
 /**
@@ -157,9 +124,7 @@ function expandCategory() {
 async function createNewContactTask() {
   let emailContactTask = document.getElementById("addTaskNewContact");
   const currentUser = loadUserData();
-  if (!currentUser.contacts) {
-    currentUser.contacts = [];
-  }
+
   let newContact = {
     id: uuidv4(),
     name: "",
@@ -261,35 +226,6 @@ function cancelNewCategory() {
 }
 
 /**
- * the function generates the html with the new name of the category
- */
-function newCategoryName() {
-  return `
-        <div class="new_contact_cont row-center">
-            <input class="new_contact_input row-center font400" id="addTaskNewCategory" 
-            placeholder="New category name"></input>
-            <div class="new_contact_input_icons row-center-center">
-                <img src="assets/img/cancelBlue.svg" onclick="cancelNewCategory()">
-                <img src="assets/img/grauLineSmall.svg">
-                <img src="assets/img/blueCheck.svg" onclick="createNewCategoryTask()">
-            </div>
-        </div>
-        <div class="new_category_colors row-center" id="colorsContainer"></div>
-    `;
-}
-
-/**
- * the function generates the html with the new color for the new category
- */
-function newCategoryColors(colorCategory) {
-  return `
-        <div class="new_category_select_color row-center">
-            <button class="new_category_circle" style="background:${colorCategory}" onclick="selectCategoryColor('${colorCategory}')"></button>
-        </div>
-    `;
-}
-
-/**
  * the function selects the color for the category
  */
 function selectCategoryColor(color) {
@@ -341,25 +277,34 @@ function renderCategory(categories) {
         <a class="add_task_subtitle font400">${categoryName}</a>
         <span class="category_circle_color color_sales" style="background:${categoryColor}"></span>
       `;
-    categoryDiv.addEventListener("click", () => {
-      if (selectedCategory) {
-        selectedCategory.check = false;
-        const prevSelectedCategoryDiv = document.getElementById(
-          `selectCategoryForTask_${categories.indexOf(selectedCategory)}`
-        );
-        prevSelectedCategoryDiv.classList.remove("add_task_selected");
-      }
-      category.check = true;
-      selectedCategory = category;
-      categoryDiv.classList.add("add_task_selected");
 
-      const selectTaskCategoryDiv =
-        document.getElementById("selectTaskCategory");
-      selectTaskCategoryDiv.textContent = selectedCategory.name;
-
-      expandCategory();
-    });
+    selectedCategoryTask(categoryDiv, category, categories);
     categoryContainer.appendChild(categoryDiv);
+  });
+}
+
+/**
+ * the function selects the category for the task
+ * @param {categoryDiv} - take the info from the category
+ * @param {category} - take the info from the category
+ **/
+function selectedCategoryTask(categoryDiv, category, categories) {
+  categoryDiv.addEventListener("click", () => {
+    if (selectedCategory) {
+      selectedCategory.check = false;
+      const prevSelectedCategoryDiv = document.getElementById(
+        `selectCategoryForTask_${categories.indexOf(selectedCategory)}`
+      );
+      prevSelectedCategoryDiv.classList.remove("add_task_selected");
+    }
+    category.check = true;
+    selectedCategory = category;
+    categoryDiv.classList.add("add_task_selected");
+
+    const selectTaskCategoryDiv = document.getElementById("selectTaskCategory");
+    selectTaskCategoryDiv.textContent = selectedCategory.name;
+
+    expandCategory();
   });
 }
 
@@ -513,38 +458,46 @@ function loadSubTasks() {
 
   if (currentUser.subTasks.length > 0) {
     currentUser.subTasks.forEach((subTask, index) => {
-      const subTaskDiv = document.createElement("div");
-      subTaskDiv.classList.add("subtasks_cont_check", "row-center");
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = "subTask${index}";
-      checkbox.classList.add("subtasks_checkbox");
-      checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-          selectedSubTasks.push(subTask);
-          subTask.check = true;
-        } else {
-          const subTaskIndex = selectedSubTasks.findIndex(
-            (item) => item.title === subTask.title
-          );
-          if (subTaskIndex !== -1) {
-            selectedSubTasks.splice(subTaskIndex, 1);
-            subTask.check = false;
-          }
-        }
-      });
-
-      const subTaskText = document.createElement("a");
-      subTaskText.classList.add("subtask_text", "font400");
-      subTaskText.textContent = subTask.title;
-
-      subTaskDiv.appendChild(checkbox);
-      subTaskDiv.appendChild(subTaskText);
-
-      subTaskContainer.appendChild(subTaskDiv);
+      createSubTaskElement(subTask, index);
     });
   }
+}
+
+/**
+ * The function creates the html for the subtask
+ * @param {subTask} - take the info from the subtask
+ * @param {index} - take the info from the index of the subtask
+ */
+function createSubTaskElement(subTask, index) {
+  const subTaskDiv = document.createElement("div");
+  subTaskDiv.classList.add("subtasks_cont_check", "row-center");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = "subTask${index}";
+  checkbox.classList.add("subtasks_checkbox");
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      selectedSubTasks.push(subTask);
+      subTask.check = true;
+    } else {
+      const subTaskIndex = selectedSubTasks.findIndex(
+        (item) => item.title === subTask.title
+      );
+      if (subTaskIndex !== -1) {
+        selectedSubTasks.splice(subTaskIndex, 1);
+        subTask.check = false;
+      }
+    }
+  });
+  const subTaskText = document.createElement("a");
+  subTaskText.classList.add("subtask_text", "font400");
+  subTaskText.textContent = subTask.title;
+
+  subTaskDiv.appendChild(checkbox);
+  subTaskDiv.appendChild(subTaskText);
+
+  subTaskContainer.appendChild(subTaskDiv);
 }
 
 /**
@@ -566,31 +519,60 @@ async function createATask() {
     let subtaskTask = selectedSubTasks || " ";
 
     const currentUser = loadUserData();
-    if (!currentUser.tasks) {
-      currentUser.tasks = [];
-    }
-
-    let newTask = {
-      id: uuidv4(),
-      title: titleTask.value,
-      contacts: contactsTask,
-      dueDate: dueDateTask.value,
-      category: categoryTask,
-      prio: prioTask,
-      description: descriptionTask.value,
-      subTask: subtaskTask,
-      columns: "todo",
-    };
-
-    currentUser.tasks.push(newTask);
-    saveUserData(currentUser);
-    const userIndex = users.findIndex((user) => user.id === currentUser.id);
-    if (userIndex !== -1) {
-      users[userIndex] = currentUser;
-      await backend.setItem("users", JSON.stringify(users));
-    }
+    createNewTask(
+      titleTask,
+      contactsTask,
+      dueDateTask,
+      categoryTask,
+      prioTask,
+      descriptionTask,
+      subtaskTask,
+      currentUser
+    );
 
     clearTask();
+  }
+}
+
+/**
+ * the function creates a new Task
+ * @param {titleTask} - take the info from the title of the task
+ * @param {contactsTask} - take the info from the contacts of the task
+ * @param {dueDateTask} - take the info from the due date of the task
+ * @param {categoryTask} - take the info from the category of the task
+ * @param {prioTask} - take the info from the prio of the task
+ * @param {descriptionTask} - take the info from the description of the task
+ * @param {subtaskTask} - take the info from the subtask of the task
+ * @param {currentUser} - take the info from the current user
+ **/
+async function createNewTask(
+  titleTask,
+  contactsTask,
+  dueDateTask,
+  categoryTask,
+  prioTask,
+  descriptionTask,
+  subtaskTask,
+  currentUser
+) {
+  let newTask = {
+    id: uuidv4(),
+    title: titleTask.value,
+    contacts: contactsTask,
+    dueDate: dueDateTask.value,
+    category: categoryTask,
+    prio: prioTask,
+    description: descriptionTask.value,
+    subTask: subtaskTask,
+    columns: "todo",
+  };
+
+  currentUser.tasks.push(newTask);
+  saveUserData(currentUser);
+  const userIndex = users.findIndex((user) => user.id === currentUser.id);
+  if (userIndex !== -1) {
+    users[userIndex] = currentUser;
+    await backend.setItem("users", JSON.stringify(users));
   }
 }
 
@@ -663,9 +645,6 @@ function clearTask() {
   });
   if (selectedCategory) {
     selectedCategory.check = false;
-    document
-      .getElementById("selectCategoryForTask")
-      .classList.remove("add_task_selected");
   }
   const checkSubTask = document.querySelectorAll(".subtasks_checkbox");
   checkSubTask.forEach((checkbox) => {
