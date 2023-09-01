@@ -487,58 +487,106 @@ function loadSubTasks() {
  * @param {index} - take the info from the index of the subtask
  */
 function createSubTaskElement(subTask, index, currentUser) {
-  const subTaskDiv = document.createElement("div");
-  subTaskDiv.classList.add("subtasks_cont_check", "row-center");
-
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.id = `subTask${index}`;
-  checkbox.classList.add("subtasks_checkbox");
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      selectedSubTasks.push(subTask);
-      subTask.check = true;
-    } else {
-      const subTaskIndex = selectedSubTasks.findIndex(
-        (item) => item.title === subTask.title
-      );
-      if (subTaskIndex !== -1) {
-        selectedSubTasks.splice(subTaskIndex, 1);
-        subTask.check = false;
-      }
-    }
-  });
-
-  const subTaskText = document.createElement("a");
-  subTaskText.classList.add("subtask_text", "font400");
-  subTaskText.textContent = subTask.title;
-
-  const deleteST = document.createElement("img");
-  deleteST.src = "assets/img/delete.svg";
-  deleteST.classList.add("delete_subtask");
-
-  // Add an event listener to delete the subtask
-  deleteST.addEventListener("click", () => {
-    // Find the index of the subtask in currentUser.subTasks
-    const subTaskIndex = currentUser.subTasks.findIndex(
-      (item) => item.id === subTask.id
-    );
-
-    if (subTaskIndex !== -1) {
-      // Remove the subtask from currentUser.subTasks
-      currentUser.subTasks.splice(subTaskIndex, 1);
-
-      // Save the updated user data and refresh the subtasks list
-      saveUserData(currentUser);
-      loadSubTasks();
-    }
-  });
+  const subTaskDiv = createSubTaskContainer(subTask, index);
+  const checkbox = createCheckbox(subTask, index);
+  const subTaskText = createSubTaskText(subTask);
+  const deleteST = createDeleteButton(subTask, currentUser);
 
   subTaskDiv.appendChild(checkbox);
   subTaskDiv.appendChild(subTaskText);
   subTaskDiv.appendChild(deleteST);
 
   subTaskContainer.appendChild(subTaskDiv);
+}
+
+/**
+ * The function creates the html for the subtask
+ * @param {subTask} - take the info from the subtask
+ * @param {index} - take the info from the index of the subtask
+ */
+function createSubTaskContainer(subTask, index) {
+  const subTaskDiv = document.createElement("div");
+  subTaskDiv.classList.add("subtasks_cont_check", "row-center");
+  return subTaskDiv;
+}
+
+/**
+ * The function creates the checkbox for the subtask
+ * @param {subTask} - take the info from the subtask
+ * @param {index} - take the info from the index of the subtask
+ **/
+function createCheckbox(subTask, index) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = `subTask${index}`;
+  checkbox.classList.add("subtasks_checkbox");
+  checkbox.addEventListener("change", () => {
+    handleCheckboxChange(checkbox, subTask);
+  });
+  return checkbox;
+}
+
+/**
+ * The function handles the checkbox for the subtask
+ * @param {checkbox} - take the info from the checkbox
+ * @param {subTask} - take the info from the subtask
+ **/
+function handleCheckboxChange(checkbox, subTask) {
+  if (checkbox.checked) {
+    selectedSubTasks.push(subTask);
+    subTask.check = true;
+  } else {
+    const subTaskIndex = selectedSubTasks.findIndex(
+      (item) => item.title === subTask.title
+    );
+    if (subTaskIndex !== -1) {
+      selectedSubTasks.splice(subTaskIndex, 1);
+      subTask.check = false;
+    }
+  }
+}
+
+/**
+ * The function creates the text for the subtask
+ * @param {subTask} - take the info from the subtask
+ **/
+function createSubTaskText(subTask) {
+  const subTaskText = document.createElement("a");
+  subTaskText.classList.add("subtask_text", "font400");
+  subTaskText.textContent = subTask.title;
+  return subTaskText;
+}
+
+/**
+ * The function creates the delete button for the subtask
+ * @param {subTask} - take the info from the subtask
+ * @param {currentUser} - take the info from the current user
+ **/
+function createDeleteButton(subTask, currentUser) {
+  const deleteST = document.createElement("img");
+  deleteST.src = "assets/img/delete.svg";
+  deleteST.classList.add("delete_subtask");
+  deleteST.addEventListener("click", () => {
+    handleDeleteButtonClick(subTask, currentUser);
+  });
+  return deleteST;
+}
+
+/**
+ * The function handles the delete button for the subtask
+ * @param {subTask} - take the info from the subtask
+ * @param {currentUser} - take the info from the current user
+ **/
+function handleDeleteButtonClick(subTask, currentUser) {
+  const subTaskIndex = currentUser.subTasks.findIndex(
+    (item) => item.id === subTask.id
+  );
+
+  if (subTaskIndex !== -1) {
+    currentUser.subTasks.splice(subTaskIndex, 1);
+    saveUserData(currentUser);
+    loadSubTasks();
+  }
 }
 
 /**
