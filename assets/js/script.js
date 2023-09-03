@@ -74,10 +74,10 @@ async function logInUser() {
  */
 async function greetGuest() {
   let guestUser = {
-    id: generateUniqueId(),
+    id: "3063f170-5add-4d07-86ec-9d203fdbe621",
     name: "Guest",
     email: "guest@example.com",
-    password: "123456",
+    password: "",
     tasks: [],
     contacts: [],
     categories: [],
@@ -87,26 +87,21 @@ async function greetGuest() {
   users.push(guestUser);
   await backend.setItem("users", JSON.stringify(users));
 
-  logInGuest();
+  logInGuest(guestUser);
 }
 
 /**
  * the function logs in the guest
  */
-function logInGuest() {
-  const guestUser = {
-    id: generateUniqueId(),
-    name: "Guest",
-    email: "guest@example.com",
-    password: "123456",
-    tasks: [],
-    contacts: [],
-    categories: [],
-    subTasks: [],
-  };
+async function logInGuest(guestUser) {
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem("users")) || [];
+  const actualUser = users.find((u) => u.email === guestUser.email);
 
-  saveUserData(guestUser);
-  loginCorrect(guestUser);
+  if (actualUser) {
+    saveUserData(actualUser);
+    loginCorrect(actualUser);
+  }
 }
 
 /**

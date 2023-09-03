@@ -1,5 +1,3 @@
-//Render Add Task HTML
-
 /**
  * The function renders the contacts in alphabetical order in a column
  *
@@ -219,6 +217,13 @@ function generateColumnsHTML(task) {
     (subtask) => subtask.completed
   ).length;
 
+  const progressPercentage = (completedSubtasks / subtaskCount) * 100;
+  const progressBarStyle = `
+    --progress: ${progressPercentage}%;
+    background: linear-gradient(to right, #0038FF 0%, #0038FF calc(${progressPercentage}% - 4px), #F4F4F4 calc(${progressPercentage}% - 4px), #F4F4F4 100%);
+  `;
+  const progressText = `${completedSubtasks}/${subtaskCount} Done`;
+
   const priorityImagePath = prioInBoardImg(task.prio);
 
   return `
@@ -236,8 +241,9 @@ function generateColumnsHTML(task) {
           <a class="minitask_descr_text font400">${task["description"]}</a>
         </div>
         <div class="minitask_subtask row-center-center">
-          ${generateProgressBarHTML(completedSubtasks, subtaskCount)}
-        </div>
+                <div class="minitask_sub_bar" style="width: ${progressBarStyle}%;"></div>
+                <a class="minitask_sub_text font400">${progressText}</a>
+            </div>
         <div class="minitask_buttom_cont row-center-center">
           <div class="minitask_contacts_cont row-center">${contactHtml}</div>
           <div class="minitask_prio_cont row-center-center">
@@ -247,6 +253,49 @@ function generateColumnsHTML(task) {
       </div>
     </div>
   `;
+}
+
+/**
+ * the function generates the initials of the contacts
+ * * @param {contact} - take the contacts from the backend
+ * * @param {index} - take the index of the contact
+ */
+function generateContactHTML(contact, index) {
+  return `
+    <div class="minitask_contact column-center-center" style="background:${
+      contact.color
+    }; left:${index * 20}px;">
+      <a class="minitask_contact_text row-center-center font400">${getInitials(
+        contact.name || contact.email
+      )}</a>
+    </div>
+  `;
+}
+
+/**
+ * the function generates the initials of the contacts for the view task
+ * * @param {taskData} - take the tasks from the backend
+ */
+function viewInitials(taskData) {
+  const viewTaskInitials = taskData.contacts
+    .map(
+      (contact, index) => `
+    <div class="view_task_contacts_container">
+      <div class="view_task_contact_circle center-center" style="background:${
+        contact.color
+      }">
+        <a class="view_task_contact_initials font400 row-center-center">${getInitials(
+          contact.name || contact.email
+        )}</a>
+      </div>
+      <a class="view_task_contact_name font400">${
+        contact.name || contact.email
+      }</a>
+    </div>
+`
+    )
+    .join("");
+  return viewTaskInitials;
 }
 
 /**

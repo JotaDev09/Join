@@ -70,182 +70,6 @@ function startDragging(id) {
 }
 
 /**
- * the function handles change in checkbox
- * * @param {taskData} - take the tasks from the backend
- * * @param {event} - take the event
- */
-async function handleCheckboxChange(event, taskData) {
-  if (event.target && event.target.type === "checkbox") {
-    const subtaskId = event.target.getAttribute("data-task-id");
-
-    if (subtaskId) {
-      const subtask = findSubtaskById(taskData, subtaskId);
-
-      if (subtask) {
-        updateSubtaskCompletion(subtask, event.target.checked);
-        updateProgressBar(taskData);
-        updateUserTasks(taskData);
-        refreshFromBackend();
-        loadTasksFromServer();
-      }
-    }
-  }
-}
-
-/**
- * the function finds a subtask by its ID
- *
- * * @param {taskData} - take the tasks from the backend
- * * @param {subtaskId} - take the subtask ID
- */
-function findSubtaskById(taskData, subtaskId) {
-  return taskData.subTask.find((sub) => sub.id === subtaskId);
-}
-
-/**
- * the function updates the completion status of a subtask
- *
- * * @param {taskData} - take the tasks from the backend
- * * @param {isChecked} - take the status of the checkbox
- */
-function updateSubtaskCompletion(subtask, isChecked) {
-  subtask.completed = isChecked;
-}
-
-/**
- * the function updates the progress bar
- * * @param {taskData} - take the tasks from the backend
- */
-function updateProgressBar(taskData) {
-  const completedSubtasks = taskData.subTask.filter(
-    (sub) => sub.completed
-  ).length;
-  const subtaskCount = taskData.subTask.length;
-  const progressPercentage = (completedSubtasks / subtaskCount) * 100;
-
-  const progressBarStyle = `
-    --progress: ${progressPercentage}%;
-    background: linear-gradient(to right, #0038FF 0%, #0038FF calc(${progressPercentage}% - 4px), #F4F4F4 calc(${progressPercentage}% - 4px), #F4F4F4 100%);
-  `;
-  const progressText = `${completedSubtasks}/${subtaskCount} Done`;
-  const progressBar = document.querySelector(".minitask_sub_bar");
-  progressBar.style.width = progressBarStyle;
-  progressBar.nextSibling.textContent = progressText;
-}
-
-// Función para actualizar las tareas del usuario
-/**
- * the function updates the user tasks
- * * @param {taskData} - take the tasks from the backend
- */
-function updateUserTasks(taskData) {
-  const currentUser = loadUserData();
-  const taskIndex = currentUser.tasks.findIndex((t) => t.id === taskData.id);
-
-  if (taskIndex !== -1) {
-    currentUser.tasks[taskIndex] = taskData;
-    saveUserData(currentUser);
-    backend.setItem("currentUser", currentUser);
-  }
-}
-
-/**
- * the function handles the change event
- * * @param {taskData} - take the tasks from the backend
- */
-function handleChangeEvent(taskData) {
-  document.addEventListener("change", async function (event) {
-    await handleCheckboxChange(event, taskData);
-  });
-}
-
-/**
- * the function checks the subtask
- * * @param {taskData} - take the tasks from the backend
- */
-async function checkSubtask(taskData) {
-  handleChangeEvent(taskData);
-}
-
-/**
- * The function opens the pop-up view task
- * @param {element} - take the element
- */
-function openTask(element) {
-  const viewTaskSection = document.getElementById("ViewTaskContainer");
-  viewTaskSection.style = "display: flex !important";
-  const taskData = JSON.parse(element.getAttribute("data-task"));
-  currentDisplayedTask = taskData;
-  let html = "";
-  html += viewTask(taskData);
-  checkSubtask(taskData);
-  viewTaskSection.innerHTML = html;
-  return html;
-}
-
-/**
- * the function generates the initials of the contacts
- * * @param {contact} - take the contacts from the backend
- * * @param {index} - take the index of the contact
- */
-function generateContactHTML(contact, index) {
-  return `
-    <div class="minitask_contact column-center-center" style="background:${
-      contact.color
-    }; left:${index * 20}px;">
-      <a class="minitask_contact_text row-center-center font400">${getInitials(
-        contact.name || contact.email
-      )}</a>
-    </div>
-  `;
-}
-
-/**
- * the function generates the progress bar
- * * @param {completedSubtasks} - take the completed subtasks
- *  * @param {subtaskCount} - take the subtask count
- */
-function generateProgressBarHTML(completedSubtasks, subtaskCount) {
-  const progressPercentage = (completedSubtasks / subtaskCount) * 100;
-  const progressBarStyle = `
-    --progress: ${progressPercentage}%;
-    background: linear-gradient(to right, #0038FF 0%, #0038FF calc(${progressPercentage}% - 4px), #F4F4F4 calc(${progressPercentage}% - 4px), #F4F4F4 100%);
-  `;
-  const progressText = `${completedSubtasks}/${subtaskCount} Done`;
-
-  return `
-    <div class="minitask_sub_bar" style="width: ${progressBarStyle};"></div>
-    <a class="minitask_sub_text font400">${progressText}</a>
-  `;
-}
-
-/**
- * the function generates the initials of the contacts for the view task
- * * @param {taskData} - take the tasks from the backend
- */
-function viewInitials(taskData) {
-  const viewTaskInitials = taskData.contacts
-    .map(
-      (contact, index) => `
-    <div class="view_task_contacts_container">
-      <div class="view_task_contact_circle center-center" style="background:${
-        contact.color
-      }">
-        <a class="view_task_contact_initials font400 row-center-center">${getInitials(
-          contact.name || contact.email
-        )}</a>
-      </div>
-      <a class="view_task_contact_name font400">${
-        contact.name || contact.email
-      }</a>
-    </div>
-`
-    )
-    .join("");
-  return viewTaskInitials;
-}
-
-/**
  * the function generates the subtasks for the view task
  * * @param {taskData} - take the tasks from the backend
  */
@@ -271,6 +95,70 @@ function viewSubTask(taskData) {
         .join("")
     : "";
   return viewTaskSubTask;
+}
+
+/**
+ * The function verifies whether the user has marked the subtask as completed
+ *  *@param {taskData} - take the tasks from the backend
+ **/
+async function checkSubtask(taskData) {
+  document.addEventListener("change", async function (event) {
+    if (event.target && event.target.type === "checkbox") {
+      const subtaskId = event.target.getAttribute("data-task-id");
+
+      if (subtaskId) {
+        const subtask = taskData.subTask.find((sub) => sub.id === subtaskId);
+
+        if (subtask) {
+          subtask.completed = event.target.checked;
+
+          const completedSubtasks = taskData.subTask.filter(
+            (sub) => sub.completed
+          ).length;
+          const subtaskCount = taskData.subTask.length;
+          const progressPercentage = (completedSubtasks / subtaskCount) * 100;
+
+          const progressBarStyle = `
+          --progress: ${progressPercentage}%;
+          background: linear-gradient(to right, #0038FF 0%, #0038FF calc(${progressPercentage}% - 4px), #F4F4F4 calc(${progressPercentage}% - 4px), #F4F4F4 100%);
+        `;
+          const progressText = `${completedSubtasks}/${subtaskCount} Done`;
+          const progressBar = document.querySelector(".minitask_sub_bar");
+          progressBar.style.width = progressBarStyle;
+          progressBar.nextSibling.textContent = progressText;
+
+          const currentUser = loadUserData();
+          const taskIndex = currentUser.tasks.findIndex(
+            (t) => t.id === taskData.id
+          );
+          if (taskIndex !== -1) {
+            currentUser.tasks[taskIndex] = taskData;
+            saveUserData(currentUser);
+            backend.setItem("currentUser", currentUser);
+          }
+
+          refreshFromBackend();
+          loadTasksFromServer();
+        }
+      }
+    }
+  });
+}
+
+/**
+ * The function opens the pop-up view task
+ * @param {element} - take the element
+ */
+function openTask(element) {
+  const viewTaskSection = document.getElementById("ViewTaskContainer");
+  viewTaskSection.style = "display: flex !important";
+  const taskData = JSON.parse(element.getAttribute("data-task"));
+  currentDisplayedTask = taskData;
+  let html = "";
+  html += viewTask(taskData);
+  checkSubtask(taskData);
+  viewTaskSection.innerHTML = html;
+  return html;
 }
 
 /**
@@ -419,16 +307,28 @@ function allowDrop(ev) {
  * * @param {column} - take the column
  */
 async function moveTo(column) {
-  const currentUser = loadUserData();
-  const taskIndex = currentUser.tasks.findIndex(
-    (task) => task.id === currentDraggedtask
-  );
+  try {
+    const currentUser = loadUserData();
+    const taskIndex = currentUser.tasks.findIndex(
+      (task) => task.id === currentDraggedtask
+    );
 
-  if (taskIndex !== -1) {
-    currentUser.tasks[taskIndex].columns = column;
-    await backend.setItem("currentUser", currentUser);
-    loadTasksColumns(currentUser.tasks);
-    await refreshFromBackend();
+    if (taskIndex !== -1) {
+      currentUser.tasks[taskIndex].columns = column;
+      saveUserData(currentUser);
+
+      const userIndex = users.findIndex((user) => user.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex] = currentUser;
+        await backend.setItem("users", JSON.stringify(users));
+      }
+
+      await backend.setItem("currentUser", currentUser);
+      loadTasksColumns(currentUser.tasks);
+      await refreshFromBackend();
+    }
+  } catch (error) {
+    console.error("Error moving task:", error);
   }
 }
 

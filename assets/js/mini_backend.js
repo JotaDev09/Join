@@ -18,10 +18,6 @@ const backend = {
   },
 };
 
-window.onload = async function () {
-  downloadFromServer();
-};
-
 async function downloadFromServer() {
   let result = await loadJSONFromServer();
   jsonFromServer = JSON.parse(result);

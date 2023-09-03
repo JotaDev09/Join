@@ -478,9 +478,9 @@ body {
 }
 
 .subTaskContainer {
+    width: 422px;
     padding-bottom: 20px;
     gap: 5px;
-    width: fit-content;
 }
 
 .delete_subtask {
@@ -640,6 +640,7 @@ body {
     .add_task_buttons_bottom_resp {
         justify-content: center !important;
     }
+
 }
 
 @media (width < 450px) {

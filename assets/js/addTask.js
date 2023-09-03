@@ -320,9 +320,6 @@ function resetCategories() {
     }
   }
 
-  // Limpiar cualquier otra lógica o cambios que debas realizar
-  // Agrega aquí cualquier otra lógica de reinicio necesaria
-
   selectedCategory = null;
 }
 
@@ -608,6 +605,10 @@ async function createATask() {
     let subtaskTask = selectedSubTasks || " ";
 
     const currentUser = loadUserData();
+    if (!currentUser.tasks) {
+      currentUser.tasks = [];
+    }
+
     createNewTask(
       titleTask,
       contactsTask,

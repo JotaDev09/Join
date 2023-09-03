@@ -157,7 +157,7 @@ function closeShowContact() {
 /**
  * The function renders a big card of one specific contact when the user clicks on it.
  *
- * @param {contac} - take the info of one specific contact
+ * @param {contact} - take the info of one specific contact
  */
 function renderBigCardContact(contact) {
   const contactName = contact.name;
@@ -218,9 +218,6 @@ async function createNewContact() {
   let phoneContact = document.getElementById("newContactPhone");
 
   const currentUser = loadUserData();
-  if (!currentUser.contacts) {
-    currentUser.contacts = [];
-  }
 
   let newContact = {
     id: uuidv4(),
@@ -238,6 +235,7 @@ async function createNewContact() {
     await backend.setItem("users", JSON.stringify(users));
   }
   addContactToHTML();
+  loadContacts();
   createContactPopup();
 }
 
@@ -361,10 +359,10 @@ function editOldContact() {
 
       const bigCardContact = renderBigCardContact(currentDisplayedContact);
       document.getElementById("bigContactCard").innerHTML = bigCardContact;
-
-      closeEditContact();
-      addContactToHTML();
     }
+    addContactToHTML();
+    closeEditContact();
+    loadContacts();
   }
 }
 
@@ -402,8 +400,8 @@ function deleteContact() {
 
       closeEditContact();
       closeShowContact();
+      loadContacts();
     }
-    loadContacts();
   }
 }
 

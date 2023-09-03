@@ -31,10 +31,7 @@
               >Tasks are better with a team!</a
             >
           </div>
-          <form
-            class="new_contact_bottom column-center"
-            onsubmit="createNewContact(); return false"
-          >
+          <div class="new_contact_bottom column-center">
             <div class="new_contact_bottom1">
               <div class="new_contact_circle row-center-center">
                 <img
@@ -102,13 +99,16 @@
                 >
                   <a class="new_contact_cancel font400">Cancel X</a>
                 </button>
-                <button class="new_contact_botton_create row-center-center">
+                <button
+                  class="new_contact_botton_create row-center-center"
+                  onclick="requiredNewContact()"
+                >
                   <a class="new_contact_button font400">Create contact</a>
                   <img src="assets/img/checkCreateT.svg" />
                 </button>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <div

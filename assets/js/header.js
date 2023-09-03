@@ -16,6 +16,6 @@ function userLogOut() {
 /**
  * The function logs out the user
  */
-function logOut() {
+async function logOut() {
   window.location.href = "index.html";
 }
